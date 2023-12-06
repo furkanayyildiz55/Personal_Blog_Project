@@ -13,6 +13,7 @@ namespace BlogProject.Controllers
             _logger = logger;
         }
 
+
         public IActionResult Index()
         {
             return View();

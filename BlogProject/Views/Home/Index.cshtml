@@ -1,8 +1,479 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/BlogLayout.cshtml";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+<!-- hero grid    -->
+<div class="hero-hrid fl-wrap gray-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="single-slider-wrap fl-wrap">
+                    <div class="single-slider fl-wrap">
+                        <div class="swiper-container">
+                            <div class="swiper-wrapper">
+                                <!-- swiper-slide   -->
+                                <div class="swiper-slide">
+                                    <div class="grid-post-item  bold_gpi  fl-wrap">
+                                        <div class="grid-post-media gpm_sing">
+                                            <div class="bg" data-bg="images/all/20.jpg"></div>
+                                            <div class="author-link"><a href="author-single.html"><img src="images/avatar/4.jpg" alt="">  <span>By Jessie Bond</span></a></div>
+                                            <div class="grid-post-media_title">
+                                                <a class="post-category-marker" href="category.html">Technology</a>
+                                                <h4><a href="post-single.html">Innovations that Bring Pleasure to All Peoples</a></h4>
+                                                <span class="video-date"><i class="far fa-clock"></i>  18 may 2022</span>
+                                                <ul class="post-opt">
+                                                    <li><i class="far fa-comments-alt"></i>  25 </li>
+                                                    <li><i class="fal fa-eye"></i>  164 </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- swiper-slide end   -->
+                                <!-- swiper-slide   -->
+                                <div class="swiper-slide ">
+                                    <div class="grid-post-item  bold_gpi  fl-wrap">
+                                        <div class="grid-post-media gpm_sing">
+                                            <div class="bg" data-bg="images/all/35.jpg"></div>
+                                            <div class="author-link"><a href="author-single.html"><img src="images/avatar/3.jpg" alt="">  <span>By Ann Kowalsky</span></a></div>
+                                            <div class="grid-post-media_title">
+                                                <a class="post-category-marker" href="category.html">Technology</a>
+                                                <h4><a href="post-single.html">Perfect James Webb telescope on track for launch.</a></h4>
+                                                <span class="video-date"><i class="far fa-clock"></i>  05 April 2022</span>
+                                                <ul class="post-opt">
+                                                    <li><i class="far fa-comments-alt"></i>  55 </li>
+                                                    <li><i class="fal fa-eye"></i>  967 </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- swiper-slide end   -->
+                                <!-- swiper-slide   -->
+                                <div class="swiper-slide ">
+                                    <div class="grid-post-item  bold_gpi  fl-wrap">
+                                        <div class="grid-post-media gpm_sing">
+                                            <div class="bg" data-bg="images/all/38.jpg"></div>
+                                            <div class="author-link"><a href="author-single.html"><img src="images/avatar/4.jpg" alt="">  <span>By Jessie Bond</span></a></div>
+                                            <div class="grid-post-media_title">
+                                                <a class="post-category-marker" href="category.html">Sports</a>
+                                                <h4><a href="post-single.html">Sports tag Club competition returns</a></h4>
+                                                <span class="video-date"><i class="far fa-clock"></i>  11 march 2022</span>
+                                                <ul class="post-opt">
+                                                    <li><i class="far fa-comments-alt"></i>  25 </li>
+                                                    <li><i class="fal fa-eye"></i>  164 </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- swiper-slide end   -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ss-slider-cont ss-slider-cont-prev"><i class="fas fa-caret-left"></i></div>
+                    <div class="ss-slider-cont ss-slider-cont-next"><i class="fas fa-caret-right"></i></div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="grid-post-item  bold_gpi    fl-wrap">
+                    <div class="grid-post-media  gpm_sing bold_gpi_half">
+                        <div class="bg" data-bg="images/all/55.jpg"></div>
+                        <div class="author-link"><a href="author-single.html"><img src="images/avatar/3.jpg" alt="">  <span>Ann Kowalsky</span></a></div>
+                        <div class="grid-post-media_title">
+                            <a class="post-category-marker" href="category.html">Politics</a>
+                            <h4><a href="post-single.html">Here's the proof that momentum strategies work</a></h4>
+                            <span class="video-date"><i class="far fa-clock"></i>  05 April 2022</span>
+                            <ul class="post-opt">
+                                <li><i class="far fa-comments-alt"></i>  15 </li>
+                                <li><i class="fal fa-eye"></i>  234 </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-post-item  bold_gpi   fl-wrap">
+                    <div class="grid-post-media gpm_sing bold_gpi_half">
+                        <div class="bg" data-bg="images/all/56.jpg"></div>
+                        <div class="author-link"><a href="author-single.html"><img src="images/avatar/2.jpg" alt="">  <span>By Mark Rose</span></a></div>
+                        <div class="grid-post-media_title">
+                            <a class="post-category-marker" href="category.html">Politics</a>
+                            <h4><a href="post-single.html">How Maps Reshape American Politics In World</a></h4>
+                            <span class="video-date"><i class="far fa-clock"></i> 22 march 2022</span>
+                            <ul class="post-opt">
+                                <li><i class="far fa-comments-alt"></i>  25 </li>
+                                <li><i class="fal fa-eye"></i>  164 </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="grid-post-item  bold_gpi    fl-wrap">
+                    <div class="grid-post-media gpm_sing bold_gpi_half">
+                        <div class="bg" data-bg="images/all/48.jpg"></div>
+                        <div class="author-link"><a href="author-single.html"><img src="images/avatar/3.jpg" alt="">  <span>Ann Kowalsky</span></a></div>
+                        <div class="grid-post-media_title">
+                            <a class="post-category-marker" href="category.html">Business</a>
+                            <h4><a href="post-single.html">Scientific research goes to the next level</a></h4>
+                            <span class="video-date"><i class="far fa-clock"></i> 30 september 2021</span>
+                            <ul class="post-opt">
+                                <li><i class="far fa-comments-alt"></i>  25 </li>
+                                <li><i class="fal fa-eye"></i>  164 </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-post-item  bold_gpi   fl-wrap">
+                    <div class="grid-post-media gpm_sing bold_gpi_half">
+                        <div class="bg" data-bg="images/all/57.jpg"></div>
+                        <div class="author-link"><a href="author-single.html"><img src="images/avatar/1.jpg" alt="">  <span>By Jane Taylor</span></a></div>
+                        <div class="grid-post-media_title">
+                            <a class="post-category-marker" href="category.html">Business</a>
+                            <h4><a href="post-single.html">First prototype flight using kinetic launch system</a></h4>
+                            <span class="video-date"><i class="far fa-clock"></i> 15 March 2022</span>
+                            <ul class="post-opt">
+                                <li><i class="far fa-comments-alt"></i> 67 </li>
+                                <li><i class="fal fa-eye"></i>  542 </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<!-- hero grid end   -->
+<!-- section -->
+<section class="no-padding">
+    <div class="fs-carousel-wrap">
+        <div class="fs-carousel-wrap_title">
+            <div class="fs-carousel-wrap_title-wrap fl-wrap">
+                <h4>Trending News</h4>
+                <h5>Don't Miss And  Stay Up-to-date. Top pic for you.</h5>
+            </div>
+            <div class="abs_bg"></div>
+            <div class="gs-controls">
+                <div class="gs_button gc-button-next"><i class="fas fa-caret-right"></i></div>
+                <div class="gs_button gc-button-prev"><i class="fas fa-caret-left"></i></div>
+            </div>
+        </div>
+        <div class="fs-carousel fl-wrap">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <!-- swiper-slide-->
+                    <div class="swiper-slide">
+                        <div class="grid-post-item  bold_gpi  fl-wrap">
+                            <div class="grid-post-media gpm_sing">
+                                <div class="bg" data-bg="images/all/50.jpg"></div>
+                                <div class="author-link"><a href="author-single.html"><img src="images/avatar/2.jpg" alt="">  <span>By Mark Rose</span></a></div>
+                                <div class="grid-post-media_title">
+                                    <a class="post-category-marker" href="category.html">Business</a>
+                                    <h4><a href="post-single.html">Envatocoin Vulnerable To Retest 20K Support</a></h4>
+                                    <span class="video-date"><i class="far fa-clock"></i> 02 March 2022</span>
+                                    <ul class="post-opt">
+                                        <li><i class="far fa-comments-alt"></i>  7 </li>
+                                        <li><i class="fal fa-eye"></i>  88 </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- swiper-slide end-->
+                    <!-- swiper-slide-->
+                    <div class="swiper-slide">
+                        <div class="grid-post-item  bold_gpi  fl-wrap">
+                            <div class="grid-post-media gpm_sing">
+                                <div class="bg" data-bg="images/all/53.jpg"></div>
+                                <div class="author-link"><a href="author-single.html"><img src="images/avatar/3.jpg" alt="">  <span>By Ann Kowalsky</span></a></div>
+                                <div class="grid-post-media_title">
+                                    <a class="post-category-marker" href="category.html">Technology</a>
+                                    <h4><a href="post-single.html">Videos show SpaceX's Dragon capsule as it returns to Earth</a></h4>
+                                    <span class="video-date"><i class="far fa-clock"></i> 13 april 2021</span>
+                                    <ul class="post-opt">
+                                        <li><i class="far fa-comments-alt"></i>  3 </li>
+                                        <li><i class="fal fa-eye"></i> 89</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- swiper-slide end-->
+                    <!-- swiper-slide-->
+                    <div class="swiper-slide">
+                        <div class="grid-post-item  bold_gpi  fl-wrap">
+                            <div class="grid-post-media gpm_sing">
+                                <div class="bg" data-bg="images/all/54.jpg"></div>
+                                <div class="author-link"><a href="author-single.html"><img src="images/avatar/2.jpg" alt="">  <span>By Mark Rose</span></a></div>
+                                <div class="grid-post-media_title">
+                                    <a class="post-category-marker" href="category.html">Sports</a>
+                                    <h4><a href="post-single.html">Sports season ends with more surprises</a></h4>
+                                    <span class="video-date"><i class="far fa-clock"></i> 23 may 2021</span>
+                                    <ul class="post-opt">
+                                        <li><i class="far fa-comments-alt"></i>  34</li>
+                                        <li><i class="fal fa-eye"></i>  567 </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- swiper-slide end-->
+                    <!-- swiper-slide-->
+                    <div class="swiper-slide">
+                        <div class="grid-post-item  bold_gpi  fl-wrap">
+                            <div class="grid-post-media gpm_sing">
+                                <div class="bg" data-bg="images/all/52.jpg"></div>
+                                <div class="author-link"><a href="author-single.html"><img src="images/avatar/1.jpg" alt="">  <span>By Jane Taylor</span></a></div>
+                                <div class="grid-post-media_title">
+                                    <a class="post-category-marker" href="category.html">Science</a>
+                                    <h4><a href="post-single.html">World electric ready to race tomorrow</a></h4>
+                                    <span class="video-date"><i class="far fa-clock"></i> 6 april 2021</span>
+                                    <ul class="post-opt">
+                                        <li><i class="far fa-comments-alt"></i>  25 </li>
+                                        <li><i class="fal fa-eye"></i>  164 </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- swiper-slide end-->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- section end -->
+<!-- section   -->
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="main-container fl-wrap fix-container-init">
+
+
+
+
+                    <div class="grid-post-wrap">
+                        <div class="more-post-wrap  fl-wrap">
+                            <div class="list-post-wrap list-post-wrap_column fl-wrap">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <!--list-post-->
+                                        <div class="list-post fl-wrap">
+                                            <a class="post-category-marker" href="category.html">Science</a>
+                                            <div class="list-post-media">
+                                                <a href="post-single.html">
+                                                    <div class="bg-wrap">
+                                                        <div class="bg" data-bg="images/all/16.jpg"></div>
+                                                    </div>
+                                                </a>
+                                                <span class="post-media_title">&copy; Image Copyrights Title</span>
+                                            </div>
+                                            <div class="list-post-content">
+                                                <h3><a href="post-single.html">How to start Home renovation.</a></h3>
+                                                <span class="post-date"><i class="far fa-clock"></i>  05 April 2022</span>
+                                            </div>
+                                        </div>
+                                        <!--list-post end-->
+                                    </div>
+                                    <div class="col-md-6">
+                                        <!--list-post-->
+                                        <div class="list-post fl-wrap">
+                                            <a class="post-category-marker" href="category.html">Sports</a>
+                                            <div class="list-post-media">
+                                                <a href="post-single.html">
+                                                    <div class="bg-wrap">
+                                                        <div class="bg" data-bg="images/all/24.jpg"></div>
+                                                    </div>
+                                                </a>
+                                                <span class="post-media_title">&copy; Image Copyrights Title</span>
+                                            </div>
+                                            <div class="list-post-content">
+                                                <h3><a href="post-single.html">Warriors face season defining clash</a></h3>
+                                                <span class="post-date"><i class="far fa-clock"></i> 11 March 2022</span>
+                                            </div>
+                                        </div>
+                                        <!--list-post end-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--grid-post-item-->
+                        <div class="single-grid-slider-wrap fl-wrap">
+                            <div class="single-grid-slider">
+                                <div class="swiper-container">
+                                    <div class="swiper-wrapper">
+                                        <!-- swiper-slide-->
+                                        <div class="swiper-slide">
+                                            <div class="grid-post-item  bold_gpi  fl-wrap">
+                                                <div class="grid-post-media gpm_sing">
+                                                    <div class="bg" data-bg="images/all/31.jpg"></div>
+                                                    <div class="author-link"><a href="author-single.html"><img src="images/avatar/2.jpg" alt="">  <span>By Mark Rose</span></a></div>
+                                                    <div class="grid-post-media_title">
+                                                        <a class="post-category-marker" href="category.html">Technology</a>
+                                                        <h4><a href="post-single.html">Videos show SpaceX's Dragon capsule as it returns to Earth</a></h4>
+                                                        <span class="video-date"><i class="far fa-clock"></i> 13 april 2021</span>
+                                                        <ul class="post-opt">
+                                                            <li><i class="far fa-comments-alt"></i>  25 </li>
+                                                            <li><i class="fal fa-eye"></i>  164 </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- swiper-slide end-->
+                                        <!-- swiper-slide-->
+                                        <div class="swiper-slide">
+                                            <div class="grid-post-item  bold_gpi  fl-wrap">
+                                                <div class="grid-post-media gpm_sing">
+                                                    <div class="bg" data-bg="images/all/40.jpg"></div>
+                                                    <div class="author-link"><a href="author-single.html"><img src="images/avatar/3.jpg" alt="">  <span>Ann Kowalsky</span></a></div>
+                                                    <div class="grid-post-media_title">
+                                                        <a class="post-category-marker" href="category.html">Business</a>
+                                                        <h4><a href="post-single.html">Scientific research goes to the next level</a></h4>
+                                                        <span class="video-date"><i class="far fa-clock"></i> 30 september 2021</span>
+                                                        <ul class="post-opt">
+                                                            <li><i class="far fa-comments-alt"></i>  25 </li>
+                                                            <li><i class="fal fa-eye"></i>  164 </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- swiper-slide end-->
+                                        <!-- swiper-slide-->
+                                        <div class="swiper-slide">
+                                            <div class="grid-post-item  bold_gpi  fl-wrap">
+                                                <div class="grid-post-media gpm_sing">
+                                                    <div class="bg" data-bg="images/all/36.jpg"></div>
+                                                    <div class="author-link"><a href="author-single.html"><img src="images/avatar/1.jpg" alt="">  <span>By Jane Taylor</span></a></div>
+                                                    <div class="grid-post-media_title">
+                                                        <a class="post-category-marker" href="category.html">Technology</a>
+                                                        <h4><a href="post-single.html">Climate change: What do scientists want this week?</a></h4>
+                                                        <span class="video-date"><i class="far fa-clock"></i> 05 december 2021</span>
+                                                        <ul class="post-opt">
+                                                            <li><i class="far fa-comments-alt"></i>  25 </li>
+                                                            <li><i class="fal fa-eye"></i>  164 </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- swiper-slide end-->
+                                    </div>
+                                    <div class="sgs-pagination sgs_ver "></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--grid-post-item end-->
+                        <div class="more-post-wrap  fl-wrap">
+                            <div class="list-post-wrap list-post-wrap_column fl-wrap">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <!--list-post-->
+                                        <div class="list-post fl-wrap">
+                                            <a class="post-category-marker" href="category.html">Sports</a>
+                                            <div class="list-post-media">
+                                                <a href="post-single.html">
+                                                    <div class="bg-wrap">
+                                                        <div class="bg" data-bg="images/all/37.jpg"></div>
+                                                    </div>
+                                                </a>
+                                                <span class="post-media_title">&copy; Image Copyrights Title</span>
+                                            </div>
+                                            <div class="list-post-content">
+                                                <h3><a href="post-single.html">Female Hawks win $10,000 funding boost</a></h3>
+                                                <span class="post-date"><i class="far fa-clock"></i>  05 April 2022</span>
+                                            </div>
+                                        </div>
+                                        <!--list-post end-->
+                                    </div>
+                                    <div class="col-md-6">
+                                        <!--list-post-->
+                                        <div class="list-post fl-wrap">
+                                            <a class="post-category-marker" href="category.html">Technology</a>
+                                            <div class="list-post-media">
+                                                <a href="post-single.html">
+                                                    <div class="bg-wrap">
+                                                        <div class="bg" data-bg="images/all/39.jpg"></div>
+                                                    </div>
+                                                </a>
+                                                <span class="post-media_title">&copy; Image Copyrights Title</span>
+                                            </div>
+                                            <div class="list-post-content">
+                                                <h3><a href="post-single.html">Cape Town's Day Zero: We are axing trees to save water</a></h3>
+                                                <span class="post-date"><i class="far fa-clock"></i> 11 March 2022</span>
+                                            </div>
+                                        </div>
+                                        <!--list-post end-->
+                                    </div>
+                                    <div class="col-md-6">
+                                        <!--list-post-->
+                                        <div class="list-post fl-wrap">
+                                            <a class="post-category-marker" href="category.html">Science</a>
+                                            <div class="list-post-media">
+                                                <a href="post-single.html">
+                                                    <div class="bg-wrap">
+                                                        <div class="bg" data-bg="images/all/18.jpg"></div>
+                                                    </div>
+                                                </a>
+                                                <span class="post-media_title">&copy; Image Copyrights Title</span>
+                                            </div>
+                                            <div class="list-post-content">
+                                                <h3><a href="post-single.html">High wind delays SpaceX crew homecoming after 6 months aloft</a></h3>
+                                                <span class="post-date"><i class="far fa-clock"></i> 11 March 2022</span>
+                                            </div>
+                                        </div>
+                                        <!--list-post end-->
+                                    </div>
+                                    <div class="col-md-6">
+                                        <!--list-post-->
+                                        <div class="list-post fl-wrap">
+                                            <a class="post-category-marker" href="category.html">Politics</a>
+                                            <div class="list-post-media">
+                                                <a href="post-single.html">
+                                                    <div class="bg-wrap">
+                                                        <div class="bg" data-bg="images/all/7.jpg"></div>
+                                                    </div>
+                                                </a>
+                                                <span class="post-media_title">&copy; Image Copyrights Title</span>
+                                            </div>
+                                            <div class="list-post-content">
+                                                <h3><a href="post-single.html">What the federal infrastructure package means for Minnesota</a></h3>
+                                                <span class="post-date"><i class="far fa-clock"></i> 11 March 2022</span>
+                                            </div>
+                                        </div>
+                                        <!--list-post end-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="blog2.html" class="dark-btn fl-wrap"> Read all News </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <!-- sidebar   -->
+                <div class="sidebar-content fl-wrap fix-bar">
+                    <!-- box-widget -->
+                    @await Component.InvokeAsync("PopularResentBlogBoxWidget")
+                    <!-- box-widget  end -->
+                    <!-- box-widget -->
+                    @await Component.InvokeAsync("SocialMediaBoxWidget")
+                    <!-- box-widget  end -->
+                    <!-- box-widget -->
+                    @await Component.InvokeAsync("PopularTagsBoxWidget")
+                    <!-- box-widget  end -->
+                    <!-- box-widget -->
+                    @await Component.InvokeAsync("EditorsChoiceBoxWidget")
+                    <!-- box-widget  end -->
+                </div>
+                <!-- sidebar  end -->
+            </div>
+        </div>
+        <div class="limit-box fl-wrap"></div>
+    </div>
+</section>
+<!-- section end -->
