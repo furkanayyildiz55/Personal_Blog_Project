@@ -1,0 +1,46 @@
+﻿using BusinessLayer.Abstract;
+using DataAccesLayer.Abstract;
+using EntityLayer.Concrete;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BusinessLayer.Concrete
+{
+    public class ContactUserManager : IContactUserService
+    {
+        IContactUserDal _contactUserDal;
+
+        public ContactUserManager(IContactUserDal contactUserDal)
+        {
+            _contactUserDal = contactUserDal;
+        }
+
+        public void Add(ContactUser t)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(ContactUser t)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ContactUser GetByID(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<ContactUser> GetList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(ContactUser t)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}
