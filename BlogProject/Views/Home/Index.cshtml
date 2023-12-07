@@ -457,18 +457,7 @@
             <div class="col-md-4">
                 <!-- sidebar   -->
                 <div class="sidebar-content fl-wrap fix-bar">
-                    <!-- box-widget -->
-                    @await Component.InvokeAsync("PopularResentBlogBoxWidget")
-                    <!-- box-widget  end -->
-                    <!-- box-widget -->
-                    @await Component.InvokeAsync("SocialMediaBoxWidget")
-                    <!-- box-widget  end -->
-                    <!-- box-widget -->
-                    @await Component.InvokeAsync("PopularTagsBoxWidget")
-                    <!-- box-widget  end -->
-                    <!-- box-widget -->
-                    @await Component.InvokeAsync("EditorsChoiceBoxWidget")
-                    <!-- box-widget  end -->
+                    @await Html.PartialAsync("~/Views/Shared/Partial/BoxWidgetPartial.cshtml")
                 </div>
                 <!-- sidebar  end -->
             </div>

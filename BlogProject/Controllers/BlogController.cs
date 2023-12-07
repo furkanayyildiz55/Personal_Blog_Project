@@ -8,5 +8,10 @@ namespace BlogProject.Controllers
         {
             return View();
         }
+        
+        public IActionResult Detail()
+        {
+            return View();
+        }
     }
 }

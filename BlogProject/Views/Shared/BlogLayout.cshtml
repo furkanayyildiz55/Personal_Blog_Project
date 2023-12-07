@@ -188,10 +188,7 @@
         <!-- wrapper -->
         <div id="wrapper">
             <!-- content    -->
-                
-            <!-- RENDER BODY    -->
             @RenderBody()
-
             <!-- content  end-->
             <!-- footer -->
             <footer class="fl-wrap main-footer">
@@ -261,11 +258,9 @@
                                     <div class="footer-widget-content">
                                         <div class="subcribe-form fl-wrap">
                                             <p>Yeni bir şablon veya güncelleme başlattığımızda bildirim almak ister misiniz? Sadece kaydolun, size bir e-posta bildirimi göndereceğiz.</p>
-                                            <form id="subscribe" class="fl-wrap">
-                                                <input class="enteremail" name="email" id="subscribe-email" placeholder="Email Adresiniz" spellcheck="false" type="text">
-                                                <button type="submit" id="subscribe-button" class="subscribe-button color-bg">Abone Ol </button>
-                                                <label for="subscribe-email" class="subscribe-message"></label>
-                                            </form>
+                                            <!-- footer-subscribe-->
+                                            @await Component.InvokeAsync("SubscribeFormWidget")
+                                            <!-- footer-subscribe end-->
                                         </div>
                                     </div>
                                 </div>
@@ -301,13 +296,13 @@
         </div>
         <!-- wrapper end -->
         <!-- cookie-info-bar -->
-        <div class="cookie-info-bar">
+@*         <div class="cookie-info-bar">
             <div class="container">
                 <div class="cookie-info-bar_title"><i class="fal fa-cookie"></i>Our site uses cookies. Learn more about our use of cookies: <a href="index3.html#">Cookie policy</a></div>
                 <a href="index3.html#" class="sicb_btn color-bg">Accept</a>
                 <a href="index3.html#" class="sicb_btn">Reject</a>
             </div>
-        </div>
+        </div> *@
         <!-- cookie-info-bar end -->
         <!--register form -->
         <div class="main-register-container">
