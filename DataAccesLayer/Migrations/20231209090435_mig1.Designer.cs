@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccesLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20231205185939_mig1_create_database")]
-    partial class mig1_create_database
+    [Migration("20231209090435_mig1")]
+    partial class mig1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,8 +34,8 @@ namespace DataAccesLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ObjectId"));
 
-                    b.Property<string>("CategoryId")
-                        .HasColumnType("nvarchar(max)")
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int")
                         .HasColumnName("category_id");
 
                     b.Property<string>("CommnetCount")
@@ -50,7 +50,7 @@ namespace DataAccesLayer.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("main_image");
 
-                    b.Property<DateTime>("ObjectIDate")
+                    b.Property<DateTime?>("ObjectIDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("object_idate");
 
@@ -58,7 +58,7 @@ namespace DataAccesLayer.Migrations
                         .HasColumnType("int")
                         .HasColumnName("object_status");
 
-                    b.Property<DateTime>("ObjectUDate")
+                    b.Property<DateTime?>("ObjectUDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("object_udate");
 
@@ -74,7 +74,15 @@ namespace DataAccesLayer.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("views_count");
 
+                    b.Property<int>("WriterId")
+                        .HasColumnType("int")
+                        .HasColumnName("writer_id");
+
                     b.HasKey("ObjectId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("WriterId");
 
                     b.ToTable("blog");
                 });
@@ -92,7 +100,7 @@ namespace DataAccesLayer.Migrations
                         .HasColumnType("int")
                         .HasColumnName("blog_id");
 
-                    b.Property<DateTime>("ObjectIDate")
+                    b.Property<DateTime?>("ObjectIDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("object_idate");
 
@@ -100,7 +108,7 @@ namespace DataAccesLayer.Migrations
                         .HasColumnType("int")
                         .HasColumnName("object_status");
 
-                    b.Property<DateTime>("ObjectUDate")
+                    b.Property<DateTime?>("ObjectUDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("object_udate");
 
@@ -126,16 +134,12 @@ namespace DataAccesLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ObjectId"));
 
-                    b.Property<int>("BlogId")
-                        .HasColumnType("int")
-                        .HasColumnName("blog_id");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("name");
 
-                    b.Property<DateTime>("ObjectIDate")
+                    b.Property<DateTime?>("ObjectIDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("object_idate");
 
@@ -143,13 +147,11 @@ namespace DataAccesLayer.Migrations
                         .HasColumnType("int")
                         .HasColumnName("object_status");
 
-                    b.Property<DateTime>("ObjectUDate")
+                    b.Property<DateTime?>("ObjectUDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("object_udate");
 
                     b.HasKey("ObjectId");
-
-                    b.HasIndex("BlogId");
 
                     b.ToTable("category");
                 });
@@ -171,7 +173,7 @@ namespace DataAccesLayer.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("content");
 
-                    b.Property<DateTime>("ObjectIDate")
+                    b.Property<DateTime?>("ObjectIDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("object_idate");
 
@@ -179,7 +181,7 @@ namespace DataAccesLayer.Migrations
                         .HasColumnType("int")
                         .HasColumnName("object_status");
 
-                    b.Property<DateTime>("ObjectUDate")
+                    b.Property<DateTime?>("ObjectUDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("object_udate");
 
@@ -219,7 +221,7 @@ namespace DataAccesLayer.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("message");
 
-                    b.Property<DateTime>("ObjectIDate")
+                    b.Property<DateTime?>("ObjectIDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("object_idate");
 
@@ -227,7 +229,7 @@ namespace DataAccesLayer.Migrations
                         .HasColumnType("int")
                         .HasColumnName("object_status");
 
-                    b.Property<DateTime>("ObjectUDate")
+                    b.Property<DateTime?>("ObjectUDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("object_udate");
 
@@ -261,7 +263,7 @@ namespace DataAccesLayer.Migrations
                         .HasColumnType("int")
                         .HasColumnName("comment_id");
 
-                    b.Property<DateTime>("ObjectIDate")
+                    b.Property<DateTime?>("ObjectIDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("object_idate");
 
@@ -269,7 +271,7 @@ namespace DataAccesLayer.Migrations
                         .HasColumnType("int")
                         .HasColumnName("object_status");
 
-                    b.Property<DateTime>("ObjectUDate")
+                    b.Property<DateTime?>("ObjectUDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("object_udate");
 
@@ -293,7 +295,7 @@ namespace DataAccesLayer.Migrations
                         .HasColumnType("bit")
                         .HasColumnName("blog_view");
 
-                    b.Property<DateTime>("ObjectIDate")
+                    b.Property<DateTime?>("ObjectIDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("object_idate");
 
@@ -301,7 +303,7 @@ namespace DataAccesLayer.Migrations
                         .HasColumnType("int")
                         .HasColumnName("object_status");
 
-                    b.Property<DateTime>("ObjectUDate")
+                    b.Property<DateTime?>("ObjectUDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("object_udate");
 
@@ -349,7 +351,7 @@ namespace DataAccesLayer.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("name");
 
-                    b.Property<DateTime>("ObjectIDate")
+                    b.Property<DateTime?>("ObjectIDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("object_idate");
 
@@ -357,7 +359,7 @@ namespace DataAccesLayer.Migrations
                         .HasColumnType("int")
                         .HasColumnName("object_status");
 
-                    b.Property<DateTime>("ObjectUDate")
+                    b.Property<DateTime?>("ObjectUDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("object_udate");
 
@@ -387,7 +389,7 @@ namespace DataAccesLayer.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("name");
 
-                    b.Property<DateTime>("ObjectIDate")
+                    b.Property<DateTime?>("ObjectIDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("object_idate");
 
@@ -395,13 +397,17 @@ namespace DataAccesLayer.Migrations
                         .HasColumnType("int")
                         .HasColumnName("object_status");
 
-                    b.Property<DateTime>("ObjectUDate")
+                    b.Property<DateTime?>("ObjectUDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("object_udate");
 
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("password");
+
+                    b.Property<string>("ProfileImage")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("profile_image");
 
                     b.Property<string>("Surname")
                         .HasColumnType("nvarchar(max)")
@@ -410,6 +416,25 @@ namespace DataAccesLayer.Migrations
                     b.HasKey("ObjectId");
 
                     b.ToTable("writer");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Blog", b =>
+                {
+                    b.HasOne("EntityLayer.Concrete.Category", "Category")
+                        .WithMany("Blog")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EntityLayer.Concrete.Writer", "Writer")
+                        .WithMany("Blog")
+                        .HasForeignKey("WriterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Writer");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.BlogTag", b =>
@@ -429,17 +454,6 @@ namespace DataAccesLayer.Migrations
                     b.Navigation("Blogs");
 
                     b.Navigation("Tags");
-                });
-
-            modelBuilder.Entity("EntityLayer.Concrete.Category", b =>
-                {
-                    b.HasOne("EntityLayer.Concrete.Blog", "Blogs")
-                        .WithMany("Category")
-                        .HasForeignKey("BlogId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Blogs");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Comment", b =>
@@ -479,9 +493,12 @@ namespace DataAccesLayer.Migrations
                 {
                     b.Navigation("BlogTag");
 
-                    b.Navigation("Category");
-
                     b.Navigation("Comment");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Category", b =>
+                {
+                    b.Navigation("Blog");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Comment", b =>
@@ -496,6 +513,8 @@ namespace DataAccesLayer.Migrations
 
             modelBuilder.Entity("EntityLayer.Concrete.Writer", b =>
                 {
+                    b.Navigation("Blog");
+
                     b.Navigation("SocialMedia");
                 });
 #pragma warning restore 612, 618

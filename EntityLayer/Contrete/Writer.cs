@@ -25,7 +25,11 @@ namespace EntityLayer.Concrete
         [Column("about")]
         public String? About { get; set; }
 
+        [Column("profile_image")]
+        public String? ProfileImage { get; set; }
+
         //Navigation Prorety
+        public List<Blog>? Blog { get; set; }
         public List<SocialMedia>? SocialMedia { get; set; }
     }
 }

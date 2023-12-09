@@ -8,7 +8,7 @@ namespace DataAccesLayer.Concrete
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=.;Database=test8;Trusted_Connection=True; TrustServerCertificate=True");
+            optionsBuilder.UseSqlServer(@"Server=.;Database=test9;Trusted_Connection=True; TrustServerCertificate=True");
             //optionsBuilder.UseSqlServer(@"Data Source=104.247.162.242\MSSQLSERVER2019;Database=aymodam1_blog;Integrated Security=false;User ID=aymodam1_furkan;Password=R0$lu03w3;TrustServerCertificate=True");
         }
 

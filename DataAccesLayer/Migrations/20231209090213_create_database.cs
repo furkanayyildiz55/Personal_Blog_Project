@@ -6,31 +6,25 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataAccesLayer.Migrations
 {
     /// <inheritdoc />
-    public partial class mig1_create_database : Migration
+    public partial class create_database : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "blog",
+                name: "category",
                 columns: table => new
                 {
                     objectid = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    content = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    thumbnail_image = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    main_image = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    category_id = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    views_count = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    comment_count = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     object_status = table.Column<int>(type: "int", nullable: false),
                     object_idate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     object_udate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_blog", x => x.objectid);
+                    table.PrimaryKey("PK_category", x => x.objectid);
                 });
 
             migrationBuilder.CreateTable(
@@ -80,6 +74,7 @@ namespace DataAccesLayer.Migrations
                     email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     password = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     about = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    profile_image = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     object_status = table.Column<int>(type: "int", nullable: false),
                     object_idate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     object_udate = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -90,51 +85,63 @@ namespace DataAccesLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "category",
+                name: "blog",
                 columns: table => new
                 {
                     objectid = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    blog_id = table.Column<int>(type: "int", nullable: false),
+                    title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    content = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    thumbnail_image = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    main_image = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    views_count = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    comment_count = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    category_id = table.Column<int>(type: "int", nullable: false),
+                    writer_id = table.Column<int>(type: "int", nullable: false),
                     object_status = table.Column<int>(type: "int", nullable: false),
                     object_idate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     object_udate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_category", x => x.objectid);
+                    table.PrimaryKey("PK_blog", x => x.objectid);
                     table.ForeignKey(
-                        name: "FK_category_blog_blog_id",
-                        column: x => x.blog_id,
-                        principalTable: "blog",
+                        name: "FK_blog_category_category_id",
+                        column: x => x.category_id,
+                        principalTable: "category",
+                        principalColumn: "objectid",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_blog_writer_writer_id",
+                        column: x => x.writer_id,
+                        principalTable: "writer",
                         principalColumn: "objectid",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "comment",
+                name: "social_media",
                 columns: table => new
                 {
                     objectid = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    user_name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    user_email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    user_ip = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    content = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    reply_id = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    blog_id = table.Column<int>(type: "int", nullable: false),
+                    platform_name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    platform_icon = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    url = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    blog_view = table.Column<bool>(type: "bit", nullable: false),
+                    profile_view = table.Column<bool>(type: "bit", nullable: false),
+                    writer_id = table.Column<int>(type: "int", nullable: false),
                     object_status = table.Column<int>(type: "int", nullable: false),
                     object_idate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     object_udate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_comment", x => x.objectid);
+                    table.PrimaryKey("PK_social_media", x => x.objectid);
                     table.ForeignKey(
-                        name: "FK_comment_blog_blog_id",
-                        column: x => x.blog_id,
-                        principalTable: "blog",
+                        name: "FK_social_media_writer_writer_id",
+                        column: x => x.writer_id,
+                        principalTable: "writer",
                         principalColumn: "objectid",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -169,28 +176,28 @@ namespace DataAccesLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "social_media",
+                name: "comment",
                 columns: table => new
                 {
                     objectid = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    platform_name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    platform_icon = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    url = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    blog_view = table.Column<bool>(type: "bit", nullable: false),
-                    profile_view = table.Column<bool>(type: "bit", nullable: false),
-                    writer_id = table.Column<int>(type: "int", nullable: false),
+                    user_name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    user_email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    user_ip = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    content = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    reply_id = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    blog_id = table.Column<int>(type: "int", nullable: false),
                     object_status = table.Column<int>(type: "int", nullable: false),
                     object_idate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     object_udate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_social_media", x => x.objectid);
+                    table.PrimaryKey("PK_comment", x => x.objectid);
                     table.ForeignKey(
-                        name: "FK_social_media_writer_writer_id",
-                        column: x => x.writer_id,
-                        principalTable: "writer",
+                        name: "FK_comment_blog_blog_id",
+                        column: x => x.blog_id,
+                        principalTable: "blog",
                         principalColumn: "objectid",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -218,6 +225,16 @@ namespace DataAccesLayer.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_blog_category_id",
+                table: "blog",
+                column: "category_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_blog_writer_id",
+                table: "blog",
+                column: "writer_id");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_blog_tag_blog_id",
                 table: "blog_tag",
                 column: "blog_id");
@@ -226,11 +243,6 @@ namespace DataAccesLayer.Migrations
                 name: "IX_blog_tag_tag_id",
                 table: "blog_tag",
                 column: "tag_id");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_category_blog_id",
-                table: "category",
-                column: "blog_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_comment_blog_id",
@@ -255,9 +267,6 @@ namespace DataAccesLayer.Migrations
                 name: "blog_tag");
 
             migrationBuilder.DropTable(
-                name: "category");
-
-            migrationBuilder.DropTable(
                 name: "contact_user");
 
             migrationBuilder.DropTable(
@@ -273,10 +282,13 @@ namespace DataAccesLayer.Migrations
                 name: "comment");
 
             migrationBuilder.DropTable(
-                name: "writer");
+                name: "blog");
 
             migrationBuilder.DropTable(
-                name: "blog");
+                name: "category");
+
+            migrationBuilder.DropTable(
+                name: "writer");
         }
     }
 }

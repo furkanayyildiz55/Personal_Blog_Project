@@ -22,9 +22,6 @@ namespace EntityLayer.Concrete
         [Column("main_image")]
         public String? MainImage { get; set; }
 
-        [Column("category_id")]
-        public String? CategoryId { get; set; }
-
         [Column("views_count")]
         public String? ViewsCount { get; set; }
         
@@ -34,6 +31,15 @@ namespace EntityLayer.Concrete
         //Navigation Prorety
         public List<Comment>? Comment { get; set; }
         public List<BlogTag>? BlogTag { get; set; }
-        public List<Category>? Category { get; set; }
+
+
+        //Navigation Property
+        [Column("category_id")]
+        public int CategoryId { get; set; }
+        public Category? Category { get; set; }
+
+        [Column("writer_id")]
+        public int WriterId { get; set; }
+        public Writer? Writer { get; set; }
     }
 }

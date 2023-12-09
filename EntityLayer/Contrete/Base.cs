@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,9 +19,9 @@ namespace EntityLayer.Concrete
         public Int32 ObjectStatus { get; set; }
 
         [Column("object_idate")]
-        public DateTime ObjectIDate { get; set; }
+        public DateTime? ObjectIDate { get; set; }
 
         [Column("object_udate")]
-        public DateTime ObjectUDate { get; set; }
+        public DateTime? ObjectUDate { get; set; }
     }
 }

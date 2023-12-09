@@ -15,8 +15,7 @@ namespace EntityLayer.Concrete
         public String Name { get; set; }
 
         //Navigation Property
-        [Column("blog_id")]
-        public int BlogId { get; set; }
-        public Blog? Blogs { get; set; }
+        public List<Blog>? Blog{ get; set; }
+
     }
 }

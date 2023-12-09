@@ -4,6 +4,7 @@ using DataAccesLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccesLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20231209090213_create_database")]
+    partial class create_database
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,7 +50,7 @@ namespace DataAccesLayer.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("main_image");
 
-                    b.Property<DateTime?>("ObjectIDate")
+                    b.Property<DateTime>("ObjectIDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("object_idate");
 
@@ -55,7 +58,7 @@ namespace DataAccesLayer.Migrations
                         .HasColumnType("int")
                         .HasColumnName("object_status");
 
-                    b.Property<DateTime?>("ObjectUDate")
+                    b.Property<DateTime>("ObjectUDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("object_udate");
 
@@ -97,7 +100,7 @@ namespace DataAccesLayer.Migrations
                         .HasColumnType("int")
                         .HasColumnName("blog_id");
 
-                    b.Property<DateTime?>("ObjectIDate")
+                    b.Property<DateTime>("ObjectIDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("object_idate");
 
@@ -105,7 +108,7 @@ namespace DataAccesLayer.Migrations
                         .HasColumnType("int")
                         .HasColumnName("object_status");
 
-                    b.Property<DateTime?>("ObjectUDate")
+                    b.Property<DateTime>("ObjectUDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("object_udate");
 
@@ -136,7 +139,7 @@ namespace DataAccesLayer.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("name");
 
-                    b.Property<DateTime?>("ObjectIDate")
+                    b.Property<DateTime>("ObjectIDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("object_idate");
 
@@ -144,7 +147,7 @@ namespace DataAccesLayer.Migrations
                         .HasColumnType("int")
                         .HasColumnName("object_status");
 
-                    b.Property<DateTime?>("ObjectUDate")
+                    b.Property<DateTime>("ObjectUDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("object_udate");
 
@@ -170,7 +173,7 @@ namespace DataAccesLayer.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("content");
 
-                    b.Property<DateTime?>("ObjectIDate")
+                    b.Property<DateTime>("ObjectIDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("object_idate");
 
@@ -178,7 +181,7 @@ namespace DataAccesLayer.Migrations
                         .HasColumnType("int")
                         .HasColumnName("object_status");
 
-                    b.Property<DateTime?>("ObjectUDate")
+                    b.Property<DateTime>("ObjectUDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("object_udate");
 
@@ -218,7 +221,7 @@ namespace DataAccesLayer.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("message");
 
-                    b.Property<DateTime?>("ObjectIDate")
+                    b.Property<DateTime>("ObjectIDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("object_idate");
 
@@ -226,7 +229,7 @@ namespace DataAccesLayer.Migrations
                         .HasColumnType("int")
                         .HasColumnName("object_status");
 
-                    b.Property<DateTime?>("ObjectUDate")
+                    b.Property<DateTime>("ObjectUDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("object_udate");
 
@@ -260,7 +263,7 @@ namespace DataAccesLayer.Migrations
                         .HasColumnType("int")
                         .HasColumnName("comment_id");
 
-                    b.Property<DateTime?>("ObjectIDate")
+                    b.Property<DateTime>("ObjectIDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("object_idate");
 
@@ -268,7 +271,7 @@ namespace DataAccesLayer.Migrations
                         .HasColumnType("int")
                         .HasColumnName("object_status");
 
-                    b.Property<DateTime?>("ObjectUDate")
+                    b.Property<DateTime>("ObjectUDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("object_udate");
 
@@ -292,7 +295,7 @@ namespace DataAccesLayer.Migrations
                         .HasColumnType("bit")
                         .HasColumnName("blog_view");
 
-                    b.Property<DateTime?>("ObjectIDate")
+                    b.Property<DateTime>("ObjectIDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("object_idate");
 
@@ -300,7 +303,7 @@ namespace DataAccesLayer.Migrations
                         .HasColumnType("int")
                         .HasColumnName("object_status");
 
-                    b.Property<DateTime?>("ObjectUDate")
+                    b.Property<DateTime>("ObjectUDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("object_udate");
 
@@ -348,7 +351,7 @@ namespace DataAccesLayer.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("name");
 
-                    b.Property<DateTime?>("ObjectIDate")
+                    b.Property<DateTime>("ObjectIDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("object_idate");
 
@@ -356,7 +359,7 @@ namespace DataAccesLayer.Migrations
                         .HasColumnType("int")
                         .HasColumnName("object_status");
 
-                    b.Property<DateTime?>("ObjectUDate")
+                    b.Property<DateTime>("ObjectUDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("object_udate");
 
@@ -386,7 +389,7 @@ namespace DataAccesLayer.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("name");
 
-                    b.Property<DateTime?>("ObjectIDate")
+                    b.Property<DateTime>("ObjectIDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("object_idate");
 
@@ -394,7 +397,7 @@ namespace DataAccesLayer.Migrations
                         .HasColumnType("int")
                         .HasColumnName("object_status");
 
-                    b.Property<DateTime?>("ObjectUDate")
+                    b.Property<DateTime>("ObjectUDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("object_udate");
 
