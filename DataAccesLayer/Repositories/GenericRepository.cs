@@ -1,12 +1,22 @@
 ﻿using DataAccesLayer.Abstract;
 using DataAccesLayer.Concrete;
+using EntityLayer.Concrete;
 using System.Linq.Expressions;
 
 namespace DataAccesLayer.Repositories
 {
-    public class GenericRepository<T> : IGenericDal<T> where T : class
+    public class GenericRepository<T> : IGenericDal<T> where T : Base
     {
-        public void Delete(T t)
+		public void Insert(T t)
+		{
+			using var context = new Context();
+            t.ObjectStatus = 1;
+            t.ObjectUDate = DateTime.Now;
+			context.Add(t);
+			context.SaveChanges();
+		}
+
+		public void Delete(T t)
         {
             using var context = new Context();
             context.Remove(t);
@@ -26,12 +36,6 @@ namespace DataAccesLayer.Repositories
             return context.Set<T>().ToList();  
         }
 
-        public void Insert(T t)
-        {
-            using var context = new Context();
-            context.Add(t);
-            context.SaveChanges();
-        }
 
         public List<T> GetListAll(Expression<Func<T, bool>> filter)
         {

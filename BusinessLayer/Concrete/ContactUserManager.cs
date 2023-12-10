@@ -20,7 +20,7 @@ namespace BusinessLayer.Concrete
 
         public void Add(ContactUser t)
         {
-            throw new NotImplementedException();
+            _contactUserDal.Insert(t);
         }
 
         public void Delete(ContactUser t)

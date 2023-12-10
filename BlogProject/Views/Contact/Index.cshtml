@@ -1,4 +1,7 @@
-﻿@{
+﻿@addTagHelper * , Microsoft.AspNetCore.Mvc.TagHelpers
+@model EntityLayer.Concrete.ContactUser
+
+@{
 	ViewBag.Title = "İletişim";
 	ViewBag.VisibleRouteSection = true;
 	Layout = "~/Views/Shared/BlogLayout.cshtml";
@@ -45,14 +48,14 @@
 					<p>İletişim bilgilerini girdikten sonra bana mesaj bırakabilrisin, mesajları günlük periyotlarda takip etmekteyim. Bol şanslar. </p>
 					<div id="contact-form" style="margin-top: 20px;">
 						<div id="message"></div>
-						<form class="custom-form" action="https://gmag.kwst.net/php/contact.php" name="contactform" id="contactform">
-							<fieldset>
-								<input type="text" name="name" id="name" placeholder="İsim *" value="" />
-								<input type="text" name="email" id="email" placeholder="Soy İsim*" value="" />
-								<textarea name="comments" id="comments" cols="40" rows="3" placeholder="Mesaj :"></textarea>
-							</fieldset>
-							<button class="btn   color-bg float-btn" id="submit">Mesajı Gönder<i class="fas fa-caret-right"></i></button>
+						
+						<form asp-action="Index" asp-controller="Contact" method="post" class="custom-form"  id="contactform">
+								<input asp-for="UserName" type="text"  id="name" placeholder="İsim - Soy İsim *"  />
+								<input asp-for="UserEmail" type="text"  id="email" placeholder="EMail*"  />
+								<textarea asp-for="Message"  id="comments" cols="40" rows="3" placeholder="Mesaj :"></textarea>
+							<button type="submit" class="btn color-bg float-btn" >Mesajı Gönder<i class="fas fa-caret-right"></i></button>
 						</form>
+						
 					</div>
 					<!-- contact form  end-->
 				</div>

@@ -4,7 +4,7 @@ function initGmag() {
     "use strict";
 	//   date------------------
     var date = new Date(),
-        monthsCal = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
+        monthsCal = ["OCA", "ÞUB", "MAR", "NÝS", "MAY", "HAZ", "TEM", "AÐU", "EYL", "EKÝ", "KAS", "ARA"];
         curdate = date.getDate(),
         getMon = monthsCal[date.getMonth()],
         getyear = date.getFullYear();
@@ -184,42 +184,44 @@ function initGmag() {
             }
         }
     });
-    //   Contact form------------------
-    $(document).on('submit', '#contactform', function () {
-        var a = $(this).attr("action");
-        $("#message").slideUp(750, function () {
-            $("#message").hide();
-            $("#submit").attr("disabled", "disabled");
-            $.post(a, {
-                name: $("#name").val(),
-                email: $("#email").val(),
-                comments: $("#comments").val()
-            }, function (a) {
-                document.getElementById("message").innerHTML = a;
-                $("#message").slideDown("slow");
-                $("#submit").removeAttr("disabled");
-                if (null != a.match("success")) $("#contactform").slideDown("slow");
-            });
-        });
-        return false;
-    });
-    $(document).on('keyup', '#contactform input, #contactform textarea', function () {
-        $("#message").slideUp(1500);
-    });
+
+    ////   Contact form------------------
+    //$(document).on('submit', '#contactform', function () {
+    //    var a = $(this).attr("action");
+    //    $("#message").slideUp(750, function () {
+    //        $("#message").hide();
+    //        $("#submit").attr("disabled", "disabled");
+    //        $.post(a, {
+    //            UserName: $("#name").val(),
+    //            UserEmail: $("#email").val(),
+    //            Message: $("#comments").val()
+    //        }, function (a) {
+    //            document.getElementById("message").innerHTML = a;
+    //            $("#message").slideDown("slow");
+    //            $("#submit").removeAttr("disabled");
+    //            if (null != a.match("success")) $("#contactform").slideDown("slow");
+    //        });
+    //    });
+    //    return false;
+    //});
+    //$(document).on('keyup', '#contactform input, #contactform textarea', function () {
+    //    $("#message").slideUp(1500);
+    //});
+
     //   mailchimp------------------
-    $("#subscribe").ajaxChimp({
-        language: "eng",
-        url: "https://gmail.us1.list-manage.com/subscribe/post?u=1fe818378d5c129b210719d80&amp;id=a2792f681b"
-    });
-    $.ajaxChimp.translations.eng = {
-        submit: "Submitting...",
-        0: '<i class="fal fa-check"></i> We will be in touch soon!',
-        1: '<i class="fal fa-exclamation-circle"></i> You must enter a valid e-mail address.',
-        2: '<i class="fal fa-exclamation-circle"></i> E-mail address is not valid.',
-        3: '<i class="fal fa-exclamation-circle"></i> E-mail address is not valid.',
-        4: '<i class="fal fa-exclamation-circle"></i> E-mail address is not valid.',
-        5: '<i class="fal fa-exclamation-circle"></i> E-mail address is not valid.'
-    };
+    //$("#subscribe").ajaxChimp({
+    //    language: "eng",
+    //    url: "https://gmail.us1.list-manage.com/subscribe/post?u=1fe818378d5c129b210719d80&amp;id=a2792f681b"
+    //});
+    //$.ajaxChimp.translations.eng = {
+    //    submit: "Submitting...",
+    //    0: '<i class="fal fa-check"></i> We will be in touch soon!',
+    //    1: '<i class="fal fa-exclamation-circle"></i> You must enter a valid e-mail address.',
+    //    2: '<i class="fal fa-exclamation-circle"></i> E-mail address is not valid.',
+    //    3: '<i class="fal fa-exclamation-circle"></i> E-mail address is not valid.',
+    //    4: '<i class="fal fa-exclamation-circle"></i> E-mail address is not valid.',
+    //    5: '<i class="fal fa-exclamation-circle"></i> E-mail address is not valid.'
+    //};
     $(".to-top").on("click", function (a) {
         a.preventDefault();
         $("html, body").animate({
