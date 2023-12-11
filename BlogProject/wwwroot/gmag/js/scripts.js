@@ -213,6 +213,10 @@ function initGmag() {
     //    language: "eng",
     //    url: "https://gmail.us1.list-manage.com/subscribe/post?u=1fe818378d5c129b210719d80&amp;id=a2792f681b"
     //});
+
+
+    
+
     //$.ajaxChimp.translations.eng = {
     //    submit: "Submitting...",
     //    0: '<i class="fal fa-check"></i> We will be in touch soon!',
@@ -691,3 +695,42 @@ document.addEventListener('gesturestart', function (e) {
 $(document).ready(function () {
     initGmag();
 });
+
+
+
+function contactForm() {
+    var data = $("#contactForm").serialize();
+    $.ajax({
+        type: 'POST',
+        url: '/Contact/Index/',
+        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+        data: data,
+        success: function (result) {
+            console.log(result)
+            var parsedData = JSON.parse(result);
+
+            // Veriyi ayrýþtýrdýktan sonra eriþebilirsiniz
+            var status = parsedData.status;
+            var resultMessages = parsedData.resultMessages;
+
+            if (status) {
+                //showToastMessage2();
+                alert("baþarýlý");
+            }
+            else {
+                // resultMessages içindeki öðeleri dolaþabilirsiniz
+                for (var i = 0; i < resultMessages.length; i++) {
+
+                    var propertyName = resultMessages[i].propertyName;
+                    var message = resultMessages[i].message;
+
+                    document.getElementById(propertyName).innerHTML = message
+                }
+            }
+        },
+        error: function (result) {
+            alert("Failed");
+            console.log('Failed ');
+        }
+    })
+}

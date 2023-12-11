@@ -1,0 +1,61 @@
+﻿@* class="custom-form" name="contactForm" id="contactForm" *@
+
+
+@{
+    ViewBag.Title = "İletişim";
+    ViewBag.VisibleRouteSection = true;
+    Layout = "~/Views/Shared/BlogLayout.cshtml";
+}
+
+<form id="contactForm" method="post">
+	<input type="text" name="UserName"  placeholder="Your Name *" value="" />
+	<p id="UserName" class="text-danger"></p>
+
+	<input type="text" name="UserEmail" placeholder="Email Address*" value="" />
+	<p id="UserEmail" class="text-danger"></p>
+
+	<textarea name="Message" cols="40" rows="3" placeholder="Your Message:"></textarea>
+	<p id="Message" class="text-danger"></p>
+
+    <button type="button" id="btnContact" class="btn color-bg float-btn" >Send message <i class="fas fa-caret-right"></i></button>
+</form>
+
+    <script type="text/javascript"> 
+        alert("asd");
+        $("#btnContact").click(function () {
+            var formData = $("#contactForm").serialize();
+            $.ajax({
+                type: 'POST',
+                url: '/Contact/Index/',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                data: formData,
+                success: function (result) {
+                    console.log(result)
+
+                    var status = result.status;
+                    var resultMessages = result.resultMessages;
+
+                    if (status) {
+                        alert(resultMessages[0].message)
+                    }
+                    else {
+                        // resultMessages içindeki öğeleri dolaşabilirsiniz
+                        for (var i = 0; i < resultMessages.length; i++) {
+
+                            var propertyName = resultMessages[i].propertyName;
+                            var message = resultMessages[i].message;
+
+                            document.getElementById(propertyName).innerHTML = message
+                        }
+                    }
+                },
+                error: function (result) {
+                    alert("Failed");
+                    console.log('Failed ');
+                }
+            });
+        });
+	</script>
+
+
+

@@ -23,6 +23,11 @@
 /*-------------Import fonts ---------------------------------------*/
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
 /*-------------General Style---------------------------------------*/
+
+.color-red {
+	color: crimson;
+}
+
 html{
 	overflow-x:hidden !important;
 	height:100%;
@@ -1607,7 +1612,7 @@ section {
 	border: 1px solid #e1e1e1;
 }
 .custom-form input {
-	margin-bottom: 20px;
+	margin-bottom: 4px;
 }
 .custom-form .btn {
 	border:none;
@@ -5494,3 +5499,7 @@ h4.cart-title span {
 	background-position:center;
 }
 }
+
+
+
+

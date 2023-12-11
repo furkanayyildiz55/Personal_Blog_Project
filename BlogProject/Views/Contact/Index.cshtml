@@ -1,11 +1,11 @@
-﻿@addTagHelper * , Microsoft.AspNetCore.Mvc.TagHelpers
-@model EntityLayer.Concrete.ContactUser
-
-@{
+﻿@{
 	ViewBag.Title = "İletişim";
 	ViewBag.VisibleRouteSection = true;
 	Layout = "~/Views/Shared/BlogLayout.cshtml";
 }
+
+
+
 <section>
 	<div class="container">
 		<div class="row">
@@ -48,19 +48,71 @@
 					<p>İletişim bilgilerini girdikten sonra bana mesaj bırakabilrisin, mesajları günlük periyotlarda takip etmekteyim. Bol şanslar. </p>
 					<div id="contact-form" style="margin-top: 20px;">
 						<div id="message"></div>
-						
-						<form asp-action="Index" asp-controller="Contact" method="post" class="custom-form"  id="contactform">
-								<input asp-for="UserName" type="text"  id="name" placeholder="İsim - Soy İsim *"  />
-								<input asp-for="UserEmail" type="text"  id="email" placeholder="EMail*"  />
-								<textarea asp-for="Message"  id="comments" cols="40" rows="3" placeholder="Mesaj :"></textarea>
-							<button type="submit" class="btn color-bg float-btn" >Mesajı Gönder<i class="fas fa-caret-right"></i></button>
+
+						<form class="custom-form"  id="contactForm" method="post">
+							<input type="text" name="UserName" placeholder="Your Name *" value="" />
+							<p id="UserName" class="color-red" style="color:red"></p>
+
+							<input type="text" name="UserEmail" placeholder="Email Address*" value="" />
+							<p id="UserEmail" class="color-red" style="color:red"></p>
+
+							<textarea name="Message"  cols="40" rows="3" placeholder="Your Message:"></textarea>
+							<p id="Message" class="color-red" style="color:red"></p>
+
+							<button type="button" id="btnContact" class="btn color-bg float-btn" >Send message <i class="fas fa-caret-right"></i></button>
 						</form>
-						
+
 					</div>
 					<!-- contact form  end-->
+						<span id="userMessage" class="color-red" style="color:green; text-align:left;"></span>
 				</div>
+
 			</div>
 		</div>
 	</div>
 </section>
-					
+
+
+
+<script type="text/javascript">
+	$("#btnContact").click(function () {
+		var formData = $("#contactForm").serialize();
+		$.ajax({
+			type: 'POST',
+			url: '/Contact/Index/',
+			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+			data: formData,
+			success: function (result) {
+				console.log(result)
+
+				var status = result.status;
+				var resultMessages = result.resultMessages;
+
+				if (status) {
+					for (var i = 0; i < resultMessages.length; i++) {
+
+						var propertyName = resultMessages[i].propertyName;
+						var message = resultMessages[i].message;
+
+						document.getElementById(propertyName).style.visibility = "visible";
+						document.getElementById(propertyName).innerHTML = message
+					}
+				}
+				else {
+					document.getElementById("userMessage").style.visibility = "hidden";
+					for (var i = 0; i < resultMessages.length; i++) {
+
+						var propertyName = resultMessages[i].propertyName;
+						var message = resultMessages[i].message;
+
+						document.getElementById(propertyName).innerHTML = message
+					}
+				}
+			},
+			error: function (result) {
+				alert("Failed");
+				console.log('Failed ');
+			}
+		});
+	});
+</script>
