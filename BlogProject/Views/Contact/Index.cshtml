@@ -28,17 +28,17 @@
 						<li><a href="contacts.html#" target="_blank"><i class="fab fa-pinterest-p"></i></a></li>
 					</ul>
 				</div>
-@* 				<!-- box-widget -->
+				@* 				<!-- box-widget -->
 				<div class="box-widget-content fl-wrap">
-					<div class="banner-widget fl-wrap">
-						<div class="bg-wrap bg-parallax-wrap-gradien">
-							<div class="bg  " data-bg="~/gmag/images/avatar/1.jpg"></div>
-						</div>
-						<div class="banner-widget_content">
-							<h5>Visit our awesome merch and souvenir online shop.</h5>
-							<a href="contacts.html#" class="btn float-btn color-bg small-btn">Our shop</a>
-						</div>
-					</div>
+				<div class="banner-widget fl-wrap">
+				<div class="bg-wrap bg-parallax-wrap-gradien">
+				<div class="bg  " data-bg="~/gmag/images/avatar/1.jpg"></div>
+				</div>
+				<div class="banner-widget_content">
+				<h5>Visit our awesome merch and souvenir online shop.</h5>
+				<a href="contacts.html#" class="btn float-btn color-bg small-btn">Our shop</a>
+				</div>
+				</div>
 				</div>
 				<!-- box-widget  end --> *@
 			</div>
@@ -49,37 +49,65 @@
 					<div id="contact-form" style="margin-top: 20px;">
 						<div id="message"></div>
 
-						<form class="custom-form"  id="contactForm" method="post">
+						<form class="custom-form" id="contactForm" method="post">
 							<input type="text" name="UserName" placeholder="Your Name *" value="" />
 							<p id="UserName" class="color-red" style="color:red"></p>
 
 							<input type="text" name="UserEmail" placeholder="Email Address*" value="" />
 							<p id="UserEmail" class="color-red" style="color:red"></p>
 
-							<textarea name="Message"  cols="40" rows="3" placeholder="Your Message:"></textarea>
+							<textarea name="Message" cols="40" rows="3" placeholder="Your Message:"></textarea>
 							<p id="Message" class="color-red" style="color:red"></p>
 
-							<button type="button" id="btnContact" class="btn color-bg float-btn" >Send message <i class="fas fa-caret-right"></i></button>
+							<button type="button" id="btnContact" class="btn color-bg float-btn">Send message <img id="imgLoading" style="display:none; text-align:center" src="~/gmag/images/loading1.gif" alt="yükleniyor" width="40px"> <i class="fas fa-caret-right"></i></button>
 						</form>
 
 					</div>
 					<!-- contact form  end-->
-						<span id="userMessage" class="color-red" style="color:green; text-align:left;"></span>
+					<span id="userMessage" class="color-red" style="color:green; text-align:left;"></span>
+					
 				</div>
 
 			</div>
 		</div>
 	</div>
+
+
+
 </section>
 
 
 
 <script type="text/javascript">
-	$("#btnContact").click(function () {
-		var formData = $("#contactForm").serialize();
+	var buttonId = "#btnContact";
+	var formId = "#contactForm"
+	var formIdClear = "contactForm"
+	var actionUrl = '/Contact/Index/';
+	var lodingGifId = "imgLoading";
+
+	function temizle(formId) {
+		var form = document.getElementById(formId);
+		var inputAlanlari = form.elements;
+		//input alanlarını temizle
+		for (var i = 0; i < inputAlanlari.length; i++) {
+			inputAlanlari[i].value = "";
+		}
+		var paragraflar = form.getElementsByTagName("p");
+
+		// Her bir paragrafın içeriğini temizle
+		for (var i = 0; i < paragraflar.length; i++) {
+			paragraflar[i].innerHTML = "";
+		}
+	}
+
+	$(buttonId).click(function () {
+		var loadingGif = document.getElementById(lodingGifId);
+		loadingGif.style.display = "inline-block";
+		var formData = $(formId).serialize();
+
 		$.ajax({
 			type: 'POST',
-			url: '/Contact/Index/',
+			url: actionUrl,
 			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 			data: formData,
 			success: function (result) {
@@ -88,15 +116,14 @@
 				var status = result.status;
 				var resultMessages = result.resultMessages;
 
+
 				if (status) {
 					for (var i = 0; i < resultMessages.length; i++) {
-
-						var propertyName = resultMessages[i].propertyName;
-						var message = resultMessages[i].message;
-
-						document.getElementById(propertyName).style.visibility = "visible";
-						document.getElementById(propertyName).innerHTML = message
+						showToastMessage(resultMessages[i].message);
 					}
+					loadingGif.style.display = "none";
+					temizle(formIdClear);
+
 				}
 				else {
 					document.getElementById("userMessage").style.visibility = "hidden";
@@ -106,13 +133,36 @@
 						var message = resultMessages[i].message;
 
 						document.getElementById(propertyName).innerHTML = message
+						loadingGif.style.display = "none";
+
 					}
 				}
+
 			},
 			error: function (result) {
 				alert("Failed");
 				console.log('Failed ');
 			}
+
 		});
+
 	});
+
+	function showToastMessage(message ) {
+		Toastify({
+			text: message,
+			duration: 3500,
+			newWindow: true,
+			close: true,
+			gravity: "top", // `top` or `bottom`
+			position: "right", // `left`, `center` or `right`
+			stopOnFocus: true, // Prevents dismissing of toast on hover
+			style: {
+				background: "linear-gradient(to right, #00b09b, #96c93d)",
+			},
+			onClick: function () { } // Callback after click
+		}).showToast();
+	};
+
 </script>
+
