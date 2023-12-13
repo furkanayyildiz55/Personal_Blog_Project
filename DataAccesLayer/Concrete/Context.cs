@@ -20,5 +20,6 @@ namespace DataAccesLayer.Concrete
         public DbSet<Category> Category { get; set; }
         public DbSet<Tag> Tag { get; set; }
         public DbSet<BlogTag> BlogTag { get; set; }
+        public DbSet<Subscribe> Subscribe { get; set; }
     }
 }
