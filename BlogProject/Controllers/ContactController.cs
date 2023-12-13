@@ -7,6 +7,7 @@ using BusinessLayer.ValidationRules;
 using Microsoft.CodeAnalysis.Elfie.Serialization;
 using BlogApplication.DTO;
 using Newtonsoft.Json;
+using System.Net;
 
 
 
@@ -26,13 +27,26 @@ namespace BlogProject.Controllers
         [HttpPost]
 		public IActionResult Index(ContactUser contactUser)
 		{
+
+
+
 			AjaxResultDTO ajaxResultDTO = new AjaxResultDTO();
 
 			ContactUserValidator validationRules = new ContactUserValidator();
 			ValidationResult validationResult = validationRules.Validate(contactUser);
 			if (validationResult.IsValid)
 			{
-				contactUser.UserIp = "127.0.0.1";
+				String? ip;
+				try
+				{
+					ip = Response.HttpContext.Connection.RemoteIpAddress?.ToString();
+				}
+				catch (Exception)
+				{
+					ip = "0";
+				}
+				contactUser.UserIp = ip;
+
 				ContactUserManager.Add(contactUser);
 
 				ajaxResultDTO.status = true;

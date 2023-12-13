@@ -24,8 +24,8 @@
 						<li><a href="contacts.html#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
 						<li><a href="contacts.html#" target="_blank"><i class="fab fa-twitter"></i></a></li>
 						<li><a href="contacts.html#" target="_blank"><i class="fab fa-instagram"></i></a></li>
-						<li><a href="contacts.html#" target="_blank"><i class="fab fa-vk"></i></a></li>
-						<li><a href="contacts.html#" target="_blank"><i class="fab fa-pinterest-p"></i></a></li>
+						<li><a href="contacts.html#" target="_blank"><i class="fab fa-github"></i></a></li>
+						<li><a href="contacts.html#" target="_blank"><i class="fab fa-linkedin"></i></a></li>
 					</ul>
 				</div>
 				@* 				<!-- box-widget -->
@@ -45,18 +45,18 @@
 			<div class="col-md-8">
 				<div class="pad-con fl-wrap">
 					<div class="pr-subtitle prs_big">Bana bir mesaj bırak !</div>
-					<p>İletişim bilgilerini girdikten sonra bana mesaj bırakabilrisin, mesajları günlük periyotlarda takip etmekteyim. Bol şanslar. </p>
+					<p>İletişim bilgilerini girdikten sonra bana mesaj bırakabilrisin, mesajları günlük periyotlarda takip etmekteyim. </p>
 					<div id="contact-form" style="margin-top: 20px;">
 						<div id="message"></div>
 
 						<form class="custom-form" id="contactForm" method="post">
-							<input type="text" name="UserName" placeholder="Your Name *" value="" />
+							<input type="text" name="UserName" placeholder="Ad Soyad *" value="" />
 							<p id="UserName" class="color-red" style="color:red"></p>
 
-							<input type="text" name="UserEmail" placeholder="Email Address*" value="" />
+							<input type="text" name="UserEmail" placeholder="Email Adres *" value="" />
 							<p id="UserEmail" class="color-red" style="color:red"></p>
 
-							<textarea name="Message" cols="40" rows="3" placeholder="Your Message:"></textarea>
+							<textarea name="Message" cols="40" rows="3" placeholder="Mesaj *"></textarea>
 							<p id="Message" class="color-red" style="color:red"></p>
 
 							<button type="button" id="btnContact" class="btn color-bg float-btn">Send message <img id="imgLoading" style="display:none; text-align:center" src="~/gmag/images/loading1.gif" alt="yükleniyor" width="40px"> <i class="fas fa-caret-right"></i></button>
@@ -100,6 +100,18 @@
 		}
 	}
 
+	function errorMessageClear(formId) {
+		var form = document.getElementById(formId);
+		var paragraflar = form.getElementsByTagName("p");
+
+		// Her bir paragrafın içeriğini temizle
+		for (var i = 0; i < paragraflar.length; i++) {
+			paragraflar[i].innerHTML = "";
+		}
+	}
+
+	
+
 	$(buttonId).click(function () {
 		var loadingGif = document.getElementById(lodingGifId);
 		loadingGif.style.display = "inline-block";
@@ -126,22 +138,21 @@
 
 				}
 				else {
-					document.getElementById("userMessage").style.visibility = "hidden";
+					errorMessageClear(formIdClear);
 					for (var i = 0; i < resultMessages.length; i++) {
 
 						var propertyName = resultMessages[i].propertyName;
 						var message = resultMessages[i].message;
 
 						document.getElementById(propertyName).innerHTML = message
-						loadingGif.style.display = "none";
-
 					}
+					loadingGif.style.display = "none";
 				}
 
 			},
 			error: function (result) {
-				alert("Failed");
-				console.log('Failed ');
+				alert("Bir hata oluştu");
+				console.log('Bir hata oluştu');
 			}
 
 		});
@@ -151,7 +162,7 @@
 	function showToastMessage(message ) {
 		Toastify({
 			text: message,
-			duration: 3500,
+			duration: 4500,
 			newWindow: true,
 			close: true,
 			gravity: "top", // `top` or `bottom`
