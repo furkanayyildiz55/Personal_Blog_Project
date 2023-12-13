@@ -1,0 +1,89 @@
+﻿<form id="subscribeForm" class="fl-wrap">
+	<input class="enteremail" name="SubscribeEmail" id="subscribe-email" placeholder="Email Adresiniz" spellcheck="false" type="text">
+	<button type="button" id="btnSubscribe" class="subscribe-button color-bg">Abone Ol <img id="imgLoadingSubscribe" style="display:none; text-align:center" src="~/gmag/images/loading1.gif" alt="yükleniyor" width="40px"> </button>
+	<p id="SubscribeEmail" class="color-red" style="color:red">asdas</p>
+</form>
+
+
+<script type="text/javascript">
+	var buttonId = "#btnSubscribe";
+	var formId = "#subscribeForm"
+	var formIdClear = "subscribeForm"
+	var actionUrl = '/Subscribe/SubscribeMail/';
+	var lodingGifId = "imgLoadingSubscribe";
+
+	function temizle(formId) {
+		var form = document.getElementById(formId);
+		var inputAlanlari = form.elements;
+		//input alanlarını temizle
+		for (var i = 0; i < inputAlanlari.length; i++) {
+			inputAlanlari[i].value = "";
+		}
+		var paragraflar = form.getElementsByTagName("p");
+
+		// Her bir paragrafın içeriğini temizle
+		for (var i = 0; i < paragraflar.length; i++) {
+			paragraflar[i].innerHTML = "";
+		}
+
+	}
+
+	function errorMessageClear(formId) {
+		var form = document.getElementById(formId);
+		var paragraflar = form.getElementsByTagName("p");
+
+		// Her bir paragrafın içeriğini temizle
+		for (var i = 0; i < paragraflar.length; i++) {
+			paragraflar[i].innerHTML = "";
+		}
+	}
+
+
+
+	$(buttonId).click(function () {
+		var loadingGif = document.getElementById(lodingGifId);
+		loadingGif.style.display = "inline-block";
+		var formData = $(formId).serialize();
+
+		$.ajax({
+			type: 'POST',
+			url: actionUrl,
+			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+			data: formData,
+			success: function (result) {
+				console.log(result)
+
+				var status = result.status;
+				var resultMessages = result.resultMessages;
+
+
+				if (status) {
+					for (var i = 0; i < resultMessages.length; i++) {
+						showToastMessage(resultMessages[i].message);
+					}
+					loadingGif.style.display = "none";
+					temizle(formIdClear);
+
+				}
+				else {
+					errorMessageClear(formIdClear);
+					for (var i = 0; i < resultMessages.length; i++) {
+
+						var propertyName = resultMessages[i].propertyName;
+						var message = resultMessages[i].message;
+
+						document.getElementById(propertyName).innerHTML = message
+					}
+					loadingGif.style.display = "none";
+				}
+
+			},
+			error: function (result) {
+				alert("Bir hata oluştu");
+				console.log('Bir hata oluştu');
+			}
+
+		});
+
+	});
+</script>

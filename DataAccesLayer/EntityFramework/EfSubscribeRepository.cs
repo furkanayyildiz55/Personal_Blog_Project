@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccesLayer.EntityFramework
 {
-    public class EfSubscribe : GenericRepository<Subscribe>, ISubscribeDal
+    public class EfSubscribeRepository : GenericRepository<Subscribe>, ISubscribeDal
     {
     }
 }

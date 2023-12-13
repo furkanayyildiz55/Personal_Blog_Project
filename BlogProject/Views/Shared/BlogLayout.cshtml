@@ -209,7 +209,7 @@
                                         <div class="subcribe-form fl-wrap">
                                             <p>Yeni bir şablon veya güncelleme başlattığımızda bildirim almak ister misiniz? Sadece kaydolun, size bir e-posta bildirimi göndereceğiz.</p>
                                             <!-- footer-subscribe-->
-                                            @await Component.InvokeAsync("SubscribeFormWidget")
+                                            @await Html.PartialAsync("~/Views/Subscribe/SubscribeMail.cshtml")
                                             <!-- footer-subscribe end-->
                                         </div>
                                     </div>
@@ -293,3 +293,22 @@
 
 </body>
 </html>
+
+<script>
+    function showToastMessage(message) {
+        Toastify({
+            text: message,
+            duration: 4500,
+            newWindow: true,
+            close: true,
+            gravity: "top", // `top` or `bottom`
+            position: "right", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+                background: "linear-gradient(to right, #00b09b, #96c93d)",
+            },
+            onClick: function () { } // Callback after click
+        }).showToast();
+    };
+
+</script>

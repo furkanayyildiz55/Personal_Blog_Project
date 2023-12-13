@@ -10,8 +10,8 @@ namespace EntityLayer.Concrete
     [Table("subscribe")]
     public class Subscribe : Base
     {
-        [Column("user_email")]
-        public String? UserEmail { get; set; }
+        [Column("subscribe_email")]
+        public String? SubscribeEmail { get; set; }
 
         [Column("user_ip")]
         public String? UserIp { get; set; }
