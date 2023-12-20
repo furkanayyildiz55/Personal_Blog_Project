@@ -35,7 +35,7 @@ namespace BusinessLayer.Concrete
 
         public List<Tag> GetList()
         {
-            throw new NotImplementedException();
+          return  _tagDal.GetListAll();
         }
 
         public void Update(Tag t)

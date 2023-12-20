@@ -1,8 +1,9 @@
-﻿
+﻿@model BlogProject.ViewModels.AddBlogViewModel
+
+
 <!--CK EDİTOR-->
 <!--https://ckeditor.com/cke4/builder-->
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-
 
 @{
     ViewData["Title"] = "AddBlog";
@@ -32,11 +33,7 @@
                     <div class="form-group  row">
                         <label class="col-sm-2 col-form-label">Konu</label>
                         <div class="col-sm-10">
-                            <select class="form-control m-b selectUI" name="state">
-                                <option value="konu1">konu 1</option>
-                                <option value="konu2">konu 2</option>
-                                <option value="konu3">konu 3</option>
-                                <option value="konu4">konu 4</option>
+                            <select class="form-control m-b selectUI" name="state" asp-items="Model.CategoryItem">
                             </select>
                         </div>
                     </div>
@@ -45,11 +42,7 @@
                     <div class="form-group  row">
                         <label class="col-sm-2 col-form-label">Etiket</label>
                         <div class="col-sm-10">
-                            <select class="form-control m-b selectUI" name="states[]" multiple="multiple">
-                                <option>Etiket 1</option>
-                                <option>Etiket 2</option>
-                                <option>Etiket 3</option>
-                                <option>Etiket 4</option>
+                            <select class="form-control m-b selectUI" name="states[]" multiple="multiple" asp-items="Model.TagItem">
                             </select>
                         </div>
                     </div>
