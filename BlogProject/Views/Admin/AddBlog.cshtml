@@ -1,0 +1,121 @@
+﻿
+<!--CK EDİTOR-->
+<!--https://ckeditor.com/cke4/builder-->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+
+@{
+    ViewData["Title"] = "AddBlog";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12 wrapper-content">
+        <div class="ibox ">
+            <div class="ibox-title">
+                <h5>Yeni Yazı</h5>
+                <div class="ibox-tools">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-floppy-o bg-success"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <!--FORM-->
+                <form method="get">
+                    <div class="form-group  row">
+                        <label class="col-sm-2 col-form-label">Başlık</label>
+                        <div class="col-sm-10"><input type="text" class="form-control"></div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group  row">
+                        <label class="col-sm-2 col-form-label">Konu</label>
+                        <div class="col-sm-10">
+                            <select class="form-control m-b selectUI" name="state">
+                                <option value="konu1">konu 1</option>
+                                <option value="konu2">konu 2</option>
+                                <option value="konu3">konu 3</option>
+                                <option value="konu4">konu 4</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group  row">
+                        <label class="col-sm-2 col-form-label">Etiket</label>
+                        <div class="col-sm-10">
+                            <select class="form-control m-b selectUI" name="states[]" multiple="multiple">
+                                <option>Etiket 1</option>
+                                <option>Etiket 2</option>
+                                <option>Etiket 3</option>
+                                <option>Etiket 4</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">
+                            Yayın Durumu <br />
+                            <small class="text-navy"></small>
+                        </label>
+                        <div class="col-sm-10">
+                            <div><label> <input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios"> Aktif </label></div>
+                            <div><label> <input type="radio" value="option2" id="optionsRadios2" name="optionsRadios"> Pasif </label></div>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group  row">
+                        <label class="col-sm-2 col-form-label">Form Görseli</label>
+                        <div class="col-sm-10 custom-file">
+                            <input id="logo" type="file" class="custom-file-input">
+                            <label for="logo" class="custom-file-label">Görsel Seçiniz...</label>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+
+
+                    <textarea name="editor55" id="editor55" rows="50" cols="80">
+                                Bilgi Güçtür
+                            </textarea>
+
+
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group row">
+                        <div class="col-sm-4 col-sm-offset-2">
+                            <button class="btn btn-white btn-sm" type="submit">Önizle</button>
+                            <button class="btn btn-primary btn-sm" type="submit">Kaydet ve Çık</button>
+                        </div>
+                    </div>
+                </form>
+                <!--FORM-->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/admin/ckeditor/ckeditor.js"></script>
+
+<script>
+    //EDİTOR
+    CKEDITOR.replace('editor55', {
+        height: 500
+    });
+
+    //SELECT
+    $(document).ready(function () {
+        $('.selectUI').select2();
+    });
+
+    //CUSTOM FILE INPUT
+    $('.custom-file-input').on('change', function () {
+        let fileName = $(this).val().split('\\').pop();
+        $(this).next('.custom-file-label').addClass("selected").html(fileName);
+    });
+</script>
+
+

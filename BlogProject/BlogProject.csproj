@@ -31,4 +31,8 @@
     <Folder Include="Helper\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\admin\ckeditor\plugins\simage\.DS_Store" />
+  </ItemGroup>
+
 </Project>
