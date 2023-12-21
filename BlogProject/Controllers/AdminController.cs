@@ -2,6 +2,7 @@
 using BusinessLayer.Concrete;
 using DataAccesLayer.EntityFramework;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -46,9 +47,21 @@ namespace BlogProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddBlog(Blog  blog)
+        public async Task<IActionResult> AddBlogAsync(AddBlogViewModel  addBlogViewModel)
         {
-            return View();
+            if (addBlogViewModel.FormFile != null)
+            {
+                var extent = Path.GetExtension(addBlogViewModel.FormFile.FileName);
+                var randomName = ($"{Guid.NewGuid()}{extent}");
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img", randomName);
+
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await addBlogViewModel.FormFile.CopyToAsync(stream);
+                }
+            }
+
+                return View();
         }
     }
 }

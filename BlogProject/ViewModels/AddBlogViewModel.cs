@@ -18,6 +18,12 @@ namespace BlogProject.ViewModels
             TagItem = tagItem;
         }
 
+        public AddBlogViewModel()
+        {
+        }
+
+        public IFormFile FormFile { get; set; }
+        public int[] TagItemIds { get; set; }
         public List<SelectListItem> CategoryItem { get; set; }
         public List<SelectListItem> TagItem { get; set; }
         public Blog Blog { get; set; }
