@@ -35,11 +35,11 @@ namespace EntityLayer.Concrete
 
         //Navigation Property
         [Column("category_id")]
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
         public Category? Category { get; set; }
 
         [Column("writer_id")]
-        public int WriterId { get; set; }
+        public int? WriterId { get; set; }
         public Writer? Writer { get; set; }
     }
 }

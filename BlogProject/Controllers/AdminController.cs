@@ -1,8 +1,9 @@
 ﻿using BlogProject.ViewModels;
 using BusinessLayer.Concrete;
+using BusinessLayer.ValidationRules;
 using DataAccesLayer.EntityFramework;
 using EntityLayer.Concrete;
-using Microsoft.AspNetCore.Http;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -21,13 +22,19 @@ namespace BlogProject.Controllers
         [HttpGet]
         public IActionResult AddBlog()
         {
+            return View(CreateAddBlogViewModel());
+        }
+
+        private AddBlogViewModel CreateAddBlogViewModel()
+        {
             List<Category> Category = CategoryManager.GetList();
             List<Tag> Tag = TagManager.GetList();
 
-            List<SelectListItem> CategoryItem =new List<SelectListItem>();
+            List<SelectListItem> CategoryItem = new List<SelectListItem>();
             List<SelectListItem> TagItem = new List<SelectListItem>();
 
-            foreach (var item in Category) {
+            foreach (var item in Category)
+            {
                 SelectListItem selectListItem = new SelectListItem();
                 selectListItem.Text = item.Name;
                 selectListItem.Value = item.ObjectId.ToString();
@@ -42,26 +49,52 @@ namespace BlogProject.Controllers
                 TagItem.Add(selectListItem);
             }
 
-            AddBlogViewModel AddBlogViewModel = new AddBlogViewModel(CategoryItem,TagItem);
-            return View(AddBlogViewModel);
+            AddBlogViewModel AddBlogViewModel = new AddBlogViewModel(CategoryItem, TagItem);
+            return AddBlogViewModel;
         }
 
         [HttpPost]
         public async Task<IActionResult> AddBlogAsync(AddBlogViewModel  addBlogViewModel)
         {
+
+            BlogValidator validationRules = new BlogValidator();
+            ValidationResult result = validationRules.Validate(addBlogViewModel.Blog);
+
+            bool imageValid;
             if (addBlogViewModel.FormFile != null)
             {
                 var extent = Path.GetExtension(addBlogViewModel.FormFile.FileName);
                 var randomName = ($"{Guid.NewGuid()}{extent}");
-                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img", randomName);
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\BlogImage", randomName);
 
                 using (var stream = new FileStream(path, FileMode.Create))
                 {
                     await addBlogViewModel.FormFile.CopyToAsync(stream);
                 }
+                imageValid = true;
+            }
+            else
+            {
+                imageValid = false;
             }
 
-                return View();
+            if (result.IsValid && imageValid)
+            {
+
+            }
+            else
+            {
+                foreach (var item in result.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                }
+                return View(CreateAddBlogViewModel());
+            }
+
+
+
+
+            return View();
         }
     }
 }
