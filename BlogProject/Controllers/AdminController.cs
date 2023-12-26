@@ -13,6 +13,7 @@ namespace BlogProject.Controllers
     {
         CategoryManager CategoryManager = new CategoryManager(new EfCategoryRepository());
         TagManager TagManager = new TagManager(new EfTagRepository());
+        BlogManager BlogManager = new BlogManager(new EfBlogRepository());
 
         public IActionResult Index()
         {
@@ -57,8 +58,6 @@ namespace BlogProject.Controllers
         public async Task<IActionResult> AddBlogAsync(AddBlogViewModel  addBlogViewModel)
         {
 
-            BlogValidator validationRules = new BlogValidator();
-            ValidationResult result = validationRules.Validate(addBlogViewModel.Blog);
 
             bool imageValid;
             if (addBlogViewModel.FormFile != null)
@@ -72,14 +71,25 @@ namespace BlogProject.Controllers
                     await addBlogViewModel.FormFile.CopyToAsync(stream);
                 }
                 imageValid = true;
+                addBlogViewModel.Blog.MainImage = path;
+                addBlogViewModel.Blog.ThumbnailImage = path;
+
             }
             else
             {
                 imageValid = false;
             }
 
+            BlogValidator validationRules = new BlogValidator();
+            ValidationResult result = validationRules.Validate(addBlogViewModel.Blog);
+
             if (result.IsValid && imageValid)
             {
+                //BLOG KAYIT 
+                addBlogViewModel.Blog.WriterId = 3;
+                BlogManager.Add(addBlogViewModel.Blog);
+
+
 
             }
             else

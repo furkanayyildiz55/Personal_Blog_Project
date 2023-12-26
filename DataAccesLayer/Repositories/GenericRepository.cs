@@ -7,7 +7,7 @@ namespace DataAccesLayer.Repositories
 {
     public class GenericRepository<T> : IGenericDal<T> where T : Base
     {
-		public void Insert(T t)
+		public void Insert(T t )
 		{
 			using var context = new Context();
             t.ObjectStatus = 1;
