@@ -6,6 +6,7 @@ using EntityLayer.Concrete;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.IO;
 
 namespace BlogProject.Controllers
 {
@@ -56,35 +57,55 @@ namespace BlogProject.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddBlogAsync(AddBlogViewModel  addBlogViewModel)
+        public async Task<IActionResult> AddBlogAsync(AddBlogViewModel addBlogViewModel)
         {
-
-
-            bool imageValid;
-            if (addBlogViewModel.FormFile != null)
+            IFormFile file = addBlogViewModel.FormFile;
+            KeyValuePair<bool, string> fileStatus;
+            if (file != null)
             {
-                var extent = Path.GetExtension(addBlogViewModel.FormFile.FileName);
-                var randomName = ($"{Guid.NewGuid()}{extent}");
-                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\BlogImage", randomName);
-
-                using (var stream = new FileStream(path, FileMode.Create))
+                string FileExt = Path.GetExtension(file.FileName);
+                long FileLength = file.Length;
+                if (FileExt == ".png" || FileExt == ".jpg")
                 {
-                    await addBlogViewModel.FormFile.CopyToAsync(stream);
-                }
-                imageValid = true;
-                addBlogViewModel.Blog.MainImage = path;
-                addBlogViewModel.Blog.ThumbnailImage = path;
+                    if (FileLength <= 5242880)  //5 Mb dan küçük
+                    {
+                        //string guid = Guid.NewGuid().ToString().Substring(0, 6);
+                        //string path = "/BlogImage/" + guid + FileExt;
 
+                        ////Sunucu kaydetme
+                        //using (var stream = new FileStream(path, FileMode.Create))
+                        //{
+                        //    await addBlogViewModel.FormFile.CopyToAsync(stream);
+                        //}
+                        ////Veritabanı kaydetme
+                        ///
+                        var ImageNanme = Guid.NewGuid() + FileExt;
+                        
+                        var ImageLocation = "BlogImage/" + ImageNanme;
+                        var ImageSaveLocation = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/" + ImageLocation);
+                        using (var stream = new FileStream(ImageSaveLocation, FileMode.Create))
+                        {
+                            await addBlogViewModel.FormFile.CopyToAsync(stream);
+                        }
+
+                        addBlogViewModel.Blog.MainImage = ImageLocation;
+                        addBlogViewModel.Blog.ThumbnailImage = ImageLocation;
+                        fileStatus = new KeyValuePair<bool, string>(true, "");
+                    }
+                    else
+                        fileStatus = new KeyValuePair<bool, string>(false, "Görsel Boyutu 5 Mb dan küçük olmalı !");
+                }
+                else
+                    fileStatus = new KeyValuePair<bool, string>(false, "Lütfen PNG veya JPG biçiminde görsel yükleyin !");
             }
             else
-            {
-                imageValid = false;
-            }
+                fileStatus = new KeyValuePair<bool, string>(false, "Lütfen görsel yükleyiniz !");
+
 
             BlogValidator validationRules = new BlogValidator();
             ValidationResult result = validationRules.Validate(addBlogViewModel.Blog);
 
-            if (result.IsValid && imageValid)
+            if (result.IsValid && fileStatus.Key)
             {
                 //BLOG KAYIT 
                 addBlogViewModel.Blog.WriterId = 3;

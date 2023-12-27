@@ -1,4 +1,6 @@
 ﻿
+@model EntityLayer.Concrete.Blog
+
 @{
     ViewBag.Title = "Blog Detayı Title";
     ViewBag.VisibleRouteSection = true;
@@ -14,7 +16,7 @@
                     <div class="single-post-header fl-wrap">
                         <a class="post-category-marker" href="category.html">Technology</a>
                         <div class="clearfix"></div>
-                        <h1>Innovations that Bring   Pleasure to All Peoples</h1>
+                        <h1>@Model.Title</h1>
                         <h4>Perspiciatis unde omnis iste natus error sit voluptatem.</h4>
                         <div class="clearfix"></div>
                         <div class="author-link"><a href="author-single.html"><img src="~/gmag/images/avatar/2.jpg" alt="">  <span>By Mark Rose</span></a></div>
@@ -33,25 +35,18 @@
                                     <div class="swiper-wrapper lightgallery">
                                         <!-- swiper-slide   -->
                                         <div class="swiper-slide hov_zoom">
-                                            <img src="~/gmag/images/all/20.jpg" alt="">
+                                            <img src="@Model.MainImage" alt="">
                                             <a href="~/gmag/images/all/20.jpg" class="box-media-zoom   popup-image"><i class="fas fa-search"></i></a>
                                             <span class="post-media_title pmd_vis">© Image Copyrights Title</span>
                                         </div>
                                         <!-- swiper-slide end   -->
-                                        <!-- swiper-slide   -->
+@*                                         <!-- swiper-slide   -->
                                         <div class="swiper-slide hov_zoom">
                                             <img src="~/gmag/images/all/13.jpg" alt="">
                                             <a href="~/gmag/images/all/13.jpg" class="box-media-zoom   popup-image"><i class="fas fa-search"></i></a>
                                             <span class="post-media_title pmd_vis">© Image Copyrights Title</span>
                                         </div>
-                                        <!-- swiper-slide end   -->
-                                        <!-- swiper-slide   -->
-                                        <div class="swiper-slide hov_zoom">
-                                            <img src="~/gmag/images/all/15.jpg" alt="">
-                                            <a href="~/gmag/images/all/15.jpg" class="box-media-zoom   popup-image"><i class="fas fa-search"></i></a>
-                                            <span class="post-media_title pmd_vis">© Image Copyrights Title</span>
-                                        </div>
-                                        <!-- swiper-slide end   -->
+                                        <!-- swiper-slide end   --> *@
                                     </div>
                                 </div>
                             </div>
@@ -82,6 +77,8 @@
                         </div>
                         <div class="clearfix"></div>
                         <div class="single-post-content_text" id="font_chage">
+                            @Html.Raw(Model.Content)
+                            <!--
                             <p class="has-drop-cap">Lorem ipsum dosectetur adipisicing elit, sed do.Lorem ipsum dolor sit amet, consectetur Nulla fringilla purus at leo dignissim congue. Mauris elementum accumsan leo vel tempor. Sit amet cursus nisl aliquam. Aliquam et elit eu nunc rhoncus viverra quis at felis. Sed do.Lorem ipsum dolor sit amet, consectetur Nulla fringilla purus Lorem ipsum dosectetur adipisicing elit at leo dignissim congue. Mauris elementum accumsan leo vel tempor . Aliquam et elit eu nunc rhoncus viverra quis at felis. Sed do.Lorem ipsum dolor sit amet, consectetur Nulla fringilla purus Lorem ipsum dosectetur adipisicing elit at leo dignissim congue. Mauris elementum accumsan leo vel tempor</p>
                             <h4 class="mb_head">Middle Post Heading</h4>
                             <p>Lorem ipsum dosectetur adipisicing elit, sed do.Lorem ipsum dolor sit amet, consectetur Nulla fringilla purus at leo dignissim congue. Mauris elementum accumsan leo vel tempor. Sit amet cursus nisl aliquam. Aliquam et elit eu nunc rhoncus viverra quis at felis. Sed do.Lorem ipsum dolor sit amet, consectetur Nulla fringilla purus Lorem ipsum dosectetur adipisicing elit at leo dignissim congue. Mauris elementum accumsan leo vel tempor . Aliquam et elit eu nunc rhoncus viverra quis at felis. Sed do.Lorem ipsum dolor sit amet, consectetur Nulla fringilla purus Lorem ipsum dosectetur adipisicing elit at leo dignissim congue. Mauris elementum accumsan leo vel tempor</p>
@@ -110,7 +107,8 @@
                             </blockquote>
                             <p>Lorem ipsum dosectetur adipisicing elit, sed do.Lorem ipsum dolor sit amet, consectetur Nulla fringilla purus at leo dignissim congue. Mauris elementum accumsan leo vel tempor. Sit amet cursus nisl aliquam. Aliquam et elit eu nunc rhoncus viverra quis at felis. Sed do.Lorem ipsum dolor sit amet, consectetur Nulla fringilla purus Lorem ipsum dosectetur adipisicing elit at leo dignissim congue. Mauris elementum accumsan leo vel tempor . Aliquam et elit eu nunc rhoncus viverra quis at felis. Sed do.Lorem ipsum dolor sit amet, consectetur Nulla fringilla purus Lorem ipsum dosectetur adipisicing elit at leo dignissim congue. Mauris elementum accumsan leo vel tempor</p>
                             <p>  Aliquam et elit eu nunc rhoncus viverra quis at felis. Sed do.Lorem ipsum dolor sit amet, consectetur Nulla fringilla purus Lorem ipsum dosectetur adipisicing elit at leo dignissim congue. Mauris elementum accumsan leo vel tempor.</p>
-                        </div>
+                            -->
+                         </div>
                         <div class="single-post-footer fl-wrap">
                             <div class="post-single-tags">
                                 <span class="tags-title"><i class="fas fa-tag"></i> Etiketler : </span>
