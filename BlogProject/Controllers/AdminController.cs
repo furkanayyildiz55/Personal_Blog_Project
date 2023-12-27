@@ -13,6 +13,7 @@ namespace BlogProject.Controllers
     {
         CategoryManager CategoryManager = new CategoryManager(new EfCategoryRepository());
         TagManager TagManager = new TagManager(new EfTagRepository());
+        BlogTagManager BlogTagManager = new BlogTagManager(new EfBlogTagRepository());
         BlogManager BlogManager = new BlogManager(new EfBlogRepository());
 
         public IActionResult Index()
@@ -89,8 +90,13 @@ namespace BlogProject.Controllers
                 addBlogViewModel.Blog.WriterId = 3;
                 BlogManager.Add(addBlogViewModel.Blog);
 
-
-
+                foreach (int id in addBlogViewModel.TagItemIds)
+                {
+                    BlogTag blogTag = new BlogTag();
+                    blogTag.TagId = id;
+                    blogTag.BlogId = addBlogViewModel.Blog.ObjectId;
+                    BlogTagManager.Add(blogTag);
+                }
             }
             else
             {
@@ -101,10 +107,7 @@ namespace BlogProject.Controllers
                 return View(CreateAddBlogViewModel());
             }
 
-
-
-
-            return View();
+            return View(CreateAddBlogViewModel());
         }
     }
 }

@@ -11,7 +11,7 @@ namespace DataAccesLayer.Repositories
 		{
 			using var context = new Context();
             t.ObjectStatus = 1;
-            t.ObjectUDate = DateTime.Now;
+            t.ObjectIDate = DateTime.Now;
 			context.Add(t);
 			context.SaveChanges();
 		}
