@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,11 @@ namespace EntityLayer.Concrete
         [Column("title")]
         public String? Title { get; set; }
 
-        [Column("content")]
+        [Required]
+		[Column("url_title")]
+		public String? UrlTitle { get; set; }
+
+		[Column("content")]
         public String? Content { get; set; }
         
         [Column("thumbnail_image")]

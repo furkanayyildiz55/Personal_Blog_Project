@@ -69,16 +69,6 @@ namespace BlogProject.Controllers
                 {
                     if (FileLength <= 5242880)  //5 Mb dan küçük
                     {
-                        //string guid = Guid.NewGuid().ToString().Substring(0, 6);
-                        //string path = "/BlogImage/" + guid + FileExt;
-
-                        ////Sunucu kaydetme
-                        //using (var stream = new FileStream(path, FileMode.Create))
-                        //{
-                        //    await addBlogViewModel.FormFile.CopyToAsync(stream);
-                        //}
-                        ////Veritabanı kaydetme
-                        ///
                         var ImageNanme = Guid.NewGuid() + FileExt;
                         
                         var ImageLocation = "BlogImage/" + ImageNanme;
@@ -109,6 +99,7 @@ namespace BlogProject.Controllers
             {
                 //BLOG KAYIT 
                 addBlogViewModel.Blog.WriterId = 3;
+
                 BlogManager.Add(addBlogViewModel.Blog);
 
                 foreach (int id in addBlogViewModel.TagItemIds)

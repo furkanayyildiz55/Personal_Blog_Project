@@ -20,5 +20,13 @@ namespace DataAccesLayer.Concrete
         public DbSet<Tag> Tag { get; set; }
         public DbSet<BlogTag> BlogTag { get; set; }
         public DbSet<Subscribe> Subscribe { get; set; }
-    }
+
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		{
+			// UrlTitle alanına tekil indeks eklemek
+			modelBuilder.Entity<Blog>()
+				.HasIndex(e => e.UrlTitle)
+				.IsUnique();
+		}
+	}
 }
