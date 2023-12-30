@@ -7,6 +7,9 @@
     Layout = "~/Views/Shared/BlogLayout.cshtml";
 }
 
+<script src="~/admin/highlight/highlight.min.js"></script>
+<link href="~/admin/highlight/styles/base16/onedark.min.css" rel="stylesheet" />
+
 <section>
     <div class="container">
         <div class="row">
@@ -76,9 +79,13 @@
                             <a class="print-btn" href="javascript:window.print()" data-microtip-position="bottom"><span>Yazdır</span><i class="fal fa-print"></i></a>
                         </div>
                         <div class="clearfix"></div>
-                        <div class="single-post-content_text" id="font_chage">
+                        <div class="single-post-content_text" style="text-align:left;all:initial;" id="font_chage">
+
                             @Html.Raw(Model.Content)
-                            <!--
+
+
+
+                            
                             <p class="has-drop-cap">Lorem ipsum dosectetur adipisicing elit, sed do.Lorem ipsum dolor sit amet, consectetur Nulla fringilla purus at leo dignissim congue. Mauris elementum accumsan leo vel tempor. Sit amet cursus nisl aliquam. Aliquam et elit eu nunc rhoncus viverra quis at felis. Sed do.Lorem ipsum dolor sit amet, consectetur Nulla fringilla purus Lorem ipsum dosectetur adipisicing elit at leo dignissim congue. Mauris elementum accumsan leo vel tempor . Aliquam et elit eu nunc rhoncus viverra quis at felis. Sed do.Lorem ipsum dolor sit amet, consectetur Nulla fringilla purus Lorem ipsum dosectetur adipisicing elit at leo dignissim congue. Mauris elementum accumsan leo vel tempor</p>
                             <h4 class="mb_head">Middle Post Heading</h4>
                             <p>Lorem ipsum dosectetur adipisicing elit, sed do.Lorem ipsum dolor sit amet, consectetur Nulla fringilla purus at leo dignissim congue. Mauris elementum accumsan leo vel tempor. Sit amet cursus nisl aliquam. Aliquam et elit eu nunc rhoncus viverra quis at felis. Sed do.Lorem ipsum dolor sit amet, consectetur Nulla fringilla purus Lorem ipsum dosectetur adipisicing elit at leo dignissim congue. Mauris elementum accumsan leo vel tempor . Aliquam et elit eu nunc rhoncus viverra quis at felis. Sed do.Lorem ipsum dolor sit amet, consectetur Nulla fringilla purus Lorem ipsum dosectetur adipisicing elit at leo dignissim congue. Mauris elementum accumsan leo vel tempor</p>
@@ -91,8 +98,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <p> Cras lacinia magna vel molestie faucibus. Donec auctor et urnaLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras lacinia magna vel molestie faucibus.Cras lacinia magna vel molestie faucibus. Donec auctor et urnaLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras lacinia magna vel molestie faucibus.Cras lacinia magna vel molestie faucibus. </p>
-                            <h4 class="mb_head">Middle Post Heading</h4>
+                            <p class="has-drop-cap">> Cras lacinia magna vel molestie faucibus. Donec auctor et urnaLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras lacinia magna vel molestie faucibus.Cras lacinia magna vel molestie faucibus. Donec auctor et urnaLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras lacinia magna vel molestie faucibus.Cras lacinia magna vel molestie faucibus. </p>
+                            <h4 class="mb_head ">Middle Post Heading</h4>
                             <div class="single-post-content_text_media fl-wrap">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -107,7 +114,7 @@
                             </blockquote>
                             <p>Lorem ipsum dosectetur adipisicing elit, sed do.Lorem ipsum dolor sit amet, consectetur Nulla fringilla purus at leo dignissim congue. Mauris elementum accumsan leo vel tempor. Sit amet cursus nisl aliquam. Aliquam et elit eu nunc rhoncus viverra quis at felis. Sed do.Lorem ipsum dolor sit amet, consectetur Nulla fringilla purus Lorem ipsum dosectetur adipisicing elit at leo dignissim congue. Mauris elementum accumsan leo vel tempor . Aliquam et elit eu nunc rhoncus viverra quis at felis. Sed do.Lorem ipsum dolor sit amet, consectetur Nulla fringilla purus Lorem ipsum dosectetur adipisicing elit at leo dignissim congue. Mauris elementum accumsan leo vel tempor</p>
                             <p>  Aliquam et elit eu nunc rhoncus viverra quis at felis. Sed do.Lorem ipsum dolor sit amet, consectetur Nulla fringilla purus Lorem ipsum dosectetur adipisicing elit at leo dignissim congue. Mauris elementum accumsan leo vel tempor.</p>
-                            -->
+                            
                          </div>
                         <div class="single-post-footer fl-wrap">
                             <div class="post-single-tags">
@@ -310,3 +317,5 @@
         <div class="limit-box fl-wrap"></div>
     </div>
 </section>
+
+<script>hljs.highlightAll();</script>

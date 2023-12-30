@@ -17,7 +17,7 @@ namespace BlogProject.Controllers
         public IActionResult Detail()
         {
             var baseUri = $"{Request.Scheme}://{Request.Host}/";
-            Blog blog = BlogManager.GetByID(11);
+            Blog blog = BlogManager.GetByID(16);
             blog.MainImage = baseUri + blog.MainImage;
             return View(blog);
         }
