@@ -1,6 +1,7 @@
 ﻿using BusinessLayer.Abstract;
 using DataAccesLayer.Abstract;
 using EntityLayer.Concrete;
+using System.Linq.Expressions;
 
 
 namespace BusinessLayer.Concrete
@@ -39,7 +40,12 @@ namespace BusinessLayer.Concrete
             throw new NotImplementedException();
         }
 
-        public Category GetByID(int id)
+		public Category Get(Expression<Func<Category, bool>> filter)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Category GetByID(int id)
         {
             return _categoryDal.GetByID(id);
         }
@@ -50,6 +56,11 @@ namespace BusinessLayer.Concrete
         }
 
         public List<Category> GetList(Category category)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Category> GetList(Expression<Func<Category, bool>> filter)
         {
             throw new NotImplementedException();
         }

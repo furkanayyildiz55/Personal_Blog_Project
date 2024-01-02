@@ -19,7 +19,5 @@ namespace EntityLayer.Concrete
         [Column("tag_id")]
         public int TagId { get; set; }
         public Tag? Tags { get; set; }
-
-
     }
 }

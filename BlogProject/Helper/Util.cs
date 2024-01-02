@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using Azure.Core;
+using System.Text.RegularExpressions;
 
 namespace BlogProject.Helper
 {
@@ -18,5 +19,7 @@ namespace BlogProject.Helper
 
 			return text;
 		}
+
+
 	}
 }

@@ -4,6 +4,7 @@ using EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,6 +13,10 @@ namespace BusinessLayer.Concrete
     public class ContactUserManager : IContactUserService
     {
         IContactUserDal _contactUserDal;
+
+        public ContactUserManager()
+        {
+        }
 
         public ContactUserManager(IContactUserDal contactUserDal)
         {
@@ -28,12 +33,22 @@ namespace BusinessLayer.Concrete
             throw new NotImplementedException();
         }
 
-        public ContactUser GetByID(int id)
+		public ContactUser Get(Expression<Func<ContactUser, bool>> filter)
+		{
+			throw new NotImplementedException();
+		}
+
+		public ContactUser GetByID(int id)
         {
             throw new NotImplementedException();
         }
 
         public List<ContactUser> GetList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<ContactUser> GetList(Expression<Func<ContactUser, bool>> filter)
         {
             throw new NotImplementedException();
         }

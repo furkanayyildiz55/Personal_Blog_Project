@@ -1,6 +1,7 @@
 ﻿using BusinessLayer.Abstract;
 using DataAccesLayer.Abstract;
 using EntityLayer.Concrete;
+using System.Linq.Expressions;
 
 namespace BusinessLayer.Concrete
 {
@@ -23,14 +24,34 @@ namespace BusinessLayer.Concrete
             throw new NotImplementedException();
         }
 
-        public BlogTag GetByID(int id)
+		public BlogTag Get(Expression<Func<BlogTag, bool>> filter)
+		{
+			throw new NotImplementedException();
+		}
+
+		public BlogTag GetByID(int id)
         {
             throw new NotImplementedException();
         }
 
         public List<BlogTag> GetList()
         {
-            throw new NotImplementedException();
+            return _blogTagDal.GetListAll();
+        }
+
+        public List<BlogTag> GetList(Expression<Func<BlogTag, bool>> filter)
+        {
+            return _blogTagDal.GetListAll(filter);
+        }
+
+        public List<BlogTag> GetListWithTag(Expression<Func<BlogTag, bool>> filter)
+        {
+            return _blogTagDal.GetListWithTag(filter);
+        }
+
+        public List<BlogTag> GetListWithTag()
+        {
+            return _blogTagDal.GetListWithTag();
         }
 
         public void Update(BlogTag t)

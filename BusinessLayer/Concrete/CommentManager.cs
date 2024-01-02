@@ -4,6 +4,7 @@ using EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,7 +31,12 @@ namespace BusinessLayer.Concrete
             _commentDal.Delete(t);
         }
 
-        public Comment GetByID(int id)
+		public Comment Get(Expression<Func<Comment, bool>> filter)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Comment GetByID(int id)
         {
             return _commentDal.GetByID(id);
         }
@@ -46,7 +52,12 @@ namespace BusinessLayer.Concrete
 			throw new NotImplementedException();
 		}
 
-		public void Update(Comment t)
+        public List<Comment> GetList(Expression<Func<Comment, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Comment t)
         {
             _commentDal.Update(t);
         }

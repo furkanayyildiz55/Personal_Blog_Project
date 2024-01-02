@@ -1,4 +1,6 @@
-﻿using EntityLayer.Concrete;
+﻿using BusinessLayer.Concrete;
+using DataAccesLayer.EntityFramework;
+using EntityLayer.Concrete;
 using FluentValidation;
 
 
@@ -6,19 +8,30 @@ namespace BusinessLayer.ValidationRules
 {
     public class BlogValidator : AbstractValidator<Blog>
     {
-        public BlogValidator()
+		BlogManager BlogManager = new BlogManager(new EfBlogRepository());
+
+		public BlogValidator()
         {
             RuleFor(x => x.Title)
             .NotEmpty().WithMessage("Lütfen başlık giriniz.")
             .MinimumLength(1).WithMessage("Başlık en az 1 karakter olmalıdır")
             .MaximumLength(150).WithMessage("Başlık en fazla 150 karakter olabilir");
 
-            RuleFor(x => x.CategoryId)
+            RuleFor(x => x.UrlTitle)
+			.NotEmpty().WithMessage("Blog için link oluşturulamadı")
+			.Must(BeUniqueBlog).WithMessage("Bu isimde blog bulunmaktadır");
+
+
+			RuleFor(x => x.CategoryId)
             .NotEmpty().WithMessage("Lütfen kategori giriniz.");
 
-            RuleFor(x => x.MainImage)
-            .NotEmpty().WithMessage("Lütfen görsel yükleyiniz");
-
         }
-    }
+
+		private bool BeUniqueBlog(string? UrlTitle)
+		{
+			Blog blog = new Blog();
+            blog = BlogManager.Get(b => b.UrlTitle == UrlTitle);
+            return blog == null;
+		}
+	}
 }

@@ -1,9 +1,5 @@
-﻿using EntityLayer.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq.Expressions;
+
 
 namespace BusinessLayer.Abstract
 {
@@ -13,6 +9,8 @@ namespace BusinessLayer.Abstract
         void Delete(T t);
         void Update(T t);
         List<T> GetList();
+        List<T> GetList(Expression<Func<T, bool>> filter);
         T GetByID(int id);
+        T Get(Expression<Func<T, bool>> filter);
     }
 }

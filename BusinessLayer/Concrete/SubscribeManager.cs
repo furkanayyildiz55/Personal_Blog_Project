@@ -4,6 +4,7 @@ using EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,12 +29,22 @@ namespace BusinessLayer.Concrete
             throw new NotImplementedException();
         }
 
-        public Subscribe GetByID(int id)
+		public Subscribe Get(Expression<Func<Subscribe, bool>> filter)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Subscribe GetByID(int id)
         {
             throw new NotImplementedException();
         }
 
         public List<Subscribe> GetList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Subscribe> GetList(Expression<Func<Subscribe, bool>> filter)
         {
             throw new NotImplementedException();
         }

@@ -30,12 +30,18 @@ namespace DataAccesLayer.Repositories
             return context.Set<T>().Find(ID);
         }
 
-        public List<T> GetListAll()
+		public T Get(Expression<Func<T, bool>> filter)
+		{
+			using var context = new Context();
+			var result = context.Set<T>().Where(filter).FirstOrDefault();
+			return result;
+		}
+
+		public List<T> GetListAll()
         {
             using var context = new Context();
             return context.Set<T>().ToList();  
         }
-
 
         public List<T> GetListAll(Expression<Func<T, bool>> filter)
         {

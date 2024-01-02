@@ -14,10 +14,19 @@ namespace BlogProject.Controllers
             return View();
         }
         
-        public IActionResult Detail()
+        public IActionResult Detail(string? title)
         {
+            if(title == null)
+            {
+                return NotFound();
+            }
+
             var baseUri = $"{Request.Scheme}://{Request.Host}/";
-            Blog blog = BlogManager.GetByID(16);
+            Blog blog = BlogManager.Get(b => b.UrlTitle== title);
+            if(blog == null)
+            {
+                return NotFound();
+            }
             blog.MainImage = baseUri + blog.MainImage;
             return View(blog);
         }

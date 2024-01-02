@@ -4,13 +4,14 @@ using EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BusinessLayer.Concrete
 {
-    public class BlogManager : IBlogService
+	public class BlogManager : IBlogService
     {
         IBlogDal _blogDal;
 
@@ -80,5 +81,15 @@ namespace BusinessLayer.Concrete
 			}
 
 		}
-	}
+
+		public Blog Get(Expression<Func<Blog, bool>> filter)
+		{
+            return _blogDal.Get(filter);
+		}
+
+        public List<Blog> GetList(Expression<Func<Blog, bool>> filter)
+        {
+           return _blogDal.GetListAll(filter);
+        }
+    }
 }
