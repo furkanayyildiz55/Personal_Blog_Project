@@ -3,6 +3,7 @@ using DataAccesLayer.Concrete;
 using DataAccesLayer.Repositories;
 using EntityLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace DataAccesLayer.EntityFramework
 {
@@ -17,6 +18,17 @@ namespace DataAccesLayer.EntityFramework
             using (var c= new Context())
             {
                 return c.Blog.Include(x => x.Category).ToList();
+            }
+        }
+
+        public Blog GetBlogWithCategory(Expression<Func<Blog, bool>> filter)
+        {
+            using (var c = new Context())
+            {
+                return c.Blog.Where(filter)
+                    .Include(x => x.Category)
+                    .Include(x => x.Writer)
+                    .FirstOrDefault();
             }
         }
 

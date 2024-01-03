@@ -153,8 +153,7 @@ namespace BlogProject.Controllers
 		public IActionResult BlogList()
 		{
 			List<BlogListDTO> blogListDTOs = new List<BlogListDTO>();
-			List<Blog> blogs = BlogManager.GetList();
-			//List<BlogTag> BlogTags = BlogTagManager.GetListWithTag();
+			List<Blog> blogs = BlogManager.GetBlogListWithCategory();
 
             foreach (Blog blog in blogs)
             {

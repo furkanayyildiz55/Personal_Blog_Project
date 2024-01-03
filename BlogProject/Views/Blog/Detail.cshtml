@@ -1,5 +1,5 @@
-﻿
-@model EntityLayer.Concrete.Blog
+﻿@using BlogProject.DTO
+@model BlogListDTO
 
 @{
     ViewBag.Title = "Blog Detayı Title";
@@ -17,16 +17,15 @@
                 <div class="main-container fl-wrap fix-container-init">
                     <!-- single-post-header  -->
                     <div class="single-post-header fl-wrap">
-                        <a class="post-category-marker" href="category.html">Technology</a>
+                        <a class="post-category-marker" href="category.html">@Model.Blog.Category.Name</a>
                         <div class="clearfix"></div>
-                        <h1>@Model.Title</h1>
-                        <h4>Perspiciatis unde omnis iste natus error sit voluptatem.</h4>
+                        <h1>@Model.Blog.Title</h1>
                         <div class="clearfix"></div>
-                        <div class="author-link"><a href="author-single.html"><img src="~/gmag/images/avatar/2.jpg" alt="">  <span>By Mark Rose</span></a></div>
-                        <span class="post-date"><i class="far fa-clock"></i> 05 April 2022</span>
+                        <div class="author-link"><a href="author-single.html"><img src="~/gmag/images/avatar/2.jpg" alt="">  <span>@Model.Blog.Writer.Name @Model.Blog.Writer.Surname</span></a></div>
+                        <span class="post-date"><i class="far fa-clock"></i> @Model.Blog.ObjectIDate </span>
                         <ul class="post-opt">
-                            <li><i class="far fa-comments-alt"></i> 4 </li>
-                            <li><i class="fal fa-eye"></i>  980 </li>
+                            <li><i class="far fa-comments-alt"></i> @Model.Blog.CommnetCount </li>
+                            <li><i class="fal fa-eye"></i>  @Model.Blog.ViewsCount </li>
                         </ul>
                     </div>
                     <!-- single-post-header end   -->
@@ -38,7 +37,7 @@
                                     <div class="swiper-wrapper lightgallery">
                                         <!-- swiper-slide   -->
                                         <div class="swiper-slide hov_zoom">
-                                            <img src="@Model.MainImage" alt="">
+                                            <img src="@Model.Blog.MainImage" alt="">
                                             <a href="~/gmag/images/all/20.jpg" class="box-media-zoom   popup-image"><i class="fas fa-search"></i></a>
                                             <span class="post-media_title pmd_vis">© Image Copyrights Title</span>
                                         </div>
@@ -81,7 +80,7 @@
                         <div class="clearfix"></div>
                         <div class="single-post-content_text" style="text-align:left;all:initial;" id="font_chage">
 
-                            @Html.Raw(Model.Content)
+                            @Html.Raw(Model.Blog.Content)
 
 
 
@@ -120,10 +119,10 @@
                             <div class="post-single-tags">
                                 <span class="tags-title"><i class="fas fa-tag"></i> Etiketler : </span>
                                 <div class="tags-widget">
-                                    <a href="post-single.html#">Science</a>
-                                    <a href="post-single.html#">Technology</a>
-                                    <a href="post-single.html#">Business</a>
-                                    <a href="post-single.html#">Lifestyle</a>
+                                    @foreach (var item in Model.Tags)
+                                    {
+                                        <a href="post-single.html#">@item.Tags.Name</a>
+                                    }
                                 </div>
                             </div>
                         </div>

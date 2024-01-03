@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Abstract;
 using DataAccesLayer.Abstract;
+using DataAccesLayer.Migrations;
 using EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
@@ -20,20 +21,20 @@ namespace BusinessLayer.Concrete
             _blogDal = blogDal;
         }
 
-
-
-
         public List<Blog> GetBlogListWithCategory()
         {
             return _blogDal.GetListWithCategory();
+        }
+
+        public Blog GetBlogWithCategory(Expression<Func<Blog, bool>> filter)
+        {
+            return _blogDal.GetBlogWithCategory(filter);
         }
 
         public Blog GetByID(int id)
         {
            return _blogDal.GetByID(id); 
         }
-
-
 
         public List<Blog> GetList()
         {
