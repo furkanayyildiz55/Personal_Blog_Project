@@ -160,7 +160,7 @@ namespace BlogProject.Controllers
             {
                 BlogListDTO blogListDTO = new BlogListDTO();
 				blogListDTO.Blog = blog;
-				blogListDTO.Tags = BlogTagManager.GetListWithTag(bt=> bt.TagId == blog.ObjectId );
+				blogListDTO.Tags = BlogTagManager.GetListWithTag(bt=> bt.BlogId == blog.ObjectId );
 				blogListDTOs.Add( blogListDTO );
             }
 

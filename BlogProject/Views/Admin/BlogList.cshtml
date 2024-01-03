@@ -89,16 +89,20 @@
                                         @(item.Blog.ViewsCount == null ? "0" : item.Blog.ViewsCount)
                                     </td>
                                     <td>
-                                        Yorum Sayısı
+                                        @(item.Blog.CommnetCount == null ? "0" : item.Blog.CommnetCount)
                                     </td>
                                     <td>
                                         @item.Blog.CategoryId
                                     </td>
                                     <td>
+                                       
                                         @foreach (var tag in item.Tags)
                                         {
-                                            @tag.Tags.Name 
+                                            <span class="label label-success" style="margin-right: 3px;">
+                                            @tag.Tags.Name
+                                            </span>
                                         }
+                                        
                                     </td>
                                     <td>
                                         @if (item.Blog.ObjectStatus == 1)
