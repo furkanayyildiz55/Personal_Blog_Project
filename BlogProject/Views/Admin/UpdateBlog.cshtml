@@ -1,0 +1,124 @@
+﻿@using BlogProject.Models
+@model BlogProject.ViewModels.AddBlogViewModel
+
+<!--CK EDİTOR-->
+<!--https://ckeditor.com/cke4/builder-->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+@{
+    ViewData["Title"] = "UpdateBlog";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-lg-12 wrapper-content">
+        <div class="ibox ">
+            <div class="ibox-title">
+                <h5>Yeni Yazı</h5>
+                <div class="ibox-tools">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-floppy-o bg-success"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <!--FORM-->
+                <form asp-controller="Admin" asp-action="UpdateBlog" method="post" enctype="multipart/form-data">
+                    <div class="form-group  row">
+                        <label class="col-sm-2 col-form-label">Başlık</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" asp-for="Blog.Title">
+                            <span class="form-text m-b-none text-danger" name="Title"></span>
+                            <p class="form-text m-b-none text-danger" name="Title"></p>
+
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group  row">
+                        <label class="col-sm-2 col-form-label">Konu</label>
+                        <div class="col-sm-10">
+                            <select class="form-control m-b selectUI" asp-for="Blog.CategoryId" asp-items="Model.CategoryItem"></select>
+                            <span class="form-text m-b-none text-danger" name="CategoryId"></span>
+                            @Html.ValidationMessageFor(x => x.Blog.Category.Name)
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group  row">
+                        <label class="col-sm-2 col-form-label">Etiket</label>
+                        <div class="col-sm-10">
+                            <select class="form-control m-b selectUI" multiple="multiple" asp-for="TagItemIds" asp-items="Model.TagItem"></select>
+                            <span class="form-text m-b-none text-danger" name="TagItemIds"></span>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">
+                            Yayın Durumu <br />
+                            <small class="text-navy"></small>
+                        </label>
+                        <div class="col-sm-10">
+                            <div><label><input asp-for="Blog.ObjectStatus" type="radio" value="1" id="optionsRadios1" checked=""> Aktif </label></div>
+                            <div><label><input asp-for="Blog.ObjectStatus" type="radio" value="0" id="optionsRadios2"> Pasif </label></div>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group  row">
+                        <label class="col-sm-2 col-form-label">Form Görseli</label>
+                        <div class="col-sm-10 custom-file">
+                            <input id="logo" asp-for="FormFile" type="file" class="custom-file-input">
+                            <label for="logo" class="custom-file-label">Görsel Seçiniz...</label>
+                            <span class="form-text m-b-none text-danger" name="MainImage"></span>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+
+
+                    <textarea asp-for="Blog.Content" id="editor55" rows="50" cols="80">
+                                Bilgi Güçtür
+                    </textarea>
+
+
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group row">
+                        <div class="col-sm-4 col-sm-offset-2">
+                            <button class="btn btn-white btn-sm disabled" asp-controller="Blog" asp-action="UpdateBlog">Önizle</button>
+                            <button class="btn btn-primary btn-sm" type="submit">Kaydet ve Çık</button>
+                        </div>
+                    </div>
+                </form>
+                <!--FORM-->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/admin/ckeditor/ckeditor.js"></script>
+
+
+
+<script>
+    //EDİTOR
+    CKEDITOR.replace('editor55', {
+        height: 500
+    });
+
+    //SELECT
+    $(document).ready(function () {
+        $('.selectUI').select2();
+    });
+
+    //CUSTOM FILE INPUT
+    $('.custom-file-input').on('change', function () {
+        let fileName = $(this).val().split('\\').pop();
+        $(this).next('.custom-file-label').addClass("selected").html(fileName);
+    });
+</script>
+
+

@@ -146,10 +146,27 @@ namespace BlogProject.Controllers
 			return AddBlogViewModel;
 		}
 
-		#endregion
+        [HttpGet]
+        public IActionResult UpdateBlog()
+        {
+			AddBlogViewModel viewModel = new AddBlogViewModel();
+			viewModel = CreateAddBlogViewModel();
+			viewModel.Blog = BlogManager.Get(b => b.ObjectId == 43);
+			//TODO: Geçici olarak yazılan update blog controller düzenlenecek
+            return View(viewModel);
+        }
 
-		#region Blog Listele
-		[HttpGet]
+        [HttpPost]
+        public IActionResult UpdateBlog(AddBlogViewModel addBlogViewModel)
+        {
+            BlogManager.Update(addBlogViewModel.Blog);
+            return RedirectToAction("BlogList" , "Admin");
+        }
+
+        #endregion
+
+        #region Blog Listele
+        [HttpGet]
 		public IActionResult BlogList()
 		{
 			List<BlogListDTO> blogListDTOs = new List<BlogListDTO>();
