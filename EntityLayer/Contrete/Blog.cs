@@ -28,10 +28,10 @@ namespace EntityLayer.Concrete
         public String? MainImage { get; set; }
 
         [Column("views_count")]
-        public String? ViewsCount { get; set; }
+        public int ViewsCount { get; set; }
         
         [Column("comment_count")]
-        public String? CommnetCount { get; set; }
+        public int CommnetCount { get; set; }
 
         //Navigation Prorety
         public List<Comment>? Comment { get; set; }

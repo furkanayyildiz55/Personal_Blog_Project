@@ -86,10 +86,10 @@
                                        @item.Blog.Title
                                     </td>
                                     <td>
-                                        @(item.Blog.ViewsCount == null ? "0" : item.Blog.ViewsCount)
+                                        @(item.Blog.ViewsCount )
                                     </td>
                                     <td>
-                                        @(item.Blog.CommnetCount == null ? "0" : item.Blog.CommnetCount)
+                                        @(item.Blog.CommnetCount )
                                     </td>
                                     <td>
                                         @item.Blog.Category.Name
@@ -117,7 +117,7 @@
                                     <td class="text-right">
                                         <div class="btn-group">
                                             <a target="_blank" href="/Blog/Detail/@item.Blog.UrlTitle" class="btn-white btn btn-xs">Görüntüle</a>
-                                            <a href="#" class="btn-white btn btn-xs">Düzenle</a>
+                                            <a href="/Admin/UpdateBlog/@item.Blog.UrlTitle" class="btn-white btn btn-xs">Düzenle</a>
                                         </div>
                                     </td>
                                 </tr>

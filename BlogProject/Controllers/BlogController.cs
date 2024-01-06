@@ -20,7 +20,7 @@ namespace BlogProject.Controllers
 
         #region BlogDetayı
 
-        public IActionResult Detail(string? title)
+        public  IActionResult Detail(string? title)
         {
             if(title == null)
             {
@@ -36,6 +36,11 @@ namespace BlogProject.Controllers
                 return NotFound();
             }
             blogListDTO.Blog.MainImage = baseUri + blogListDTO.Blog.MainImage;
+
+            //TODO : Update metodu async olarak düzenlenecek
+            blogListDTO.Blog.ViewsCount += 1;
+            BlogManager.Update(blogListDTO.Blog);
+
             return View(blogListDTO);
         }
         #endregion

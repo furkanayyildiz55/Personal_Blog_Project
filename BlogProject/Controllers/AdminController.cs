@@ -181,20 +181,23 @@ namespace BlogProject.Controllers
             return RedirectToAction("BlogList", "Admin");
         }
 
-
         #endregion
 
 
         #region UpdateBlog
 
         [HttpGet]
-        public IActionResult UpdateBlog()
+        public IActionResult UpdateBlog(string? title)
         {
-            int blogID = 43;
+            if (title == null)
+            {
+                return NotFound();
+            }
+
             AddBlogViewModel viewModel = new AddBlogViewModel();
             viewModel = CreateAddBlogViewModel();
-            viewModel.Blog = BlogManager.Get(b => b.ObjectId == blogID);
-            viewModel.TagItemIds = BlogTagManager.GetList(bt => bt.BlogId == blogID).Select(bt => bt.TagId).ToArray();
+            viewModel.Blog = BlogManager.Get(b => b.UrlTitle == title);
+            viewModel.TagItemIds = BlogTagManager.GetList(bt => bt.BlogId == viewModel.Blog.ObjectId).Select(bt => bt.TagId).ToArray();
             //TODO: Geçici olarak yazılan update blog controller düzenlenecek
             return View(viewModel);
         }
@@ -202,7 +205,7 @@ namespace BlogProject.Controllers
         [HttpPost]
         public IActionResult UpdateBlog(AddBlogViewModel addBlogViewModel)
         {
-            Blog UpdatedBlog = BlogManager.Get(b => b.ObjectId == 43);
+            Blog UpdatedBlog = BlogManager.Get(b => b.ObjectId == addBlogViewModel.Blog.ObjectId);
 
             UpdatedBlog.Title = addBlogViewModel.Blog.Title;
             UpdatedBlog.UrlTitle = Util.UrlFormating(addBlogViewModel.Blog.Title);
@@ -288,6 +291,8 @@ namespace BlogProject.Controllers
         [HttpGet]
         public IActionResult BlogList()
         {
+
+
             List<BlogListDTO> blogListDTOs = new List<BlogListDTO>();
             List<Blog> blogs = BlogManager.GetBlogListWithCategory();
 
