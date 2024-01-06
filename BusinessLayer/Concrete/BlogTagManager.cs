@@ -21,12 +21,12 @@ namespace BusinessLayer.Concrete
 
         public void Delete(BlogTag t)
         {
-            throw new NotImplementedException();
+            _blogTagDal.Delete(t);
         }
 
 		public BlogTag Get(Expression<Func<BlogTag, bool>> filter)
 		{
-			throw new NotImplementedException();
+			return _blogTagDal.Get(filter);
 		}
 
 		public BlogTag GetByID(int id)

@@ -33,7 +33,7 @@ namespace DataAccesLayer.Repositories
 		public T Get(Expression<Func<T, bool>> filter)
 		{
 			using var context = new Context();
-			var result = context.Set<T>().Where(filter).First();
+			var result = context.Set<T>().Where(filter).FirstOrDefault();
 			return result;
 		}
 

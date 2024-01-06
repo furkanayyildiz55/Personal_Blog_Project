@@ -18,11 +18,14 @@ namespace BusinessLayer.ValidationRules
             .MaximumLength(150).WithMessage("Başlık en fazla 150 karakter olabilir");
 
             RuleFor(x => x.UrlTitle)
-			.NotEmpty().WithMessage("Blog için link oluşturulamadı")
-			.Must(BeUniqueBlog).WithMessage("Bu isimde blog bulunmaktadır");
+            .NotEmpty().WithMessage("Blog için link oluşturulamadı");
+
+            RuleFor(x => x.UrlTitle)
+            .Must(BeUniqueBlog).WithMessage("Bu isimde blog bulunmaktadır")
+            .When(x => x.ObjectId == 0);
 
 
-			RuleFor(x => x.CategoryId)
+            RuleFor(x => x.CategoryId)
             .NotEmpty().WithMessage("Lütfen kategori giriniz.");
 
         }
