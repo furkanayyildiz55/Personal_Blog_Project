@@ -15,6 +15,7 @@ namespace BlogProject.Controllers
 
         public IActionResult Index()
         {
+
             return View();
         }
 

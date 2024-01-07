@@ -15,7 +15,7 @@ namespace DataAccesLayer.EntityFramework
         /// <returns></returns>
         public List<Blog> GetListWithCategory()
         {
-            using (var c= new Context())
+            using (var c = new Context())
             {
                 return c.Blog.Include(x => x.Category).ToList();
             }
@@ -32,6 +32,15 @@ namespace DataAccesLayer.EntityFramework
             }
         }
 
-
+        public List<Blog> GetListWithCategory(Expression<Func<Blog, bool>> filter)
+        {
+            using (var c = new Context())
+            {
+                return c.Blog.Where(filter)
+                    .Include(x => x.Category)
+                    .Include(x => x.Writer)
+                    .ToList();
+            }
+        }
     }
 }

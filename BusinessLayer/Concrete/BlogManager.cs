@@ -26,6 +26,11 @@ namespace BusinessLayer.Concrete
             return _blogDal.GetListWithCategory();
         }
 
+        public List<Blog> GetBlogListWithCategory(Expression<Func<Blog, bool>> filter)
+        {
+            return _blogDal.GetListWithCategory(filter);
+        }
+
         public Blog GetBlogWithCategory(Expression<Func<Blog, bool>> filter)
         {
             return _blogDal.GetBlogWithCategory(filter);
