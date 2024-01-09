@@ -1,0 +1,19 @@
+﻿@using EntityLayer.Concrete
+@model List<Blog>
+
+<div class="header_news-ticker-wrap">
+    <div class="hnt_title">Son Eklenenler : </> </div>
+    <div class="header_news-ticker fl-wrap">
+        <ul>
+            @foreach (Blog blog in Model)
+            {
+                <li><a href="/Blog/Detail/@blog.UrlTitle">@blog.Title</a></li>
+            }
+
+        </ul>
+    </div>
+    <div class="n_contr-wrap">
+        <div class="n_contr p_btn"><i class="fas fa-caret-left"></i></div>
+        <div class="n_contr n_btn"><i class="fas fa-caret-right"></i></div>
+    </div>
+</div>

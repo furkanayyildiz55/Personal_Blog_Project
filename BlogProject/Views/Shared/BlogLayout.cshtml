@@ -45,21 +45,8 @@
                         <span class="date_mounth"></span>
                         <span class="date_year"></span>
                     </div>
-
-                    <div class="header_news-ticker-wrap">
-                        <div class="hnt_title">Size Özel : </div>
-                        <div class="header_news-ticker fl-wrap">
-                            <ul>
-                                <li><a href="post-single.html">BLOG BAŞLIKLARI</a></li>
-                                <li><a href="post-single.html">BLOG BAŞLIKLARI</a></li>
-                                <li><a href="post-single.html">BLOG BAŞLIKLARI</a></li>
-                            </ul>
-                        </div>
-                        <div class="n_contr-wrap">
-                            <div class="n_contr p_btn"><i class="fas fa-caret-left"></i></div>
-                            <div class="n_contr n_btn"><i class="fas fa-caret-right"></i></div>
-                        </div>
-                    </div>
+    
+                    @await Component.InvokeAsync("BlogTitleSlider")
 
                     <ul class="topbar-social">
                         <li><a href="https://github.com/furkanayyildiz55" target="_blank"><i class="fab fa-github"></i></a></li>
