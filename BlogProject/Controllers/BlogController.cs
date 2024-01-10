@@ -36,11 +36,12 @@ namespace BlogProject.Controllers
             {
                 return NotFound();
             }
-            blogListDTO.Blog.MainImage = baseUri + blogListDTO.Blog.MainImage;
-
             //TODO : Update metodu async olarak düzenlenecek
             blogListDTO.Blog.ViewsCount += 1;
             BlogManager.Update(blogListDTO.Blog);
+            blogListDTO.Blog.MainImage = baseUri + blogListDTO.Blog.MainImage;
+
+
 
             return View(blogListDTO);
         }

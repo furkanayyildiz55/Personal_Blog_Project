@@ -2,8 +2,8 @@
 @model BlogListDTO
 
 @{
-    ViewBag.Title = "Blog Detayı Title";
-    ViewBag.VisibleRouteSection = true;
+    ViewBag.Title = Model.Blog.Title != null ? Model.Blog.Title : "Furkan Ayyıldız" ;
+    ViewBag.VisibleRouteSection = false;
     Layout = "~/Views/Shared/BlogLayout.cshtml";
 }
 
