@@ -20,6 +20,11 @@ namespace BlogProject.Helper
 			return text;
 		}
 
+		public static string BaseUrl(HttpRequest Request)
+		{
+			return $"{Request.Scheme}://{Request.Host}/";
+        }
+
 
 	}
 }
