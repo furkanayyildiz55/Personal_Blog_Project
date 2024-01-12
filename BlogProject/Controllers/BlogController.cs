@@ -78,7 +78,7 @@ namespace BlogProject.Controllers
             if (QueryStatus)
             {
                 if (Title != "")
-                    blogList = blogList.Where(bl => bl.Title == Title).ToList();
+                    blogList = blogList.Where(bl => bl.Title.Contains(Title)).ToList();
                 if (Category != 0)
                     blogList = blogList.Where(bl => bl.CategoryId == Category).ToList();
 
@@ -114,11 +114,6 @@ namespace BlogProject.Controllers
             return View(filterBlogListViewModel);
         }
 
-        [HttpPost]
-        public IActionResult Index(FilterBlogListViewModel filterBlogList)
-        {
-            return View();
-        }
 
         #region BlogDetayı
 

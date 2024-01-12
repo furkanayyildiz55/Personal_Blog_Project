@@ -23,7 +23,7 @@ namespace EntityLayer.Concrete
         public String? Content { get; set; }
 
         [Column("reply_id")]
-        public String? ReplyId { get; set; }
+        public int? ReplyId { get; set; }
 
         //Navigation Property
         [Column("blog_id")]

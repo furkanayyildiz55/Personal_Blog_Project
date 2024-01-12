@@ -24,8 +24,6 @@ namespace BusinessLayer.Concrete
             _commentDal.Insert(t);
         }
 
-
-
         public void Delete(Comment t)
         {
             _commentDal.Delete(t);
@@ -54,7 +52,7 @@ namespace BusinessLayer.Concrete
 
         public List<Comment> GetList(Expression<Func<Comment, bool>> filter)
         {
-            throw new NotImplementedException();
+           return _commentDal.GetListAll(filter).ToList() ;
         }
 
         public void Update(Comment t)
