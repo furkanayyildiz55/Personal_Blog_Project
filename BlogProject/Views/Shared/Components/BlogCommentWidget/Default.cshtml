@@ -16,12 +16,11 @@
                 <h4><a href="post-single.html#">Kevin Antony</a></h4>
                 <div class="box-widget-menu-btn smact"><i class="far fa-ellipsis-h"></i></div>
                 <div class="show-more-snopt-tooltip bxwt">
-                    <a href="post-single.html#"> <i class="fas fa-reply"></i> Cevapla</a>
-                    <a href="post-single.html#"> <i class="fas fa-exclamation-triangle"></i> Raporla </a>
+                    <a href="#"> <i class="fas fa-exclamation-triangle"></i> Raporla </a>
                 </div>
                 <div class="clearfix"></div>
                 <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo.</p>
-                <a class="comment-reply-link" href="post-single.html#"><i class="fas fa-reply"></i> Cevapla</a>
+                    <a class="comment-reply-link" href="#CommentUserName"><i class="fas fa-reply" onclick="setParentCommentIdAndFocus('1', 'CommentUserName')"></i> Cevapla</a>
                 <div class="comment-meta"><i class="far fa-clock"></i> January 02, 2020</div>
                 <div class="comment-body_dec"></div>
             </div>
@@ -37,8 +36,7 @@
                         <h4><a href="post-single.html#">Liza Rose</a></h4>
                         <div class="box-widget-menu-btn smact"><i class="far fa-ellipsis-h"></i></div>
                         <div class="show-more-snopt-tooltip bxwt">
-                            <a href="post-single.html#"> <i class="fas fa-reply"></i> Cevapla</a>
-                            <a href="post-single.html#"> <i class="fas fa-exclamation-triangle"></i> Raporla </a>
+                            <a href="#"> <i class="fas fa-exclamation-triangle"></i> Raporla </a>
                         </div>
                         <div class="clearfix"></div>
                         <p>  In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
@@ -50,28 +48,45 @@
             }
 
         }
-
     </ul>
     <div class="clearfix"></div>
     <div id="addcom" class="clearafix">
-        <div class="pr-subtitle"> Leave A Comment <i class="fas fa-caret-down"></i></div>
+        <div class="pr-subtitle"> Bir Yorum Ekle 😊 <i class="fas fa-caret-down"></i></div>
         <div class="comment-reply-form fl-wrap">
-            <form id="add-comment" class="add-comment custom-form">
+            <form id="add-comment" class="add-comment custom-form" asp-controller="Comment" asp-action="AddComment" method="post">
                 <fieldset>
                     <div class="row">
                         <div class="col-md-6">
-                            <input type="text" placeholder="Your Name *" value="" />
+                            <input type="text" name="UserName" placeholder="İsim *" value="" />
                         </div>
                         <div class="col-md-6">
-                            <input type="text" placeholder="Email Address*" value="" />
+                            <input type="text" name="Useremail" placeholder="Mail *" value="" />
                         </div>
                     </div>
-                    <textarea placeholder="Your Comment:"></textarea>
+                    <textarea placeholder="Yorum *" name="Content"></textarea>
                 </fieldset>
-                <button class="btn float-btn color-btn">  Submit Comment <i class="fas fa-caret-right"></i> </button>
+                <button type="submit" class="btn float-btn color-btn">  Yorum Yap <i class="fas fa-caret-right"></i> </button>
             </form>
         </div>
     </div>
     <!--end respond-->
 </div>
 <!--comments end -->
+
+
+<script>
+    // Yanıt verilen yorumun ID'sini ve input alanının ID'sini ayarlamak için fonksiyon
+    function setParentCommentIdAndFocus(commentId, inputId) {
+        // Gizli input alanının değerini ayarla
+        $('#parentCommentId').val(commentId);
+
+        // Input alanına odaklan
+        $('#' + inputId).focus();
+    }
+
+    // Formu göndermek için fonksiyon
+    function submitComment() {
+        // Mevcut form gönderme mantığını buraya ekleyin
+        // Yanıt verilen yorumun ID'sine $('#parentCommentId').val() kullanarak erişebilirsiniz
+    }
+</script>
