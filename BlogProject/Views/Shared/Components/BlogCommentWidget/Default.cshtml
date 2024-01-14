@@ -8,20 +8,20 @@
     <ul class="commentlist clearafix">
         @foreach (var commentListDTO in Model)
         {
-                    <li class="comment">
+        <li class="comment">
             <div class="comment-author">
                 <img alt="" src="~/gmag/images/avatar/2.jpg" width="50" height="50">
             </div>
             <div class="comment-body smpar">
-                <h4><a href="post-single.html#">Kevin Antony</a></h4>
+                <h4><a href="#">@commentListDTO.MainComment.UserName</a></h4>
                 <div class="box-widget-menu-btn smact"><i class="far fa-ellipsis-h"></i></div>
                 <div class="show-more-snopt-tooltip bxwt">
                     <a href="#"> <i class="fas fa-exclamation-triangle"></i> Raporla </a>
                 </div>
                 <div class="clearfix"></div>
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo.</p>
-                    <a class="comment-reply-link" href="#CommentUserName"><i class="fas fa-reply" onclick="setParentCommentIdAndFocus('1', 'CommentUserName')"></i> Cevapla</a>
-                <div class="comment-meta"><i class="far fa-clock"></i> January 02, 2020</div>
+                    <p>@commentListDTO.MainComment.Content</p>
+                    <a class="comment-reply-link" href="#CommentUserName"><i class="fas fa-reply" ></i> Cevapla</a>
+                    <div class="comment-meta"><i class="far fa-clock"></i> @commentListDTO.MainComment.ObjectIDate</div>
                 <div class="comment-body_dec"></div>
             </div>
         </li>
@@ -33,15 +33,15 @@
                         <img alt="" src="~/gmag/images/avatar/4.jpg" width="50" height="50">
                     </div>
                     <div class="comment-body smpar">
-                        <h4><a href="post-single.html#">Liza Rose</a></h4>
+                        <h4><a href="#">@item.UserName</a></h4>
                         <div class="box-widget-menu-btn smact"><i class="far fa-ellipsis-h"></i></div>
                         <div class="show-more-snopt-tooltip bxwt">
                             <a href="#"> <i class="fas fa-exclamation-triangle"></i> Raporla </a>
                         </div>
                         <div class="clearfix"></div>
-                        <p>  In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</p>
-                        <a class="comment-reply-link" href="post-single.html#"><i class="fas fa-reply"></i> Cevapla</a>
-                        <div class="comment-meta"><i class="far fa-clock"></i> January 02, 2020</div>
+                        <p>@item.Content</p>
+                        <a class="comment-reply-link" href="#"><i class="fas fa-reply"></i> Cevapla</a>
+                        <div class="comment-meta"><i class="far fa-clock"></i> @item.ObjectIDate</div>
                         <div class="comment-body_dec"></div>
                     </div>
                 </li>
@@ -53,7 +53,7 @@
     <div id="addcom" class="clearafix">
         <div class="pr-subtitle"> Bir Yorum Ekle 😊 <i class="fas fa-caret-down"></i></div>
         <div class="comment-reply-form fl-wrap">
-            <form id="add-comment" class="add-comment custom-form" asp-controller="Comment" asp-action="AddComment" method="post">
+            <form id="add-comment" class="add-comment custom-form"  method="post">
                 <fieldset>
                     <div class="row">
                         <div class="col-md-6">
@@ -65,7 +65,7 @@
                     </div>
                     <textarea placeholder="Yorum *" name="Content"></textarea>
                 </fieldset>
-                <button type="submit" class="btn float-btn color-btn">  Yorum Yap <i class="fas fa-caret-right"></i> </button>
+                <button id="btnComment" type="submit" class="btn float-btn color-btn">  Yorum Yap <i class="fas fa-caret-right"></i> </button>
             </form>
         </div>
     </div>
@@ -74,19 +74,79 @@
 <!--comments end -->
 
 
-<script>
-    // Yanıt verilen yorumun ID'sini ve input alanının ID'sini ayarlamak için fonksiyon
-    function setParentCommentIdAndFocus(commentId, inputId) {
-        // Gizli input alanının değerini ayarla
-        $('#parentCommentId').val(commentId);
+<script type="text/javascript">
+    var commentButtonId = "#btnComment";
+    var commentFormId = "#add-comment";
+    var commentFormIdClear = "add-comment";
+    var commentActionUrl = '/Comment/AddComment/';
+    var commentLoadingGifId = "imgLoadingcomment";
 
-        // Input alanına odaklan
-        $('#' + inputId).focus();
+    function commentTemizle(formId) {
+        var form = document.getElementById(formId);
+        var inputAlanlari = form.elements;
+        //input alanlarını temizle
+        for (var i = 0; i < inputAlanlari.length; i++) {
+            inputAlanlari[i].value = "";
+        }
+        var paragraflar = form.getElementsByTagName("p");
+
+        // Her bir paragrafın içeriğini temizle
+        for (var i = 0; i < paragraflar.length; i++) {
+            paragraflar[i].innerHTML = "";
+        }
     }
 
-    // Formu göndermek için fonksiyon
-    function submitComment() {
-        // Mevcut form gönderme mantığını buraya ekleyin
-        // Yanıt verilen yorumun ID'sine $('#parentCommentId').val() kullanarak erişebilirsiniz
+    function commentErrorMessageClear(formId) {
+        var form = document.getElementById(formId);
+        var paragraflar = form.getElementsByTagName("p");
+
+        // Her bir paragrafın içeriğini temizle
+        for (var i = 0; i < paragraflar.length; i++) {
+            paragraflar[i].innerHTML = "";
+        }
     }
+
+    $(commentButtonId).click(function () {
+        //var loadingGif = document.getElementById(commentLoadingGifId);
+        //loadingGif.style.display = "inline-block";
+        var formData = $(commentFormId).serialize();
+        console.log(formData);
+
+        $.ajax({
+            type: 'POST',
+            url: commentActionUrl,
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            data: formData,
+            success: function (result) {
+                console.log(result)
+
+                var status = result.status;
+                var resultMessages = result.resultMessages;
+
+                if (status) {
+                    for (var i = 0; i < resultMessages.length; i++) {
+                        showToastMessage(resultMessages[i].message);
+                    }
+                    loadingGif.style.display = "none";
+                    commentTemizle(commentFormIdClear);
+
+                } else {
+                    commentErrorMessageClear(commentFormIdClear);
+                    for (var i = 0; i < resultMessages.length; i++) {
+                        var propertyName = resultMessages[i].propertyName;
+                        var message = resultMessages[i].message;
+                        document.getElementById(propertyName).innerHTML = message
+                    }
+                    loadingGif.style.display = "none";
+                }
+
+            },
+            error: function (result) {
+                alert("Bir hata oluştu");
+                console.log('Bir hata oluştu');
+            }
+
+        });
+
+    });
 </script>

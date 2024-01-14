@@ -1,0 +1,32 @@
+﻿using EntityLayer.Concrete;
+using FluentValidation;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BusinessLayer.ValidationRules
+{
+    public class CommentValidator : AbstractValidator<Comment>
+    {
+        public CommentValidator()
+        {
+            RuleFor(x => x.UserName)
+                 .NotEmpty().WithMessage("Lütfen adınızı ve soyadınızı giriniz.")
+                 .MinimumLength(1).WithMessage("Ad soyad en az 3 karakter olmalıdır")
+                 .MaximumLength(55).WithMessage("Ad soyad en fazla 55 karakter olabilir");
+
+            RuleFor(x => x.Useremail)
+                .NotEmpty().WithMessage("Lütfen Email adresinizi giriniz.")
+                .MaximumLength(55).WithMessage("Email en fazla 55 karakter olabilir")
+                .EmailAddress().WithMessage("Lütfen geçerli bir Email adresi giriniz");
+
+
+            RuleFor(x => x.Content)
+                .NotEmpty().WithMessage("Lütfen yorumunuzu giriniz.")
+                .MinimumLength(1).WithMessage("Yorum en az 1 karakter olmalıdır")
+                .MaximumLength(400).WithMessage("Yorum en fazla 400 karakter olabilir");
+        }
+    }
+}

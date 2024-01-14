@@ -6,13 +6,13 @@
 
 
 <script type="text/javascript">
-	var buttonId = "#btnSubscribe";
-	var formId = "#subscribeForm"
-	var formIdClear = "subscribeForm"
-	var actionUrl = '/Subscribe/SubscribeMail/';
-	var lodingGifId = "imgLoadingSubscribe";
+	var subscribeButtonId = "#btnSubscribe";
+	var subscribeFormId = "#subscribeForm";
+	var subscribeFormIdClear = "subscribeForm";
+	var subscribeActionUrl = '/Subscribe/SubscribeMail/';
+	var subscribeLoadingGifId = "imgLoadingSubscribe";
 
-	function temizle(formId) {
+	function subscribeTemizle(formId) {
 		var form = document.getElementById(formId);
 		var inputAlanlari = form.elements;
 		//input alanlarını temizle
@@ -25,10 +25,9 @@
 		for (var i = 0; i < paragraflar.length; i++) {
 			paragraflar[i].innerHTML = "";
 		}
-
 	}
 
-	function errorMessageClear(formId) {
+	function subscribeErrorMessageClear(formId) {
 		var form = document.getElementById(formId);
 		var paragraflar = form.getElementsByTagName("p");
 
@@ -38,16 +37,14 @@
 		}
 	}
 
-
-
-	$(buttonId).click(function () {
-		var loadingGif = document.getElementById(lodingGifId);
+	$(subscribeButtonId).click(function () {
+		var loadingGif = document.getElementById(subscribeLoadingGifId);
 		loadingGif.style.display = "inline-block";
-		var formData = $(formId).serialize();
+		var formData = $(subscribeFormId).serialize();
 
 		$.ajax({
 			type: 'POST',
-			url: actionUrl,
+			url: subscribeActionUrl,
 			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 			data: formData,
 			success: function (result) {
@@ -56,22 +53,18 @@
 				var status = result.status;
 				var resultMessages = result.resultMessages;
 
-
 				if (status) {
 					for (var i = 0; i < resultMessages.length; i++) {
 						showToastMessage(resultMessages[i].message);
 					}
 					loadingGif.style.display = "none";
-					temizle(formIdClear);
+					subscribeTemizle(subscribeFormIdClear);
 
-				}
-				else {
-					errorMessageClear(formIdClear);
+				} else {
+					subscribeErrorMessageClear(subscribeFormIdClear);
 					for (var i = 0; i < resultMessages.length; i++) {
-
 						var propertyName = resultMessages[i].propertyName;
 						var message = resultMessages[i].message;
-
 						document.getElementById(propertyName).innerHTML = message
 					}
 					loadingGif.style.display = "none";
