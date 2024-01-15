@@ -1,32 +1,32 @@
 ﻿@using BlogProject.DTO
-@model List<CommentListDTO>
+@model CommentListDTO
 
 <!--comments  -->
 <div id="comments" class="single-post-comm fl-wrap">
-    <div class="pr-subtitle prs_big">Yorumlar  <span>3</span></div>
+    <div class="pr-subtitle prs_big">Yorumlar  <span></span></div>
 
     <ul class="commentlist clearafix">
-        @foreach (var commentListDTO in Model)
+        @foreach (var comment in Model.CommentList )
         {
         <li class="comment">
             <div class="comment-author">
                 <img alt="" src="~/gmag/images/avatar/2.jpg" width="50" height="50">
             </div>
             <div class="comment-body smpar">
-                <h4><a href="#">@commentListDTO.MainComment.UserName</a></h4>
+                    <h4><a href="#">@comment.MainComment.UserName</a></h4>
                 <div class="box-widget-menu-btn smact"><i class="far fa-ellipsis-h"></i></div>
                 <div class="show-more-snopt-tooltip bxwt">
                     <a href="#"> <i class="fas fa-exclamation-triangle"></i> Raporla </a>
                 </div>
                 <div class="clearfix"></div>
-                    <p>@commentListDTO.MainComment.Content</p>
-                    <a class="comment-reply-link" href="#CommentUserName"><i class="fas fa-reply" ></i> Cevapla</a>
-                    <div class="comment-meta"><i class="far fa-clock"></i> @commentListDTO.MainComment.ObjectIDate</div>
+                    <p>@comment.MainComment.Content</p>
+                    <button class="comment-reply-link" onclick="setReplyId(@comment.MainComment.ObjectId , '@comment.MainComment.UserName' )"><i class="fas fa-reply"></i> Cevapla</button>
+                    <div class="comment-meta"><i class="far fa-clock"></i> @comment.MainComment.ObjectIDate</div>
                 <div class="comment-body_dec"></div>
             </div>
         </li>
 
-            foreach (var item in commentListDTO.ReplyComment)
+            foreach (var item in comment.ReplyComment)
             {
                 <li class="comment comment_reply">
                     <div class="comment-author">
@@ -40,7 +40,7 @@
                         </div>
                         <div class="clearfix"></div>
                         <p>@item.Content</p>
-                        <a class="comment-reply-link" href="#"><i class="fas fa-reply"></i> Cevapla</a>
+                        <button class="comment-reply-link" onclick="setReplyId(@comment.MainComment.ObjectId , '@item.UserName')"><i class="fas fa-reply")></i> Cevapla</button>
                         <div class="comment-meta"><i class="far fa-clock"></i> @item.ObjectIDate</div>
                         <div class="comment-body_dec"></div>
                     </div>
@@ -52,20 +52,29 @@
     <div class="clearfix"></div>
     <div id="addcom" class="clearafix">
         <div class="pr-subtitle"> Bir Yorum Ekle 😊 <i class="fas fa-caret-down"></i></div>
+        <div class="pr-subtitle" id="replyUserName1" >&nbsp;&nbsp;&nbsp;<i class="fas fa-caret-down"></i></div>
+
         <div class="comment-reply-form fl-wrap">
             <form id="add-comment" class="add-comment custom-form"  method="post">
                 <fieldset>
                     <div class="row">
                         <div class="col-md-6">
-                            <input type="text" name="UserName" placeholder="İsim *" value="" />
+                            <input type="hidden" name="ReplyId" placeholder="İsim *" value="" />
+                            <input type="hidden" name="BlogId" placeholder="İsim *" value="@Model.BlogId" />
+                            <input id="focusUserName" type="text" name="UserName" placeholder="İsim *" value="" />
+                            <p id="UserName" class="color-red" style="color:red"></p>
+
                         </div>
                         <div class="col-md-6">
                             <input type="text" name="Useremail" placeholder="Mail *" value="" />
+                            <p id="Useremail" class="color-red" style="color:red"></p>
                         </div>
                     </div>
                     <textarea placeholder="Yorum *" name="Content"></textarea>
+                    <p id="Content" class="color-red" style="color:red"></p>
+
                 </fieldset>
-                <button id="btnComment" type="submit" class="btn float-btn color-btn">  Yorum Yap <i class="fas fa-caret-right"></i> </button>
+                <button id="btnComment" type="submit" class="btn float-btn color-btn">  Yorum Yap <i class="fas fa-caret-right"> <img id="CommentImgLoading" style="display:none; text-align:center" src="~/gmag/images/loading1.gif" alt="yükleniyor" width="40px"></i> </button>
             </form>
         </div>
     </div>
@@ -75,11 +84,25 @@
 
 
 <script type="text/javascript">
+
+
+    function setReplyId(replyId , replyName) {
+        document.getElementsByName("ReplyId")[0].value = replyId;
+        console.log("sa");
+        console.log(replyName);
+        document.getElementById("focusUserName").focus();
+        document.getElementById("replyUserName1").innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp" + replyName +   " kişisine yanıt veriyorsun...";
+        
+        console.log("as");
+    }
+
+
+
     var commentButtonId = "#btnComment";
     var commentFormId = "#add-comment";
     var commentFormIdClear = "add-comment";
     var commentActionUrl = '/Comment/AddComment/';
-    var commentLoadingGifId = "imgLoadingcomment";
+    var commentLoadingGifId = "CommentImgLoading";
 
     function commentTemizle(formId) {
         var form = document.getElementById(formId);
@@ -107,8 +130,9 @@
     }
 
     $(commentButtonId).click(function () {
-        //var loadingGif = document.getElementById(commentLoadingGifId);
-        //loadingGif.style.display = "inline-block";
+        event.preventDefault();
+        var loadingGif = document.getElementById(commentLoadingGifId);
+        loadingGif.style.display = "inline-block";
         var formData = $(commentFormId).serialize();
         console.log(formData);
 
@@ -135,15 +159,17 @@
                     for (var i = 0; i < resultMessages.length; i++) {
                         var propertyName = resultMessages[i].propertyName;
                         var message = resultMessages[i].message;
-                        document.getElementById(propertyName).innerHTML = message
+                        document.getElementById(propertyName).innerHTML = message;
                     }
                     loadingGif.style.display = "none";
                 }
 
             },
             error: function (result) {
-                alert("Bir hata oluştu");
+                alert("Bir hata oluştu. Üzgünüz");
                 console.log('Bir hata oluştu');
+                loadingGif.style.display = "none";
+
             }
 
         });

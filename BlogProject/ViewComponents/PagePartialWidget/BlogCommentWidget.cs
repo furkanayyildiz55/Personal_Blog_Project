@@ -13,17 +13,18 @@ namespace BlogProject.ViewComponents.PagePartialWidget
         public IViewComponentResult Invoke(int BlogId)
         {
             List<Comment> comments = CommentManager.GetList(cm => cm.BlogId == BlogId);
-            List<CommentListDTO> commentListDTOs = new List<CommentListDTO>();
+            CommentListDTO commentListDTO = new CommentListDTO();
+            commentListDTO.BlogId = BlogId;
 
             foreach (Comment comment in comments.Where(cm => cm.ReplyId == null))
             {
-                CommentListDTO commentDTO = new CommentListDTO();
-                commentDTO.MainComment = comment;
-                commentDTO.ReplyComment= comments.Where(cm => cm.ReplyId == comment.ObjectId).ToList();
+                CommentList commentList = new CommentList();
+                commentList.MainComment = comment;
+                commentList.ReplyComment= comments.Where(cm => cm.ReplyId == comment.ObjectId).ToList();
 
-                commentListDTOs.Add(commentDTO);
+                commentListDTO.CommentList.Add(commentList);
             }
-            return View(commentListDTOs);
+            return View(commentListDTO);
         }
     }
 }

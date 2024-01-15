@@ -24,7 +24,7 @@ namespace BlogProject.Controllers
                 CommentManager.Add(comment);
 
                 ajaxResultDTO.status = true;
-                ResultMessage resultMessage = new ResultMessage("userMessage", "Mesajınız yönticiye iletildi.");
+                ResultMessage resultMessage = new ResultMessage("userMessage", "Yorumunuz yönetici onayından sonra yayınlanacak.");
                 ajaxResultDTO.resultMessages.Add(resultMessage);
                 return Json(ajaxResultDTO);
             }
