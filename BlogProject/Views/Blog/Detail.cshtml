@@ -17,11 +17,11 @@
                 <div class="main-container fl-wrap fix-container-init">
                     <!-- single-post-header  -->
                     <div class="single-post-header fl-wrap">
-                        <a class="post-category-marker" href="category.html">@Model.Blog.Category.Name</a>
+                        <a class="post-category-marker" href="/Blog/?Category=@Model.Blog.Category.ObjectId">@Model.Blog.Category.Name</a>
                         <div class="clearfix"></div>
                         <h1>@Model.Blog.Title</h1>
                         <div class="clearfix"></div>
-                        <div class="author-link"><a href="author-single.html"><img src="~/gmag/images/avatar/2.jpg" alt="">  <span>@Model.Blog.Writer.Name @Model.Blog.Writer.Surname</span></a></div>
+                        <div class="author-link"><a href="/About/Index/"><img src="~/gmag/images/avatar/2.jpg" alt="">  <span>@Model.Blog.Writer.Name @Model.Blog.Writer.Surname</span></a></div>
                         <span class="post-date"><i class="far fa-clock"></i> @Model.Blog.ObjectIDate </span>
                         <ul class="post-opt">
                             <li><i class="far fa-comments-alt"></i> @Model.Blog.CommnetCount </li>
@@ -82,9 +82,6 @@
 
                             @Html.Raw(Model.Blog.Content)
 
-
-
-                            
                             <p class="has-drop-cap">Lorem ipsum dosectetur adipisicing elit, sed do.Lorem ipsum dolor sit amet, consectetur Nulla fringilla purus at leo dignissim congue. Mauris elementum accumsan leo vel tempor. Sit amet cursus nisl aliquam. Aliquam et elit eu nunc rhoncus viverra quis at felis. Sed do.Lorem ipsum dolor sit amet, consectetur Nulla fringilla purus Lorem ipsum dosectetur adipisicing elit at leo dignissim congue. Mauris elementum accumsan leo vel tempor . Aliquam et elit eu nunc rhoncus viverra quis at felis. Sed do.Lorem ipsum dolor sit amet, consectetur Nulla fringilla purus Lorem ipsum dosectetur adipisicing elit at leo dignissim congue. Mauris elementum accumsan leo vel tempor</p>
                             <h4 class="mb_head">Middle Post Heading</h4>
                             <p>Lorem ipsum dosectetur adipisicing elit, sed do.Lorem ipsum dolor sit amet, consectetur Nulla fringilla purus at leo dignissim congue. Mauris elementum accumsan leo vel tempor. Sit amet cursus nisl aliquam. Aliquam et elit eu nunc rhoncus viverra quis at felis. Sed do.Lorem ipsum dolor sit amet, consectetur Nulla fringilla purus Lorem ipsum dosectetur adipisicing elit at leo dignissim congue. Mauris elementum accumsan leo vel tempor . Aliquam et elit eu nunc rhoncus viverra quis at felis. Sed do.Lorem ipsum dolor sit amet, consectetur Nulla fringilla purus Lorem ipsum dosectetur adipisicing elit at leo dignissim congue. Mauris elementum accumsan leo vel tempor</p>
@@ -121,12 +118,12 @@
                                 <div class="tags-widget">
                                     @foreach (var item in Model.Tags)
                                     {
-                                        <a href="post-single.html#">@item.Tags.Name</a>
+                                        <a href="/Blog/?Tag=@item.Tags.ObjectId">@item.Tags.Name</a>
                                     }
                                 </div>
                             </div>
                         </div>
-                        <!-- single-post-nav"   -->
+@*                         <!-- single-post-nav"   -->
                         <div class="single-post-nav fl-wrap">
                             <a href="post-single.html" class="single-post-nav_prev spn_box">
                                 <div class="spn_box_img">
@@ -147,7 +144,7 @@
                                 </div>
                             </a>
                         </div>
-                        <!-- single-post-nav"  end   -->
+                        <!-- single-post-nav"  end   --> *@
                     </div>
                     <!-- single-post-content  end   -->
                     <div class="limit-box2 fl-wrap"></div>
@@ -157,11 +154,11 @@
                             <img src="~/gmag/images/avatar/2.jpg" alt="">
                         </div>
                         <div class="author-content fl-wrap">
-                            <h5>Yazar <a href="author-single.html">Furkan Ayyıldız</a></h5>
-                            <p>At one extremity the rope was unstranded, and the separate spread yarns were all braided and woven round the socket of the harpoon; the pole was then driven hard up into the socket..</p>
+                            <h5>Yazar <a href="/About/Index/">Furkan Ayyıldız</a></h5>
+                            <p>Yazılım Mühendisi</p>
                         </div>
                         <div class="profile-card-footer fl-wrap">
-                            <a href="author-single.html" class="post-author_link">PROFİLİ GÖRÜNTÜLE <i class="fas fa-caret-right"></i></a>
+                            <a href="/About/Index/" class="post-author_link">PROFİLİ GÖRÜNTÜLE <i class="fas fa-caret-right"></i></a>
                             <div class="profile-card-footer_soc">
                                 <div class="profile-card-footer_title">Takip: </div>
                                 <div class="profile-card-social">

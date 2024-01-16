@@ -16,6 +16,7 @@ namespace BlogProject.ViewComponents.BoxWidget
                 .GroupBy(p => p.TagId)
                 .Select(group => new PopularTagBoxViewModel
                 {
+                    TagId = group.First().Tags.ObjectId,
                     TagName = group.First().Tags.Name,
                     TagUsingCount = group.Count()
                 }).Take(8).ToList();

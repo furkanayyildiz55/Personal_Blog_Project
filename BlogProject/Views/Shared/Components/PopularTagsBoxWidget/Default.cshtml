@@ -8,7 +8,7 @@
         <div class="tags-widget">
             @foreach (PopularTagBoxViewModel item in Model)
             {
-                <a href="#">@item.TagName</a>
+                <a href="/Blog/?Tag=@item.TagId">@item.TagName</a>
             }
         </div>
     </div>
