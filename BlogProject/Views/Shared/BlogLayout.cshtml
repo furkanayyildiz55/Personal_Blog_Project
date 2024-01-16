@@ -59,18 +59,18 @@
             <div class="header-inner fl-wrap">
                 <div class="container">
                     <!-- logo holder  -->
-                    <a href="index.html" class="logo-holder"><img src="~/gmag/images/logo3.png" alt=""></a>
+                    <a href="/Home" class="logo-holder"><img src="~/gmag/images/logo3.png" alt=""></a>
                     <!-- logo holder end -->
                     <div class="search_btn htact show_search-btn"><i class="far fa-search"></i> <span class="header-tooltip">Ara</span></div>
-                    <div class="srf_btn htact show-reg-form"><i class="fal fa-user"></i> <span class="header-tooltip">Giriş Yap</span></div>
-                    <div class="show-cart sc_btn htact"><i class="fal fa-house"></i><span class="header-tooltip">Ana Sayfa</span></div>
+                    @* <div class="srf_btn htact show-reg-form"><i class="fal fa-user"></i> <span class="header-tooltip">Giriş Yap</span></div> *@
+                    <div class="show-cart sc_btn htact"><i class="fal fa-house"></i><a href="/Home/Index" class="header-tooltip">Ana Sayfa</a></div>
 
                     <!-- header-search-wrap -->
                     <div class="header-search-wrap novis_sarch">
                         <div class="widget-inner">
-                            <form action="index3.html#">
-                                <input name="se" id="se" type="text" class="search" placeholder="Ara..." value="" />
-                                <button class="search-submit" id="submit_btn"><i class="fa fa-search transition"></i> </button>
+                            <form action="/Blog">
+                                <input name="Title" id="se" type="text" class="search" placeholder="Ara..." value="" />
+                                <button class="search-submit" id="submit_btn" onclick="document.getElementsByName('SearchBlogTitle').value"><i class="fa fa-search transition"></i> </button>
                             </form>
                         </div>
                     </div>
@@ -139,7 +139,7 @@
                             <div class="col-md-4">
                                 <div class="footer-widget">
                                     <div class="footer-widget-content">
-                                        <a href="index.html" class="footer-logo"><img src="images/logo2.png" alt=""></a>
+                                        <a href="/Home" class="footer-logo"><img src="images/logo2.png" alt=""></a>
                                         <p>Beni sosyal medya hesaplarımdan takip edebilir, iletişime geçebilirsiniz. </p>
                                         <div class="footer-social fl-wrap">
                                             <ul>
@@ -159,11 +159,11 @@
                                     <div class="footer-widget-content">
                                         <div class="footer-list footer-box fl-wrap">
                                             <ul>
-                                                <li> <a href="index3.html#">C Sharp</a></li>
-                                                <li> <a href="index3.html#">ASP .NET Core</a></li>
+                                                <li> <a href="/Blog?category=1">Yazılım</a></li>
+@*                                                 <li> <a href="index3.html#">ASP .NET Core</a></li>
                                                 <li> <a href="index3.html#">Flutter</a></li>
                                                 <li> <a href="index3.html#">Teknoloji</a></li>
-                                                <li> <a href="index3.html#">Faydalı</a></li>
+                                                <li> <a href="index3.html#">Faydalı</a></li> *@
                                             </ul>
                                         </div>
                                     </div>
@@ -177,10 +177,10 @@
                                     <div class="footer-widget-content">
                                         <div class="footer-list footer-box fl-wrap">
                                             <ul>
-                                                <li> <a href="index3.html#">Ana Sayfa</a></li>
-                                                <li> <a href="index3.html#">Hakkımda</a></li>
-                                                <li> <a href="index3.html#">İletişim</a></li>
-                                                <li> <a href="index3.html#">Son Blog Yazısı</a></li>
+                                                <li> <a href="/Home/Index">Ana Sayfa</a></li>
+                                                <li> <a href="/About/Index/">Hakkımda</a></li>
+                                                <li> <a href="/Contact/Index/">İletişim</a></li>
+@*                                                 <li> <a href="index3.html#">Son Blog Yazısı</a></li> *@
                                             </ul>
                                         </div>
                                     </div>

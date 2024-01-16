@@ -19,8 +19,8 @@
                                         <div class="overlay"></div>
                                     </div>
                                     <div class="grid-post-media_title">
-                                        <a class="post-category-marker" href="#">@blog.Category.Name</a>
-                                        <h4><a href="post-single.html">@blog.Title</a></h4>
+                                        <a class="post-category-marker" href="/Blog?category=@blog.Category.ObjectId">@blog.Category.Name</a>
+                                        <h4><a href="/Blog/Detail/@blog.UrlTitle">@blog.Title</a></h4>
                                         <span class="video-date"><i class="far fa-clock"></i>@blog.ObjectIDate</span>
                                         <ul class="post-opt">
                                             <li><i class="far fa-comments-alt"></i> @blog.CommnetCount </li>
