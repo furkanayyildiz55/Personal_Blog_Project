@@ -262,7 +262,7 @@
                                         <div class="col-md-6">
                                             <!--list-post-->
 											<div class="list-post fl-wrap">
-                                                <a class="post-category-marker" href="category.html">@Model[i].Category.Name</a>
+                                                <a class="post-category-marker" href="/Blog?Category=@Model[i].Category.ObjectId">@Model[i].Category.Name</a>
 												<div class="list-post-media">
 													<a href="/Blog/Detail/@Model[i].UrlTitle">
 														<div class="bg-wrap">
@@ -295,7 +295,7 @@
 													<div class="grid-post-media gpm_sing">
                                                         <div class="bg" data-bg="@Model[i].ThumbnailImage"></div>
 														<div class="grid-post-media_title">
-                                                            <a class="post-category-marker" href="category.html">@Model[i].Category.Name</a>
+                                                            <a class="post-category-marker" href="/Blog?Category=@Model[i].Category.ObjectId">@Model[i].Category.Name</a>
                                                             <h4><a href="/Blog/Detail/@Model[i].UrlTitle">@Model[i].Title</a></h4>
                                                             <span class="video-date"><i class="far fa-clock"></i> @Model[i].ObjectIDate</span>
 															<ul class="post-opt">
