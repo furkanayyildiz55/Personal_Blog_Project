@@ -128,7 +128,6 @@ namespace BlogProject.Controllers
         }
 
         #region Add Blog
-
         [HttpGet]
         public IActionResult AddBlog()
         {
@@ -182,7 +181,6 @@ namespace BlogProject.Controllers
         }
 
         #endregion
-
 
         #region UpdateBlog
 
@@ -283,10 +281,6 @@ namespace BlogProject.Controllers
 
         #endregion
 
-
-
-
-
         #region Blog Listele
         [HttpGet]
         public IActionResult BlogList()
@@ -313,6 +307,22 @@ namespace BlogProject.Controllers
             return View();
         }
 
+        #endregion
+
+        #region Login
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(Writer writer)
+        {
+
+
+            return View();
+        }
         #endregion
     }
 }
