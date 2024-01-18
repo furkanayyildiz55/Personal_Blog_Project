@@ -52,7 +52,7 @@ namespace BusinessLayer.Concrete
 
 		public Writer Get(Expression<Func<Writer, bool>> filter)
 		{
-			throw new NotImplementedException();
+			return _writerDal.Get(filter);
 		}
 
         public List<Writer> GetList(Expression<Func<Writer, bool>> filter)

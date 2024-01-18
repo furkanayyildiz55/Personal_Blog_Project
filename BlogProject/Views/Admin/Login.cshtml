@@ -30,7 +30,7 @@
                 <h2 class="font-bold">Furkan Ayyıldız</h2>
 
                 <p>
-                    Blog
+                    Gelişim
                 </p>
 
                 <p>
@@ -47,11 +47,17 @@
                     <form class="m-t" role="form"  asp-action="Login" asp-controller="Admin">
                         <div class="form-group">
                             <input type="email" class="form-control" placeholder="Mail" required="" asp-for="Email">
+                            <p id="Email" class="color-red" style="color:red"></p>
+
                         </div>
                         <div class="form-group">
                             <input type="password" class="form-control" placeholder="Şifre" required="" asp-for="Password">
+                            <p id="Password" class="color-red" style="color:red"></p>
+
                         </div>
                         <button type="submit" class="btn btn-primary block full-width m-b" asp-action="Login" asp-controller="Admin">Giriş Yap</button>
+                        <p id="LoginError" class="color-red" style="color:red"></p>
+
                     </form>
 
                     <!-- <a href="#">

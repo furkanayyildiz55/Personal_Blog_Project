@@ -6,6 +6,7 @@ using BusinessLayer.ValidationRules;
 using DataAccesLayer.EntityFramework;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Mono.TextTemplating;
@@ -19,6 +20,7 @@ namespace BlogProject.Controllers
         TagManager TagManager = new TagManager(new EfTagRepository());
         BlogTagManager BlogTagManager = new BlogTagManager(new EfBlogTagRepository());
         BlogManager BlogManager = new BlogManager(new EfBlogRepository());
+        WriterManager WriterManager = new WriterManager(new EfWriterRepository());
 
         #region YardımcıFonksiyonlar
         private AddBlogViewModel CreateAddBlogViewModel()
@@ -311,17 +313,41 @@ namespace BlogProject.Controllers
 
         #region Login
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Login(Writer writer)
+        [AllowAnonymous]
+        public IActionResult Login(Writer loginWriter)
         {
+            LoginValidator validationRules = new LoginValidator();
+            ValidationResult result = validationRules.Validate(loginWriter);
 
+            if(result.IsValid)
+            {
+                Writer writer = WriterManager.Get(wr => wr.Email == loginWriter.Email && wr.Password == loginWriter.Password);
 
-            return View();
+                if(writer != null)
+                {
+                    //login - create session
+                  return RedirectToAction("Index", "Admin");
+                }
+                else
+                {
+                    ModelState.AddModelError("LoginError", "Email veya şifre hatalı...");
+                }
+            }
+            else
+            {
+                foreach (var item in result.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                }
+            }
+            return View(loginWriter);
         }
         #endregion
     }

@@ -12,13 +12,10 @@ namespace BusinessLayer.ValidationRules
 	{
 		public SubscribeValidator()
 		{
-
-
 			RuleFor(x => x.SubscribeEmail)
 				.NotEmpty().WithMessage("Lütfen Email adresinizi giriniz.")
 				.MaximumLength(55).WithMessage("Email en fazla 55 karakter olabilir")
 				.EmailAddress().WithMessage("Lütfen geçerli bir Email adresi giriniz");
-
 
 		}
 	}
