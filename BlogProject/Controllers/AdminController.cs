@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Mono.TextTemplating;
 using System.IO;
+using static BlogProject.Constants.Enums;
 
 namespace BlogProject.Controllers
 {
@@ -21,6 +22,7 @@ namespace BlogProject.Controllers
         BlogTagManager BlogTagManager = new BlogTagManager(new EfBlogTagRepository());
         BlogManager BlogManager = new BlogManager(new EfBlogRepository());
         WriterManager WriterManager = new WriterManager(new EfWriterRepository());
+        CommentManager CommentManager = new CommentManager(new EfCommentRepository());
 
         #region YardımcıFonksiyonlar
         private AddBlogViewModel CreateAddBlogViewModel()
@@ -124,10 +126,12 @@ namespace BlogProject.Controllers
 
         #endregion
 
+        #region Index
         public IActionResult Index()
         {
             return View();
         }
+        #endregion
 
         #region Add Blog
         [HttpGet]
@@ -351,5 +355,39 @@ namespace BlogProject.Controllers
             return View(loginWriter);
         }
         #endregion
+
+
+        #region CommentList
+        [HttpGet]
+        public IActionResult CommentCheck()
+        {
+            return View(CommentCheckList());
+        }
+
+        private List<Comment> CommentCheckList()
+        {
+            return CommentManager
+                .GetList(cm => cm.ObjectStatus == (int)ObjectStatus.Passive)
+                .OrderBy(cm => cm.ObjectIDate)
+                .ToList();
+        }
+
+        [HttpPost]
+        public IActionResult CommentCheck(int CommentId , int CommentStatus )
+        {
+
+            Comment comment = CommentManager.Get(cm => cm.ObjectId == CommentId);
+
+            if (comment != null && (CommentStatus==(int)ObjectStatus.Active || CommentStatus == (int)ObjectStatus.Deleted))
+            {
+                comment.ObjectStatus = CommentStatus;
+                CommentManager.Update(comment);
+            }
+
+            return View(CommentCheckList());
+        }
+        #endregion
+
+
     }
 }

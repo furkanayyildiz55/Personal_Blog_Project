@@ -3,6 +3,7 @@ using BusinessLayer.Concrete;
 using DataAccesLayer.EntityFramework;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Mvc;
+using static BlogProject.Constants.Enums;
 
 namespace BlogProject.ViewComponents.PagePartialWidget
 {
@@ -12,7 +13,7 @@ namespace BlogProject.ViewComponents.PagePartialWidget
 
         public IViewComponentResult Invoke(int BlogId)
         {
-            List<Comment> comments = CommentManager.GetList(cm => cm.BlogId == BlogId);
+            List<Comment> comments = CommentManager.GetList(cm => cm.BlogId == BlogId && cm.ObjectStatus== (int)ObjectStatus.Active);
             CommentListDTO commentListDTO = new CommentListDTO();
             commentListDTO.BlogId = BlogId;
 

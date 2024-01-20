@@ -1,5 +1,3 @@
-using FluentValidation.AspNetCore;
-using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 

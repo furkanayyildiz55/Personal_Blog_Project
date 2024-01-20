@@ -4,8 +4,9 @@
     {
         public  enum ObjectStatus
         {
+            Passive = 0,
             Active = 1,
-            Passive= 0
+            Deleted= 2
         }
 
         public enum Order

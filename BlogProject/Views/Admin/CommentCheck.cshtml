@@ -1,0 +1,96 @@
+﻿@using EntityLayer.Concrete
+@model List<Comment>
+
+@{
+    ViewData["Title"] = "CommentCheck";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<link href="/admin/css/plugins/footable/footable.core.css" rel="stylesheet">
+
+<div class="wrapper wrapper-content animated fadeInRight">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Yorum Onaylama İşlemleri </h5>
+
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-refresh"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+
+                    <table class="footable table table-stripped toggle-arrow-tiny">
+                        <thead>
+                            <tr>
+
+                                <th data-toggle="true">Yorum</th>
+                                <th>İsim</th>
+                                <th>Mail</th>
+                                <th data-hide="all">Tarih</th>
+                                <th data-hide="all">Blog</th>
+                                <th>Eylem</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var comment in Model)
+                            {
+                                <tr>
+                                    <td>@comment.Content</td>
+                                    <td>@comment.UserName</td>
+                                    <td>@comment.Useremail</td>
+                                    <td>@comment.ObjectIDate</td>
+                                    <td>@comment.BlogId</td>
+                                    <td>
+                                        <div class="btn-group" role="group" aria-label="Yorum Eylemleri">
+                                            <form>
+                                                <input type="hidden" name="CommentId" value="@comment.ObjectId"/>
+                                                <input type="hidden" name="CommentStatus" value="1" />
+                                                <button asp-controller="Admin" asp-action="CommentCheck" formmethod="post" class="btn btn-outline btn-primary dim" type="submit"><i class="fa fa-check"></i></button>
+                                            </form>
+                                            <form>
+                                                <input type="hidden" name="CommentId" value="@comment.ObjectId" />
+                                                <input type="hidden" name="CommentStatus" value="2" />
+                                                <button asp-controller="Admin" asp-action="CommentCheck" formmethod="post" class="btn btn-outline btn-danger dim" type="submit"><i class="fa fa-times"></i></button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5">
+                                    <ul class="float-right">Listelenen : <strong>@Model.Count</strong></ul>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script src="/admin/js/plugins/footable/footable.all.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+        $('.footable').footable();
+        $('.footable2').footable();
+
+    });
+
+</script>

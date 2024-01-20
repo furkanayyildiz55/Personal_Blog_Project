@@ -5,6 +5,7 @@ using DataAccesLayer.EntityFramework;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
+using static BlogProject.Constants.Enums;
 
 namespace BlogProject.Controllers
 {
@@ -21,7 +22,7 @@ namespace BlogProject.Controllers
 
             if(validationResult.IsValid)
             {
-                CommentManager.Add(comment , 0);
+                CommentManager.Add(comment , (int)ObjectStatus.Passive);
 
                 ajaxResultDTO.status = true;
                 ResultMessage resultMessage = new ResultMessage("userMessage", "Yorumunuz yönetici onayından sonra yayınlanacak.");

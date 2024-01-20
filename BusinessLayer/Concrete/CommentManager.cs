@@ -36,8 +36,8 @@ namespace BusinessLayer.Concrete
 
 		public Comment Get(Expression<Func<Comment, bool>> filter)
 		{
-			throw new NotImplementedException();
-		}
+            return _commentDal.Get(filter);
+        }
 
 		public Comment GetByID(int id)
         {
