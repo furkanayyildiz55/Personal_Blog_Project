@@ -332,8 +332,9 @@ namespace BlogProject.Controllers
 
                 if(writer != null)
                 {
-                    //login - create session
-                  return RedirectToAction("Index", "Admin");
+                    HttpContext.Session.SetString("LoginWriterID", writer.ObjectId.ToString() );
+                    return RedirectToAction("Index", "Admin");
+
                 }
                 else
                 {

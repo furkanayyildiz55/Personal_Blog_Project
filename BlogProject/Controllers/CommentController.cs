@@ -21,7 +21,7 @@ namespace BlogProject.Controllers
 
             if(validationResult.IsValid)
             {
-                CommentManager.Add(comment);
+                CommentManager.Add(comment , 0);
 
                 ajaxResultDTO.status = true;
                 ResultMessage resultMessage = new ResultMessage("userMessage", "Yorumunuz yönetici onayından sonra yayınlanacak.");

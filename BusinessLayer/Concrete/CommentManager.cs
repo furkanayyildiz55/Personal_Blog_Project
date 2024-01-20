@@ -24,6 +24,11 @@ namespace BusinessLayer.Concrete
             _commentDal.Insert(t);
         }
 
+        public void Add(Comment t , int status)
+        {
+            _commentDal.Insert(t , status);
+        }
+
         public void Delete(Comment t)
         {
             _commentDal.Delete(t);

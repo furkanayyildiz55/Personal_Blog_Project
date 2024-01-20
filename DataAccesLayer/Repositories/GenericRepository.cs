@@ -7,7 +7,7 @@ namespace DataAccesLayer.Repositories
 {
     public class GenericRepository<T> : IGenericDal<T> where T : Base
     {
-		public void Insert(T t )
+		public void Insert(T t)
 		{
 			using var context = new Context();
             t.ObjectStatus = 1;
@@ -16,7 +16,17 @@ namespace DataAccesLayer.Repositories
 			context.SaveChanges();
 		}
 
-		public void Delete(T t)
+        public void Insert(T t , int status)
+        {
+            using var context = new Context();
+            t.ObjectStatus = status;
+            t.ObjectIDate = DateTime.Now;
+            context.Add(t);
+            context.SaveChanges();
+        }
+
+
+        public void Delete(T t)
         {
             using var context = new Context();
             context.Remove(t);

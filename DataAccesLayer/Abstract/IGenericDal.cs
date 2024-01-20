@@ -10,6 +10,7 @@ namespace DataAccesLayer.Abstract
     public interface IGenericDal<T> where T : class
     {
         void Insert(T t);
+        void Insert(T t, int status);
         void Delete(T t);
         void Update(T t);
         
