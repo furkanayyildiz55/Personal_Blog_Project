@@ -6,15 +6,19 @@ using BusinessLayer.ValidationRules;
 using DataAccesLayer.EntityFramework;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Mono.TextTemplating;
 using System.IO;
+using System.Security.Claims;
 using static BlogProject.Constants.Enums;
 
 namespace BlogProject.Controllers
 {
+    [Authorize(Roles ="writer")]
     public class AdminController : Controller
     {
         CategoryManager CategoryManager = new CategoryManager(new EfCategoryRepository());
@@ -325,7 +329,7 @@ namespace BlogProject.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult Login(Writer loginWriter)
+        public async Task<IActionResult> Login(Writer loginWriter)
         {
             LoginValidator validationRules = new LoginValidator();
             ValidationResult result = validationRules.Validate(loginWriter);
@@ -336,7 +340,16 @@ namespace BlogProject.Controllers
 
                 if(writer != null)
                 {
-                    HttpContext.Session.SetString("LoginWriterID", writer.ObjectId.ToString() );
+                    var claims = new List<Claim>()
+                    {
+                        new Claim(ClaimTypes.Name, $"{writer.Name} {writer.Surname}"),
+                        new Claim(ClaimTypes.NameIdentifier, writer.ObjectId.ToString()),
+                        new Claim(ClaimTypes.Role, "writer"),
+                    };
+
+                    var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    var authProperties = new AuthenticationProperties();
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme , new ClaimsPrincipal(claimsIdentity) , authProperties  )  ;
                     return RedirectToAction("Index", "Admin");
 
                 }
