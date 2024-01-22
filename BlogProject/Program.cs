@@ -15,28 +15,6 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     options.AccessDeniedPath = "/Admin/Login";
 });  
 
-//builder.Services.AddSession(options =>
-//{
-//    options.IdleTimeout = TimeSpan.FromSeconds(10);
-//    options.Cookie.HttpOnly = true;
-//    options.Cookie.IsEssential = true;
-//});
-
-//builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-//    .AddCookie(x => {
-//        x.LoginPath = "/Admin/Login";
-//        x.AccessDeniedPath = "/Home/Index";
-//    });
-
-//builder.Services.ConfigureApplicationCookie(opts => // birden fazla yönlerdirme hatasý aldým bunun ile çözüldü
-//{
-//    //Cookie settings
-//    opts.Cookie.HttpOnly = true;
-//    opts.ExpireTimeSpan = TimeSpan.FromMinutes(25);
-//    opts.AccessDeniedPath = new PathString("/Login/AccessDenied/");  //yetkisi olmayan sayfalarda gideceði path 
-//    opts.LoginPath = "/Home/Index";
-//    opts.SlidingExpiration = true;
-//});
 
 var app = builder.Build();
 
@@ -49,7 +27,6 @@ if (!app.Environment.IsDevelopment())
 }
 app.UseStaticFiles();
 
-//app.UseSession();
 
 
 app.UseRouting();

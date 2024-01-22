@@ -331,6 +331,11 @@ namespace BlogProject.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login(Writer loginWriter)
         {
+            //GİRİŞ YAPMIŞ İSE YÖNLENDİR 
+            if (User.Identity.IsAuthenticated)
+                return RedirectToAction("Index", "Admin");
+
+
             LoginValidator validationRules = new LoginValidator();
             ValidationResult result = validationRules.Validate(loginWriter);
 
@@ -369,6 +374,15 @@ namespace BlogProject.Controllers
         }
         #endregion
 
+        #region LogAuth
+        [HttpGet]
+        public async Task<IActionResult> LogAuth()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Home");
+        }
+
+        #endregion
 
         #region CommentList
         [HttpGet]
