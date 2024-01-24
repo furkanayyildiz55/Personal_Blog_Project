@@ -116,7 +116,6 @@ namespace BlogProject.Controllers
 
 
         #region BlogDetayı
-
         public  IActionResult Detail(string? title)
         {
             if(title == null)

@@ -9,6 +9,13 @@
 
 <script src="~/admin/highlight/highlight.min.js"></script>
 <link href="~/admin/highlight/styles/base16/onedark.min.css" rel="stylesheet" />
+<!--highlight.js fontu ayarlanıyor-->
+<style>
+    pre > code {
+        font-family: monospace;
+        font-size: 14px;
+    }
+</style>
 
 <section>
     <div class="container">
@@ -78,7 +85,7 @@
                             <a class="print-btn" href="javascript:window.print()" data-microtip-position="bottom"><span>Yazdır</span><i class="fal fa-print"></i></a>
                         </div>
                         <div class="clearfix"></div>
-                        <div class="single-post-content_text" style="text-align:left;all:initial;" id="font_chage">
+                        <div class="single-post-content_text" style="text-align:left;all:initial;"  id="font_chage">
 
                             @Html.Raw(Model.Blog.Content)
 
