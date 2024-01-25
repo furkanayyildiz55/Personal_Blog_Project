@@ -411,6 +411,10 @@ namespace BlogProject.Controllers
                 CommentManager.Update(comment);
             }
 
+            Blog blog = BlogManager.Get(cm => cm.ObjectId == comment.BlogId);
+            blog.CommnetCount = CommentManager.GetList(cm => cm.ObjectStatus == (int)ObjectStatus.Active && cm.BlogId == blog.ObjectId).Count();
+            BlogManager.Update(blog);
+
             return View(CommentCheckList());
         }
         #endregion
