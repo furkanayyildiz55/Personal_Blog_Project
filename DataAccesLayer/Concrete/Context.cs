@@ -1,14 +1,22 @@
 ﻿using EntityLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.Extensions.Logging;
 
 namespace DataAccesLayer.Concrete
 {
     public class Context : DbContext
     {
+        public static readonly Microsoft.Extensions.Logging.LoggerFactory _myLoggerFactory =
+        new LoggerFactory(new[] {
+            new Microsoft.Extensions.Logging.Debug.DebugLoggerProvider()
+        });
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=.;Database=test9;Trusted_Connection=True; TrustServerCertificate=True");
+            optionsBuilder.UseSqlServer(@"Server=.;Database=test10;Trusted_Connection=True; TrustServerCertificate=True");
+            optionsBuilder.UseLoggerFactory(_myLoggerFactory);
+
         }
 
         public DbSet<Blog> Blog { get; set; }
@@ -27,6 +35,7 @@ namespace DataAccesLayer.Concrete
 			modelBuilder.Entity<Blog>()
 				.HasIndex(e => e.UrlTitle)
 				.IsUnique();
-		}
-	}
+
+        }
+    }
 }

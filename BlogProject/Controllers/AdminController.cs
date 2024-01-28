@@ -1,5 +1,6 @@
 ﻿using BlogProject.DTO;
 using BlogProject.Helper;
+using BlogProject.MailOperations;
 using BlogProject.ViewModels;
 using BusinessLayer.Concrete;
 using BusinessLayer.ValidationRules;
@@ -13,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Mono.TextTemplating;
 using System.IO;
+using System.Net.Mail;
 using System.Security.Claims;
 using static BlogProject.Constants.Enums;
 
@@ -27,6 +29,15 @@ namespace BlogProject.Controllers
         BlogManager BlogManager = new BlogManager(new EfBlogRepository());
         WriterManager WriterManager = new WriterManager(new EfWriterRepository());
         CommentManager CommentManager = new CommentManager(new EfCommentRepository());
+
+        private readonly IMailService mailService;
+
+        public AdminController(IMailService mailService)
+        {
+            this.mailService = mailService;
+        }
+
+
 
         #region YardımcıFonksiyonlar
         private AddBlogViewModel CreateAddBlogViewModel()
@@ -131,8 +142,14 @@ namespace BlogProject.Controllers
         #endregion
 
         #region Index
-        public IActionResult Index()
+        public async  Task<IActionResult> Index()
         {
+            MailData mailData = new MailData();
+            mailData.ToEmail = "furkanayyildiz55@hotmail.com";
+            mailData.ToName = "Alıcı furkan";
+            mailData.ToEmailSubject = "Mail Başlık";
+            mailData.ToEmailBody = "<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n\r\n</head>\r\n<body style=\"font-family: Arial, sans-serif; padding: 20px; background-color: #f4f4f4; text-align: center;\">\r\n\r\n    <p>selam ben Furkan</p>\r\n\r\n</body>\r\n</html>";
+            await mailService.SendMailAsync(mailData);
             return View();
         }
         #endregion
@@ -411,6 +428,7 @@ namespace BlogProject.Controllers
                 CommentManager.Update(comment);
             }
 
+            
             Blog blog = BlogManager.Get(cm => cm.ObjectId == comment.BlogId);
             blog.CommnetCount = CommentManager.GetList(cm => cm.ObjectStatus == (int)ObjectStatus.Active && cm.BlogId == blog.ObjectId).Count();
             BlogManager.Update(blog);

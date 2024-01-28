@@ -1,4 +1,6 @@
 ﻿
+using BlogProject.MailOperations;
+using MailKit;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -13,7 +15,11 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     options.Cookie.Name = "NetCoreMvc.Auth";
     options.LoginPath= "/Admin/Login";
     options.AccessDeniedPath = "/Admin/Login";
-});  
+});
+
+//appsettings.json içerisinden veriler alabilmek için
+builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
+builder.Services.AddTransient<BlogProject.MailOperations.IMailService, BlogProject.MailOperations.MailService>();
 
 
 var app = builder.Build();
