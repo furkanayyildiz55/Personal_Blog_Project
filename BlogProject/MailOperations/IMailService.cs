@@ -2,6 +2,7 @@
 {
     public interface IMailService
     {
-        Task SendMailAsync(MailData mailData);
+        Task<KeyValuePair<bool,string>> SendMailAsync(MailData mailData);
+        Task<KeyValuePair<bool,string>> SendMailAsync(MailData mailData , int errorCycle);
     }
 }

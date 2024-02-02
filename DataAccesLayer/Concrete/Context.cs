@@ -1,4 +1,5 @@
 ﻿using EntityLayer.Concrete;
+using EntityLayer.Contrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -16,7 +17,6 @@ namespace DataAccesLayer.Concrete
         {
             optionsBuilder.UseSqlServer(@"Server=.;Database=test10;Trusted_Connection=True; TrustServerCertificate=True");
             optionsBuilder.UseLoggerFactory(_myLoggerFactory);
-
         }
 
         public DbSet<Blog> Blog { get; set; }
@@ -28,8 +28,10 @@ namespace DataAccesLayer.Concrete
         public DbSet<Tag> Tag { get; set; }
         public DbSet<BlogTag> BlogTag { get; set; }
         public DbSet<Subscribe> Subscribe { get; set; }
+        public DbSet<MailLog> MailLog { get; set; }
 
-		protected override void OnModelCreating(ModelBuilder modelBuilder)
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			// UrlTitle alanına tekil indeks eklemek
 			modelBuilder.Entity<Blog>()

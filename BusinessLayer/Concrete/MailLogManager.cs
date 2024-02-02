@@ -1,6 +1,6 @@
 ﻿using BusinessLayer.Abstract;
 using DataAccesLayer.Abstract;
-using EntityLayer.Concrete;
+using EntityLayer.Contrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,46 +10,45 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Concrete
 {
-    public class SubscribeManager : ISubscribeService
+    public class MailLogManager : IMailLogService
     {
-        ISubscribeDal _subscribeDal;
-
-        public SubscribeManager(ISubscribeDal subscribeDal)
+        IMailLogDal _mailLogDal;
+        public MailLogManager(IMailLogDal mailLogDal)
         {
-            _subscribeDal = subscribeDal;
+            _mailLogDal = mailLogDal;
         }
 
-        public void Add(Subscribe t)
+        public void Add(MailLog t)
         {
-            _subscribeDal.Insert(t);
+            _mailLogDal.Insert(t);
         }
 
-        public void Delete(Subscribe t)
-        {
-            throw new NotImplementedException();
-        }
-
-		public Subscribe Get(Expression<Func<Subscribe, bool>> filter)
-		{
-			return _subscribeDal.Get(filter);
-		}
-
-		public Subscribe GetByID(int id)
+        public void Delete(MailLog t)
         {
             throw new NotImplementedException();
         }
 
-        public List<Subscribe> GetList()
+        public MailLog Get(Expression<Func<MailLog, bool>> filter)
         {
             throw new NotImplementedException();
         }
 
-        public List<Subscribe> GetList(Expression<Func<Subscribe, bool>> filter)
+        public MailLog GetByID(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Subscribe t)
+        public List<MailLog> GetList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<MailLog> GetList(Expression<Func<MailLog, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(MailLog t)
         {
             throw new NotImplementedException();
         }

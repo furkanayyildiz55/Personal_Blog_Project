@@ -1,4 +1,6 @@
 ﻿using BlogApplication.DTO;
+using BlogProject.Helper;
+using BlogProject.MailOperations;
 using BusinessLayer.Concrete;
 using BusinessLayer.ValidationRules;
 using DataAccesLayer.EntityFramework;
@@ -13,6 +15,14 @@ namespace BlogProject.Controllers
     public class SubscribeController : Controller
     {
         SubscribeManager SubscribeManager = new SubscribeManager(new EfSubscribeRepository());
+        private readonly IMailService mailService;
+
+        public SubscribeController(IMailService mailService)
+        {
+            this.mailService = mailService;
+        }
+
+        #region Subscribe
 
         [HttpGet]
         public PartialViewResult SubscribeMail()
@@ -21,7 +31,7 @@ namespace BlogProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult SubscribeMail(Subscribe subscribe)
+        public async Task<IActionResult> SubscribeMail(Subscribe subscribe)
         {
             AjaxResultDTO ajaxResultDTO = new AjaxResultDTO();
 
@@ -39,19 +49,26 @@ namespace BlogProject.Controllers
                     ip = "0";
                 }
                 subscribe.UserIp = ip;
+                subscribe.SubscribeGuid = Util.Guid12();
 
                 SubscribeManager.Add(subscribe);
 
                 ajaxResultDTO.status = true;
                 ResultMessage resultMessage = new ResultMessage("userMessage", "Aboneliğiniz alındı.");
                 ajaxResultDTO.resultMessages.Add(resultMessage);
-                return Json(ajaxResultDTO);
 
+                
+                MailData mailData = new MailData();
+                mailData.ToEmail = "furkanayyildiz55@hotmail.com";
+                mailData.ToEmailSubject = "Aboneliğin İçin Teşekkürler! İlk Haberler Seninle!";
+                mailData.ToEmailBody = MailBodyCreator.Subsribe("furkanayyildiz55@hotmail.com");
+                _ = Task.Run(() => mailService.SendMailAsync(mailData, 5));
+
+                return Json(ajaxResultDTO);
             }
             else
             {
                 ajaxResultDTO.status = false;
-
                 foreach (var item in validationResult.Errors)
                 {
                     ResultMessage resultMessage = new ResultMessage(item.PropertyName, item.ErrorMessage);
@@ -60,5 +77,18 @@ namespace BlogProject.Controllers
                 return Json(ajaxResultDTO);
             }
         }
+
+        #endregion
+
+
+        #region UnSubscribeMail
+
+        public async Task<IActionResult> UnSubscribe(string Email , string Guid)
+        {
+
+            return View();
+        }
+
+        #endregion
     }
 }

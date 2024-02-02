@@ -13,6 +13,9 @@ namespace EntityLayer.Concrete
         [Column("subscribe_email")]
         public String? SubscribeEmail { get; set; }
 
+        [Column("subscribe_guid")]
+        public String? SubscribeGuid { get; set; }
+
         [Column("user_ip")]
         public String? UserIp { get; set; }
     }

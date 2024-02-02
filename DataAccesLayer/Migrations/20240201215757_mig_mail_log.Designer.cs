@@ -4,6 +4,7 @@ using DataAccesLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccesLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20240201215757_mig_mail_log")]
+    partial class mig_mail_log
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -363,10 +366,6 @@ namespace DataAccesLayer.Migrations
                     b.Property<string>("SubscribeEmail")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("subscribe_email");
-
-                    b.Property<string>("SubscribeGuid")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("subscribe_guid");
 
                     b.Property<string>("UserIp")
                         .HasColumnType("nvarchar(max)")

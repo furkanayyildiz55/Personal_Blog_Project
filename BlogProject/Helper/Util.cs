@@ -25,6 +25,16 @@ namespace BlogProject.Helper
 			return $"{Request.Scheme}://{Request.Host}/";
         }
 
+		public static string Guid12()
+		{
+			string guid12 = Guid.NewGuid().ToString().ToLower().Replace("-","").Substring(0,12);
+
+			guid12 = UrlFormating(guid12);
+
+			return guid12;
+
+		}
+
 
 	}
 }
