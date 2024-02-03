@@ -36,22 +36,22 @@ namespace BusinessLayer.Concrete
 
 		public Subscribe GetByID(int id)
         {
-            throw new NotImplementedException();
+            return _subscribeDal.GetByID(id);
         }
 
         public List<Subscribe> GetList()
         {
-            throw new NotImplementedException();
+            return _subscribeDal.GetListAll();
         }
 
         public List<Subscribe> GetList(Expression<Func<Subscribe, bool>> filter)
         {
-            throw new NotImplementedException();
+           return _subscribeDal.GetListAll(filter);
         }
 
         public void Update(Subscribe t)
         {
-            throw new NotImplementedException();
+           _subscribeDal.Update(t);
         }
     }
 }

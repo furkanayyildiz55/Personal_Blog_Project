@@ -1,8 +1,43 @@
-﻿
+﻿@model KeyValuePair<bool,string>
+
+
 @{
     ViewData["Title"] = "UnSubscribe";
     Layout = "~/Views/Shared/BlogLayout.cshtml";
 }
 
-<h1>Bültenden başarı ile çıktınız</h1>
+<div class="content">
+    <!--section   -->
+    <section class="hero-section error-section">
+        <div class="bg-wrap hero-section_bg">
+            <div class="bg" data-bg="images/bg/6.jpg"></div>
+        </div>
+        <div class="container">
+            <div class="error-wrap">
+                <h2 style="color: black;"><i class="@(Model.Key == true ? "fa fa-thumbs-up" : "fa fa-thumbs-down")"></i> </h2>
+
+                @if (Model.Key)
+                {
+                    <p style="color: black;">@Model.Value adresi blog bülteninden başarı ile çıkarıldı. </p>
+                    <p style="color: green;"> Görüşmek Üzere </p>
+                }
+                else
+                {
+                    <p style="color: black;">@Model.Value</p>
+                }
+
+                <div class="clearfix"></div>
+                <form action="/Blog" class="custom-form">
+                    <input name="Title" id="se2" type="text" class="search" placeholder="Ara.." value="">
+                    <button class="search-submit color-bg" id="submit_btn2"><i class="fa fa-search"></i> </button>
+                </form>
+                <div class="clearfix"></div>
+                <p>Veya</p>
+                <a href="/Home" class="btn color-btn flat-btn"> <span>Ana Sayfa</span> <i class="fas fa-caret-right"></i></a>
+            </div>
+        </div>
+    </section>
+    <!-- section end  -->
+</div>
+
 

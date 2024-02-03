@@ -8,6 +8,8 @@ using EntityLayer.Concrete;
 using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using static BlogProject.Constants.Enums;
 
 namespace BlogProject.Controllers
 {
@@ -59,9 +61,9 @@ namespace BlogProject.Controllers
 
                 
                 MailData mailData = new MailData();
-                mailData.ToEmail = "furkanayyildiz55@hotmail.com";
+                mailData.ToEmail = subscribe.SubscribeEmail;
                 mailData.ToEmailSubject = "Aboneliğin İçin Teşekkürler! İlk Haberler Seninle!";
-                mailData.ToEmailBody = MailBodyCreator.Subsribe("furkanayyildiz55@hotmail.com");
+                mailData.ToEmailBody = MailBodyCreator.Subsribe(subscribe.SubscribeEmail, subscribe.SubscribeGuid , Util.BaseUrl(Request));
                 _ = Task.Run(() => mailService.SendMailAsync(mailData, 5));
 
                 return Json(ajaxResultDTO);
@@ -83,10 +85,22 @@ namespace BlogProject.Controllers
 
         #region UnSubscribeMail
 
-        public async Task<IActionResult> UnSubscribe(string Email , string Guid)
+        public async Task<IActionResult> UnSubscribe(string Email="" , string Guid = "")
         {
+            if (Email=="" || Email.Length > 100)
+                return View(new KeyValuePair<bool, string>(false, "Geçersiz Email bilgisi")); 
 
-            return View();
+            if(Guid=="" || Guid.Length != 12)
+                return View(new KeyValuePair<bool, string>(false, "Geçersiz Guid bilgisi"));
+
+            Subscribe subscribe = SubscribeManager.Get(s => s.SubscribeEmail == Email && s.SubscribeGuid == Guid);
+
+            if (subscribe == null)
+                return View(new KeyValuePair<bool, string>(false, "Geçersiz istek"));
+
+            subscribe.ObjectStatus = (int)ObjectStatus.Passive; 
+            SubscribeManager.Update(subscribe);
+            return View(new KeyValuePair<bool, string>(true, Email));
         }
 
         #endregion

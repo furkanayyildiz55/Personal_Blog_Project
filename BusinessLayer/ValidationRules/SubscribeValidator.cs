@@ -29,7 +29,7 @@ namespace BusinessLayer.ValidationRules
         private bool BeUniqueEmail(string? Email)
         {
             Subscribe subscribe = new Subscribe();
-            subscribe = SubscribeManager.Get(s => s.SubscribeEmail == Email);
+            subscribe = SubscribeManager.Get(s => s.SubscribeEmail == Email && s.ObjectStatus==1);
             return subscribe == null;
         }
     }

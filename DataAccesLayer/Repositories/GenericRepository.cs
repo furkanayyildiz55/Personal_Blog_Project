@@ -63,6 +63,7 @@ namespace DataAccesLayer.Repositories
         public void Update(T t)
         {
             using var context = new Context();
+            t.ObjectUDate = DateTime.Now;
             context.Update(t);
             context.SaveChanges();
         }
