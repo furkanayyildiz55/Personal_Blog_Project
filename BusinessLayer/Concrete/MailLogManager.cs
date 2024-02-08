@@ -45,7 +45,7 @@ namespace BusinessLayer.Concrete
 
         public List<MailLog> GetList(Expression<Func<MailLog, bool>> filter)
         {
-            throw new NotImplementedException();
+           return _mailLogDal.GetListAll(filter);
         }
 
         public void Update(MailLog t)

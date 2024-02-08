@@ -29,5 +29,13 @@ namespace EntityLayer.Contrete
 
         [Column("mail_body")]
         public String? MailBody { get; set; }
+
+        [Column("subscribe_id")]
+        public int? SubscribeId { get; set; }
+
+        [Column("blog_id")]
+        public int? BlogId { get; set; }
+
+
     }
 }

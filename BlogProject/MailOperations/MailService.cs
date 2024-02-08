@@ -56,6 +56,26 @@ namespace BlogProject.MailOperations
 
         public async Task<KeyValuePair<bool, string>> SendMailAsync(MailData mailData ,int errorCycle = 5)
         {
+            if(_mailSettings.ToSend == false)
+            {
+                MailLog mailLog = new MailLog();
+                mailLog.MailReceiver = mailData.ToEmail;
+                mailLog.MailBody = mailData.ToEmailBody;
+                mailLog.MailSubject = mailData.ToEmailSubject;
+                mailLog.SendStatus = false;
+                mailLog.LogMessage = "Mail gönderimi kapatılmış";
+                mailLog.ErrorCycle = -1;
+
+                if(mailData.BlogId.HasValue && mailData.SubscribeId.HasValue)
+                {
+                    mailLog.BlogId = mailData.BlogId;
+                    mailLog.SubscribeId = mailData.SubscribeId;
+                }
+
+                MailLogManager.Add(mailLog);
+                return new KeyValuePair<bool, string>(false, "Mail gönderimi kapatılmış");
+            }
+
             for (int i = 1; i <= errorCycle; i++)
             {
                 var result = await SendMailAsync(mailData);
@@ -64,9 +84,15 @@ namespace BlogProject.MailOperations
                 mailLog.MailBody = mailData.ToEmailBody;
                 mailLog.MailSubject = mailData.ToEmailSubject;
                 mailLog.SendStatus = result.Key;
+                if (mailData.BlogId.HasValue && mailData.SubscribeId.HasValue)
+                {
+                    mailLog.BlogId = mailData.BlogId;
+                    mailLog.SubscribeId = mailData.SubscribeId;
+                }
                 mailLog.LogMessage= result.Value;
                 mailLog.ErrorCycle = i;
-                MailLogManager.Add(mailLog); 
+                MailLogManager.Add(mailLog);
+                
                 if (result.Key)
                 {
                     return new KeyValuePair<bool, string>(true, "Mail gönderimi başarılı.");
@@ -74,6 +100,25 @@ namespace BlogProject.MailOperations
                 Thread.Sleep(5000);
             }
             return new KeyValuePair<bool, string>(false, "Mail gönderimi başarısız");
+        }
+
+        public async Task<KeyValuePair<bool, string>> SenMailsAsync(List<MailData> mailDatas , int errorCycle = 5)
+        {
+            //örnek bir sayıda hatalı mail varsa gönderim işlemi durdurulur.
+            int errorMailCount;
+                foreach (MailData mailData in mailDatas)
+                {
+                    errorMailCount = MailLogManager.GetList(ml => ml.SendStatus == false).Count();
+               
+                    if(errorMailCount > _mailSettings.AcceptableError)
+                    {
+                        return new KeyValuePair<bool, string>(false, "Hatalı maillerden dolayı gönderim iptal edildi.");
+                    }
+
+                    await SendMailAsync(mailData, errorCycle);
+                    Thread.Sleep(5000);
+                }
+            return new KeyValuePair<bool, string>(true, "Mailler gönderildi");
         }
     }
 }

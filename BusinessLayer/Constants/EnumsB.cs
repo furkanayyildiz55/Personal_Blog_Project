@@ -1,6 +1,6 @@
 ﻿namespace BlogProject.Constants
 {
-    public static class Enums
+    public static class EnumsB
     {
         public  enum ObjectStatus
         {

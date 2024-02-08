@@ -91,11 +91,11 @@ $.extend($.jgrid,{
 		currency : {decimalSeparator:".", thousandsSeparator: " ", decimalPlaces: 2, prefix: "", suffix:"", defaultValue: '0.00'},
 		date : {
 			dayNames:   [
-				"Paz", "Pts", "Sal", "Çar", "Per", "Cum", "Cts",
+				"Paz", "Pts", "Sal", "Car", "Per", "Cum", "Cts",
 				"Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"
 			],
 			monthNames: [
-				"Oca", "Şub", "Mar", "Nis", "May", "Haz", "Tem", "Ağu", "Eyl", "Eki", "Kas", "Ara",
+				"Oca", "Sub", "Mar", "Nis", "May", "Haz", "Tem", "Agu", "Eyl", "Eki", "Kas", "Ara",
 				"Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"
 			],
 			AmPm : ["am","pm","AM","PM"],

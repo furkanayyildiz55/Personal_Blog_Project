@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Mono.TextTemplating;
+using Org.BouncyCastle.Asn1.Pkcs;
 using System.IO;
 using System.Net.Mail;
 using System.Security.Claims;
@@ -29,6 +30,9 @@ namespace BlogProject.Controllers
         BlogManager BlogManager = new BlogManager(new EfBlogRepository());
         WriterManager WriterManager = new WriterManager(new EfWriterRepository());
         CommentManager CommentManager = new CommentManager(new EfCommentRepository());
+        MailLogManager MailLogManager = new MailLogManager(new EfMailLogRepository());
+        SubscribeManager SubscribeManager = new SubscribeManager(new EfSubscribeRepository());
+
 
         private readonly IMailService mailService;
 
@@ -36,8 +40,6 @@ namespace BlogProject.Controllers
         {
             this.mailService = mailService;
         }
-
-
 
         #region YardımcıFonksiyonlar
         private AddBlogViewModel CreateAddBlogViewModel()
@@ -144,12 +146,6 @@ namespace BlogProject.Controllers
         #region Index
         public async  Task<IActionResult> Index()
         {
-            MailData mailData = new MailData();
-            mailData.ToEmail = "furkanayyildiz55@hotmail.com";
-            mailData.ToName = "Alıcı furkan";
-            mailData.ToEmailSubject = "Mail Başlık";
-            mailData.ToEmailBody = "<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n\r\n</head>\r\n<body style=\"font-family: Arial, sans-serif; padding: 20px; background-color: #f4f4f4; text-align: center;\">\r\n\r\n    <p>selam ben Furkan</p>\r\n\r\n</body>\r\n</html>";
-            await mailService.SendMailAsync(mailData);
             return View();
         }
         #endregion
@@ -437,6 +433,82 @@ namespace BlogProject.Controllers
         }
         #endregion
 
+        #region BlogMail
 
+        [HttpGet]
+        public async Task<IActionResult> BlogMail(int BlogID)
+        {
+            if(BlogID == 0)
+            {
+                return NotFound();
+            }
+            
+            return View(BlogMailGetData(BlogID));
+        }
+
+        private BlogMailViewModel BlogMailGetData(int blogId)
+        {
+            Blog blog = BlogManager.GetByID(blogId);
+            int SucsflyMailCount = MailLogManager.GetList(ml => ml.BlogId == blogId && ml.SendStatus == true).Count;
+            int ErrorMailCount = MailLogManager.GetList(ml => ml.BlogId == blogId && ml.SendStatus == false).Count;
+            int SubscribeCount = SubscribeManager.GetList(sc => sc.ObjectStatus == (int)ObjectStatus.Active).Count;
+            BlogMailViewModel blogMailViewModel = new BlogMailViewModel(blog, SucsflyMailCount, ErrorMailCount, SubscribeCount);
+            return blogMailViewModel;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> BlogMail(BlogMailRequestDTO ViewRequest)
+        {
+
+            if (ViewRequest.BlogId == 0)
+                return NotFound();
+
+            BlogMailViewModel blogMailViewModel = BlogMailGetData(ViewRequest.BlogId);
+
+            if (ViewRequest.Mail == null || ViewRequest.Password == null || ViewRequest.BlogTitle == null)
+            {
+                blogMailViewModel.SendStatus = new KeyValuePair<bool, string>(false,"Gönderim iptal edildi, veriler hatalı.");
+                return View(blogMailViewModel);
+            }
+
+            Writer writer = WriterManager.Get(wr => wr.Email == ViewRequest.Mail && wr.Password == wr.Password);
+
+            if(writer == null)
+            {
+                blogMailViewModel.SendStatus = new KeyValuePair<bool, string>(false, "Gönderim iptal edildi, veriler hatalı.");
+                return View(blogMailViewModel);
+            }
+
+            Blog blog = BlogManager.GetBlogWithCategory(bl => bl.ObjectId==ViewRequest.BlogId && bl.Title == ViewRequest.BlogTitle && bl.ObjectStatus == (int)ObjectStatus.Active );
+
+            if (blog == null) 
+            {
+                blogMailViewModel.SendStatus = new KeyValuePair<bool, string>(false, "Gönderim iptal edildi, veriler hatalı.");
+                return View(blogMailViewModel);
+            }
+
+            List<Subscribe> subscribeList = SubscribeManager.GetList(s => s.ObjectStatus == (int)ObjectStatus.Active).ToList();
+
+            List<MailData> mailDatas = new List<MailData>();
+            string baseUrl = Util.BaseUrl(Request);
+            foreach (Subscribe subscribe in subscribeList)
+            {
+                MailData mailData = new MailData();
+                mailData.ToEmail = subscribe.SubscribeEmail;
+                mailData.SubscribeId = subscribe.ObjectId;
+
+                mailData.BlogId = blog.ObjectId;
+                mailData.ToEmailSubject = "Blog test mailidir";
+                mailData.ToEmailBody = MailBodyCreator.NewBlogMail(blog,subscribe,baseUrl); ;
+                mailDatas.Add(mailData);
+            }
+
+            _ = Task.Run(() => mailService.SenMailsAsync(mailDatas, 5));
+
+            blogMailViewModel.SendStatus = new KeyValuePair<bool, string>(true, "Gönderim işlemi başlatıldı.");
+            return View(blogMailViewModel);
+        }
+
+        #endregion
     }
 }
