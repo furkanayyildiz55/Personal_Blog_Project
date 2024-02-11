@@ -1,3 +1,4 @@
+using BlogProject.Helper;
 using BlogProject.Models;
 using BusinessLayer.Concrete;
 using DataAccesLayer.EntityFramework;
@@ -22,12 +23,11 @@ namespace BlogProject.Controllers
 
         public IActionResult Index()
         {
-            var baseUri = $"{Request.Scheme}://{Request.Host}/";
+            var baseUri = Util.BaseUrl(Request);
             List<Blog> blogList = new List<Blog>();
             blogList = BlogManager.GetBlogListWithCategory(bl => bl.ObjectStatus == 1).OrderByDescending(x=>x.ObjectId).Take(7).ToList();
             foreach (var item in blogList)
             {
-                item.ThumbnailImage = item.ThumbnailImage.Replace( @"\", @"/");
                 item.ThumbnailImage = baseUri + item.ThumbnailImage;
                 item.MainImage= baseUri + item.MainImage;
             }

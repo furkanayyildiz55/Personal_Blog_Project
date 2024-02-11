@@ -12,6 +12,7 @@ using System.Reflection.Metadata;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using BlogProject.Constants;
 using BlogProject.Helper;
+using static BlogProject.Constants.Enums;
 
 namespace BlogProject.Controllers
 {
@@ -72,7 +73,7 @@ namespace BlogProject.Controllers
             }
             FilterBlogListViewModel filterBlogListViewModel = FilterBlogListViewModel();
 
-            List<Blog> blogList = BlogManager.GetBlogListWithCategory();
+            List<Blog> blogList = BlogManager.GetBlogListWithCategory(b => b.ObjectStatus == (int)ObjectStatus.Active);
 
 
             if (QueryStatus)

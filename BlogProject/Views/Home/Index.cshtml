@@ -254,65 +254,75 @@
 			<div class="col-md-8">
 				<div class="main-container fl-wrap fix-container-init">
 					<div class="grid-post-wrap">
-						<div class="more-post-wrap  fl-wrap">
-							<div class="list-post-wrap list-post-wrap_column fl-wrap">
-								<div class="row">
-									@for (int i = 0; i <= 1; i++)
-                                    {
-                                        <div class="col-md-6">
-                                            <!--list-post-->
-											<div class="list-post fl-wrap">
-                                                <a class="post-category-marker" href="/Blog?Category=@Model[i].Category.ObjectId">@Model[i].Category.Name</a>
-												<div class="list-post-media">
-													<a href="/Blog/Detail/@Model[i].UrlTitle">
-														<div class="bg-wrap">
-															<div class="bg" data-bg="@Model[i].ThumbnailImage"></div>
-														</div>
-													</a>
-													<span class="post-media_title">Okumak İçin Tıkla</span>
-												</div>
-												<div class="list-post-content">
-													<h3><a href="/Blog/Detail/@Model[i].UrlTitle">@Model[i].Title</a></h3>
-                                                    <span class="post-date"><i class="far fa-clock"></i>  @Model[i].ObjectIDate</span>
-												</div>
-											</div>
-											<!--list-post end-->
-										</div>
-									}
-								</div>
-							</div>
-						</div>
+
+                        @if(Model.Count >= 2)
+                        {
+                            <div class="more-post-wrap  fl-wrap">
+                                <div class="list-post-wrap list-post-wrap_column fl-wrap">
+                                    <div class="row">
+                                        @for (int i = 0; i <= 1; i++)
+                                        {
+                                            <div class="col-md-6">
+                                                <!--list-post-->
+                                                <div class="list-post fl-wrap">
+                                                    <a class="post-category-marker" href="/Blog?Category=@Model[i].Category.ObjectId">@Model[i].Category.Name</a>
+                                                    <div class="list-post-media">
+                                                        <a href="/Blog/Detail/@Model[i].UrlTitle">
+                                                            <div class="bg-wrap">
+                                                                <div class="bg" data-bg="@Model[i].ThumbnailImage"></div>
+                                                            </div>
+                                                        </a>
+                                                        <span class="post-media_title">Okumak İçin Tıkla</span>
+                                                    </div>
+                                                    <div class="list-post-content">
+                                                        <h3><a href="/Blog/Detail/@Model[i].UrlTitle">@Model[i].Title</a></h3>
+                                                        <span class="post-date"><i class="far fa-clock"></i>  @Model[i].ObjectIDate</span>
+                                                    </div>
+                                                </div>
+                                                <!--list-post end-->
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
 						<!--grid-post-item-->
-						<div class="single-grid-slider-wrap fl-wrap">
-							<div class="single-grid-slider">
-								<div class="swiper-container">
-									<div class="swiper-wrapper">
-										@for (int i = 2; i <= 3; i++)
-										{
-											<!-- swiper-slide-->
-											<div class="swiper-slide">
-												<div class="grid-post-item  bold_gpi  fl-wrap">
-													<div class="grid-post-media gpm_sing">
-                                                        <div class="bg" data-bg="@Model[i].ThumbnailImage"></div>
-														<div class="grid-post-media_title">
-                                                            <a class="post-category-marker" href="/Blog?Category=@Model[i].Category.ObjectId">@Model[i].Category.Name</a>
-                                                            <h4><a href="/Blog/Detail/@Model[i].UrlTitle">@Model[i].Title</a></h4>
-                                                            <span class="video-date"><i class="far fa-clock"></i> @Model[i].ObjectIDate</span>
-															<ul class="post-opt">
-                                                                <li><i class="far fa-comments-alt"></i>  @Model[i].CommnetCount </li>
-                                                                <li><i class="fal fa-eye"></i>  @Model[i].ViewsCount </li>
-															</ul>
-														</div>
-													</div>
-												</div>
-											</div>
-											<!-- swiper-slide end-->
-										}
-									</div>
-									<div class="sgs-pagination sgs_ver "></div>
-								</div>
-							</div>
-						</div>
+
+                        @if(Model.Count >= 4)
+                        {
+                            <div class="single-grid-slider-wrap fl-wrap">
+                                <div class="single-grid-slider">
+                                    <div class="swiper-container">
+                                        <div class="swiper-wrapper">
+                                            @for (int i = 2; i <= 3; i++)
+                                            {
+                                                <!-- swiper-slide-->
+                                                <div class="swiper-slide">
+                                                    <div class="grid-post-item  bold_gpi  fl-wrap">
+                                                        <div class="grid-post-media gpm_sing">
+                                                            <div class="bg" data-bg="@Model[i].ThumbnailImage"></div>
+                                                            <div class="grid-post-media_title">
+                                                                <a class="post-category-marker" href="/Blog?Category=@Model[i].Category.ObjectId">@Model[i].Category.Name</a>
+                                                                <h4><a href="/Blog/Detail/@Model[i].UrlTitle">@Model[i].Title</a></h4>
+                                                                <span class="video-date"><i class="far fa-clock"></i> @Model[i].ObjectIDate</span>
+                                                                <ul class="post-opt">
+                                                                    <li><i class="far fa-comments-alt"></i>  @Model[i].CommnetCount </li>
+                                                                    <li><i class="fal fa-eye"></i>  @Model[i].ViewsCount </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- swiper-slide end-->
+                                            }
+                                        </div>
+                                        <div class="sgs-pagination sgs_ver "></div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
 
 						<!--grid-post-item end-->
 

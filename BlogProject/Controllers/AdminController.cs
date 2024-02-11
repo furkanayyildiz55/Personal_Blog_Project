@@ -86,7 +86,7 @@ namespace BlogProject.Controllers
                     var subfolderName = Path.Combine("BlogImage", folderName);
 
                     var ImageName = FileName + "-T-" + time + FileExt;
-                    var ImageLocation = Path.Combine(subfolderName, ImageName);
+                    var ImageLocation = Path.Combine(subfolderName, ImageName).Replace("\\","/");
 
                     var ImageSaveLocation = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", subfolderName, ImageName);
 

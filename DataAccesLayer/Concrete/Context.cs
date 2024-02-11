@@ -38,6 +38,7 @@ namespace DataAccesLayer.Concrete
 				.HasIndex(e => e.UrlTitle)
 				.IsUnique();
 
+            //modelBuilder.HasDefaultSchema("aymodam1_personal");
         }
     }
 }
